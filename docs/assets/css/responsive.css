@@ -483,11 +483,14 @@
 
   .f-lang { margin-left: 0; }
   .site-footer__social { margin-left: auto; }
-  .site-footer__cols { grid-template-columns: 1fr; gap: 28px; }
+  /* Four link groups two-up halve the footer's height; the signup block
+     needs the full width for its field and button, so it spans both. */
+  .site-footer__cols { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+  .site-footer__cols > :last-child { grid-column: 1 / -1; }
 
   /* 19px of text with 10px between rows is a fiddly thing to hit with a
-     thumb; the extra gap costs nothing in a single column. */
-  .site-footer__links { gap: 15px; }
+     thumb; the extra gap costs nothing in a two-column list. */
+  .site-footer__links { gap: 14px; }
   .site-footer__signup { flex-wrap: wrap; }
   .site-footer__signup .input { flex: 1 1 180px; }
 
@@ -504,13 +507,27 @@
   .cta-band__actions .cta-solid,
   .cta-band__actions .cta-ghost { justify-content: center; width: 100%; }
 
-  /* A row of three guarantees, each wrapping onto two lines, reads worse
-     than three lines that each say one thing. */
-  .trust-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  /* The proof badge has to stay one line under the headline. Dropping
+     "Trusted by" keeps both numbers and fits the pill beside them. */
+  .hero__badge {
+    padding: 5px 12px 5px 8px;
+    white-space: nowrap;
   }
+
+  .hero__badge-text { font-size: 12.5px; }
+  .hero__badge-more { display: none; }
+
+  /* The one line is 303px; on the few 320px screens left it may wrap
+     rather than run off the edge. */
+  @media (max-width: 340px) { .hero__badge { white-space: normal; } }
+
+  /* Under full-width buttons, three guarantees are noise; the refund promise
+     is the one that moves a purchase, so it stands alone and centred. */
+  .trust-row,
+  .aa-hero__trust { justify-content: center; }
+
+  .trust-row .trust-item:nth-child(n + 2),
+  .aa-hero__trust > span:nth-child(n + 2) { display: none; }
 
   /* Home ----------------------------------------------------------------- */
   .cat-grid,
@@ -553,9 +570,23 @@
   /* All Access ----------------------------------------------------------- */
   .plans { grid-template-columns: 1fr; }
 
-  /* The comparison table keeps three columns but loses the padding that
-     made them roomy; below this it would be unreadable either way. */
-  .compare__row { grid-template-columns: 1.6fr 1fr 1fr; font-size: 12.5px; }
+  /* The closing band was a headline beside two buttons; here it is a
+     headline over them, centred like every other band on a phone. */
+  .cta-band--split {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding-block: 56px;
+    text-align: center;
+  }
+
+  .cta-band--split h2 { font-size: 26px; }
+  .cta-band--split .cta-band__actions { flex-direction: column; align-items: stretch; }
+
+  /* The comparison table keeps three columns, but the label column gives
+     up its lead so the All Access answers stop breaking mid-phrase. */
+  .compare__row { grid-template-columns: 1fr 0.9fr 1.2fr; font-size: 12.5px; }
+  .compare__row > * { padding: 12px 10px; }
 
   /* Product -------------------------------------------------------------- */
   .buybox__rating { flex-wrap: wrap; }
@@ -579,8 +610,6 @@
     justify-content: center;
     padding-inline: 16px;
   }
-
-  .aa-hero__trust { flex-wrap: wrap; justify-content: center; gap: 8px 16px; }
 
   /* The headline's no-wrap spans keep "One license." whole; at this width
      the line has to be allowed to break wherever it can. */
@@ -652,6 +681,20 @@
   .statement__stats { grid-template-columns: 1fr; }
 
   /* Thank you ------------------------------------------------------------ */
-  .licence__row { flex-wrap: wrap; }
+  /* Icon and name on one line, the two actions full-width beneath: the
+     download button is the point of this page and gets the whole row. */
+  .order__item { flex-wrap: wrap; gap: 12px 14px; padding: 18px; }
+  .order__body { flex: 1 1 calc(100% - 62px); }
+  .order__actions { flex: 1 0 100%; align-items: stretch; }
+  .order__actions .btn { justify-content: center; height: 44px; }
+  .order__docs { text-align: center; }
+
+  /* The key never breaks mid-string: it takes the row and Copy sits under
+     it, right-aligned, where a thumb lands after reading. */
+  .licence__row { flex-wrap: wrap; justify-content: flex-end; }
+  .licence__key { flex: 1 0 100%; text-align: center; letter-spacing: .02em; }
+
+  /* Contact -------------------------------------------------------------- */
+  .statement h2 { font-size: 26px; }
 }
 
