@@ -16,8 +16,8 @@
    Keys:
      title    <title> and og:title
      desc     meta description
-     css      extra stylesheets from assets/css (base/components/layout are
-              always included)
+     css      extra stylesheets from assets/css (base/components/layout come
+              before it, responsive.css after it)
      js       extra scripts from assets/js (site.js is always included)
      nav      which top-level nav item to mark active
      header   true/omitted for the full site header, "none", or the name of
@@ -102,7 +102,9 @@ async function build() {
     if (headers[meta.header]) header = headers[meta.header];
     else if (meta.header !== "none") header = fill(headerFull, { ...navVars, search: meta.search ? search : "" });
 
-    const styles = ["base", "components", "layout", ...(meta.css || [])]
+    // responsive.css is last so its media queries can override any page sheet
+    // at equal specificity.
+    const styles = ["base", "components", "layout", ...(meta.css || []), "responsive"]
       .map((name) => `<link rel="stylesheet" href="assets/css/${name}.css">`)
       .join("\n");
 

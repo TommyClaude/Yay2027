@@ -101,9 +101,17 @@ rather than styling:
 
 ## Known limits
 
-- **Desktop only**, `min-width: 1280px`, matching the prototypes. The designs
-  were never drawn at tablet or phone width, so a responsive pass would be new
-  design work rather than a port.
+- **The responsive layer is new design work.** The prototypes were only drawn
+  at 1280px and up, so everything narrower was decided here rather than
+  ported. It lives in `src/assets/css/responsive.css`, loaded after the page
+  sheets, which keeps the desktop rendering identical to what was checked
+  against the artifact and puts the whole adaptation in one readable file.
+  Four steps, each named for what actually breaks at that width: **1180px**
+  (the 1200px column stops clearing its gutters, the header search goes),
+  **1024px** (the horizontal nav runs out of room and becomes a drawer),
+  **860px** (side-by-side layouts stack), **620px** (phone: one column,
+  smaller type). Verified for horizontal overflow at eighteen widths from
+  1440px down to 320px.
 - **Images are still remote.** Plugin icons come from `ps.w.org`, photography
   and screenshots from `yaycommerce.com`, card marks from jsDelivr. This
   session's network policy blocks those hosts, so they couldn't be pulled local.

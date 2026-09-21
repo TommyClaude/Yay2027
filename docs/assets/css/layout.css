@@ -90,12 +90,70 @@
   font-weight: 500;
 }
 
+/* Above the drawer breakpoint the panel is not a box at all, so the nav and
+   the actions stay direct flex children of the bar. */
+.site-header__panel { display: contents; }
+
 .site-header__actions {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 14px;
 }
+
+/* The bar-level cart and the drawer control: both off until the breakpoint
+   that needs them. */
+.site-header__tools,
+.cart-link--bar,
+.nav-toggle,
+.drawer-close,
+.drawer-scrim { display: none; }
+
+.nav-toggle {
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--r-control);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.nav-toggle:hover { background: var(--surface-hover); }
+
+/* Three bars from one element: the box is the middle one, the pseudos the
+   outer two, and they fold into a cross when the drawer is open. */
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 19px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.nav-toggle__bars {
+  position: relative;
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle__bars::before { top: -6px; }
+.nav-toggle__bars::after { top: 6px; }
+
+.is-drawer-open .nav-toggle__bars { background: transparent; }
+.is-drawer-open .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
+.is-drawer-open .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
 
 .site-header__search { position: relative; width: 230px; }
 .site-header__search .input { height: 36px; }

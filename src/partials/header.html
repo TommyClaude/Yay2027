@@ -18,6 +18,13 @@
     <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
   </a>
 
+  <!-- Below the nav breakpoint this panel becomes the drawer; above it, it is
+       display: contents, so nav and actions stay direct children of the bar. -->
+  <div class="site-header__panel" id="site-drawer">
+  <button type="button" class="drawer-close" aria-label="Close menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"/></svg>
+  </button>
+
   <nav class="site-nav" aria-label="Main">
     <div class="has-mega">
       <a href="shop.html" class="nav-link{{navPlugins}}" aria-haspopup="true">
@@ -87,7 +94,7 @@
 
   <div class="site-header__actions">
     {{search}}
-    <a href="checkout.html" class="cart-link" aria-label="Cart, 1 item">
+    <a href="checkout.html" class="cart-link cart-link--inline" aria-label="Cart, 1 item">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 17.4a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zm9.4 0a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zM6.9 6l-.5-2H2v1.5h3.2l2.2 8.9c.17.66.77 1.1 1.45 1.1h8.4c.68 0 1.27-.45 1.45-1.1l1.65-6.1c.26-.95-.46-1.9-1.45-1.9H6.9zm2.1 8L7.4 7.5h11.4L17.1 14H9z"/></svg>
       <span class="cart-link__count">1</span>
     </a>
@@ -116,4 +123,20 @@
 
     <a href="all-access.html" class="btn btn--primary btn--md">Get All Access</a>
   </div>
+  </div><!-- /.site-header__panel -->
+
+  <!-- Stays in the bar at every width: the cart the drawer would bury, and
+       the control that opens the drawer. -->
+  <div class="site-header__tools">
+    <a href="checkout.html" class="cart-link cart-link--bar" aria-label="Cart, 1 item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 17.4a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zm9.4 0a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zM6.9 6l-.5-2H2v1.5h3.2l2.2 8.9c.17.66.77 1.1 1.45 1.1h8.4c.68 0 1.27-.45 1.45-1.1l1.65-6.1c.26-.95-.46-1.9-1.45-1.9H6.9zm2.1 8L7.4 7.5h11.4L17.1 14H9z"/></svg>
+      <span class="cart-link__count">1</span>
+    </a>
+
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-drawer">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
+  </div>
 </header>
+
+<div class="drawer-scrim"></div>

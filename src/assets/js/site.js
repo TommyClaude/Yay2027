@@ -17,8 +17,13 @@
      -------------------------------------------------------------------- */
 
   function bindHoverMenu(root) {
-    var open = function () { root.classList.add("is-open"); };
-    var close = function () { root.classList.remove("is-open"); };
+    /* In the drawer, and on any touch screen, these are click toggles
+       instead — see below. Hover must not fight them. */
+    var hoverable = function () {
+      return !window.matchMedia("(max-width: 1024px), (hover: none)").matches;
+    };
+    var open = function () { if (hoverable()) root.classList.add("is-open"); };
+    var close = function () { if (hoverable()) root.classList.remove("is-open"); };
 
     root.addEventListener("mouseenter", open);
     root.addEventListener("mouseleave", close);
@@ -32,6 +37,73 @@
   }
 
   document.querySelectorAll(".has-mega, .has-account").forEach(bindHoverMenu);
+
+  /* -----------------------------------------------------------------------
+     Drawer
+
+     Below 1024 the header nav and actions move into an off-canvas panel.
+     The panel is the same markup as the desktop bar, so nothing here has to
+     know what is inside it — only when it is open.
+     -------------------------------------------------------------------- */
+
+  var narrow = window.matchMedia("(max-width: 1024px)");
+  var coarse = window.matchMedia("(hover: none)");
+  var toggle = document.querySelector(".nav-toggle");
+  var scrim = document.querySelector(".drawer-scrim");
+  var panel = document.getElementById("site-drawer");
+
+  function setDrawer(open) {
+    document.documentElement.classList.toggle("is-drawer-open", open);
+    if (toggle) toggle.setAttribute("aria-expanded", String(open));
+  }
+
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      setDrawer(!document.documentElement.classList.contains("is-drawer-open"));
+    });
+  }
+
+  if (scrim) scrim.addEventListener("click", function () { setDrawer(false); });
+
+  var closer = document.querySelector(".drawer-close");
+  if (closer) closer.addEventListener("click", function () { setDrawer(false); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setDrawer(false);
+  });
+
+  /* A link inside the drawer navigates; leaving the panel open would flash
+     it over the next page. Anchors on the same page need it closed too. */
+  if (panel) {
+    panel.addEventListener("click", function (e) {
+      if (e.target.closest("a") && !e.target.closest(".has-mega > .nav-link")) setDrawer(false);
+    });
+  }
+
+  /* Resizing past the breakpoint with the drawer open would leave the scroll
+     lock on a desktop layout. */
+  narrow.addEventListener("change", function (e) {
+    if (!e.matches) setDrawer(false);
+  });
+
+  /* -----------------------------------------------------------------------
+     Plugins menu on touch and in the drawer
+
+     Hover can't open a menu with a finger, and inside the drawer the mega
+     menu is an accordion rather than a panel. In both cases the Plugins row
+     toggles instead of navigating — the drawer still offers "View all
+     plugins" as the way through to the shop.
+     -------------------------------------------------------------------- */
+
+  var mega = document.querySelector(".has-mega");
+
+  if (mega) {
+    mega.querySelector(".nav-link").addEventListener("click", function (e) {
+      if (!narrow.matches && !coarse.matches) return;
+      e.preventDefault();
+      mega.classList.toggle("is-open");
+    });
+  }
 
   /* -----------------------------------------------------------------------
      FAQ accordion

@@ -1,0 +1,655 @@
+/* ===========================================================================
+   YayCommerce — responsive layer
+
+   The prototypes were only ever drawn at 1280px and up, so everything below
+   that is new work. It lives in one sheet, loaded after the page styles, for
+   two reasons: the desktop rendering stays byte-for-byte what was signed off
+   against the design, and the whole adaptation can be read — or removed — in
+   one place.
+
+   Four steps, each named for what actually breaks at that width:
+
+     1180px  the 1200px column no longer fits its gutters; header search goes
+      1024px  the horizontal nav runs out of room; it becomes a drawer
+       860px  side-by-side page layouts stop working; they stack
+       620px  phone: one column, tighter type, thumb-sized controls
+
+   Within each step the rules follow the page order of the build.
+   ======================================================================== */
+
+/* =========================================================================
+   1180 — tighten the frame
+   ====================================================================== */
+
+@media (max-width: 1180px) {
+  :root {
+    --gutter: 40px;
+    --gutter-edge: 32px;
+  }
+
+  /* The search field is the widest thing in the bar and the one the drawer
+     can't usefully hold; the shop and docs pages both have their own. */
+  .site-header__search { display: none; }
+
+  .site-header { gap: 22px; }
+  .site-header__actions { gap: 10px; }
+
+  .mega { width: min(800px, calc(100vw - 2 * var(--gutter-edge))); }
+
+  /* Grid and flex children default to min-width: auto, so a wide child —
+     a thumbnail strip, a two-column mock — stops its track from shrinking
+     and pushes the page sideways. Every multi-column layout that survives
+     past this width opts out. */
+  .hero > *,
+  .product-hero > *,
+  .aa-band > *,
+  .shop-aa > *,
+  .checkout__grid > *,
+  .account__layout > *,
+  .contact > *,
+  .statement__grid > *,
+  .reviews > *,
+  .casestudy > *,
+  .feature > *,
+  .mock__body > * { min-width: 0; }
+
+  /* Floating labels have to come inside the frame once the column narrows. */
+  .mock { padding-right: 0; }
+  .mock__window { max-width: 100%; }
+  .mock__tag--currency,
+  .mock__tag--swatches,
+  .mock__tag--pricing,
+  .mock__tag--boost { right: 4px; }
+
+  /* Search fields drawn at a fixed width on the desktop comps. */
+  .docs-hero .search,
+  .shop-controls .search { width: 100%; max-width: 560px; }
+}
+
+/* =========================================================================
+   1024 — the nav becomes a drawer
+   ====================================================================== */
+
+@media (max-width: 1024px) {
+  .site-header__tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+  }
+
+  .nav-toggle { display: flex; }
+  .cart-link--bar { display: flex; }
+  .cart-link--inline { display: none; }
+
+  /* The header is its own stacking context, so the panel inside it can only
+     clear the scrim if the header itself does. */
+  .is-drawer-open .site-header { z-index: 90; }
+
+  /* The panel stops being display: contents and becomes the sheet itself. */
+  .site-header__panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: min(360px, 88vw);
+    padding: 18px 20px 28px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--surface);
+    box-shadow: -8px 0 32px -12px rgba(0, 0, 0, .28);
+    transform: translateX(100%);
+    transition: transform .22s ease;
+  }
+
+  .is-drawer-open .site-header__panel { transform: translateX(0); }
+
+  /* The bar's own toggle ends up underneath the sheet, so the way out has to
+     live inside it. */
+  .drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    width: 40px;
+    height: 40px;
+    margin: -6px -8px 6px 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: var(--r-control);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .drawer-close:hover { background: var(--surface-hover); color: var(--ink); }
+
+  .is-drawer-open .drawer-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(0, 0, 0, .35);
+  }
+
+  .is-drawer-open { overflow: hidden; }
+
+  /* Drawer nav ----------------------------------------------------------- */
+  .site-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    font-size: 15px;
+  }
+
+  .site-nav > .nav-link,
+  .has-mega > .nav-link {
+    padding: 11px 12px;
+    border-radius: var(--r-inline);
+  }
+
+  /* In the bar this is a 72px-tall flex cell; in the drawer it has to grow
+     with the list it now contains. */
+  .has-mega {
+    position: static;
+    display: block;
+    height: auto;
+  }
+
+  .nav-link__chevron { margin-left: auto; transition: transform .15s ease; }
+  .has-mega.is-open .nav-link__chevron { transform: rotate(180deg); }
+
+  /* The mega menu flattens into an indented list under Plugins. */
+  .mega {
+    position: static;
+    width: auto;
+    margin: 0 0 6px;
+    padding: 0 0 0 12px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+  }
+
+  .has-mega .mega { display: none; }
+  .has-mega.is-open .mega { display: block; }
+
+  .mega__grid,
+  .mega__groups {
+    display: block;
+    gap: 0;
+  }
+
+  .mega__groups > div + div { margin-top: 10px; }
+  .mega__group-title { margin-bottom: 2px; }
+  .mega__bundle { display: none; }
+
+  .mega__foot {
+    margin-top: 10px;
+    padding: 10px 0 0;
+    border-top: 1px solid var(--line-3);
+  }
+
+  .mega__foot-note { display: none; }
+
+  /* Drawer actions ------------------------------------------------------- */
+  .site-header__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-3);
+  }
+
+  .has-account { position: static; }
+
+  .account-chip {
+    padding: 8px 12px;
+    pointer-events: none;
+  }
+
+  .account-chip > svg { display: none; }
+
+  /* No dropdown in a drawer — the account links are simply part of the list.
+     The selector carries :not(.is-open) to outrank the rule that hides it. */
+  .has-account:not(.is-open) .account-menu,
+  .account-menu {
+    position: static;
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .account-menu__head { display: none; }
+
+  .site-header__actions .btn {
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    margin-top: 10px;
+  }
+
+  /* Slim headers have no drawer; they just need to stop overflowing. */
+  .site-header--slim .site-header__actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: none;
+  }
+
+  .site-header--slim .account-chip { pointer-events: auto; }
+
+  /* Footer --------------------------------------------------------------- */
+  .site-footer__cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 32px;
+  }
+}
+
+/* =========================================================================
+   860 — side-by-side layouts stack
+   ====================================================================== */
+
+@media (max-width: 860px) {
+  :root {
+    --gutter: 28px;
+    --gutter-edge: 24px;
+  }
+
+  .h-hero { font-size: 38px; }
+  .h-section { font-size: 26px; }
+  .h-band { font-size: 28px; }
+  .lede { font-size: 16px; }
+
+  .section { padding-block: 64px; }
+  .section--tight { padding-block: 56px; }
+
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+
+  /* Promo bar: the countdown is the first thing to go, then the strapline. */
+  .promo__timer { display: none; }
+  .promo__inner { gap: 10px; }
+
+  /* Section heads stop being a baseline row once the title wraps. */
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Home ----------------------------------------------------------------- */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding-block: 56px 64px;
+  }
+
+  .mock { padding: 0; }
+  .mock__window { max-width: 560px; }
+
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .plugin-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .aa-band {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-block: 64px;
+  }
+
+  .aa-band__wallpaper,
+  .aa-band__glow--soft { display: none; }
+
+  .aa-card { max-width: 420px; }
+
+  .case-grid,
+  .tstm-grid,
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-photo { grid-column: 1 / -1; }
+
+  /* Product -------------------------------------------------------------- */
+  .product-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* A sticky sidebar that is now a full-width block would pin the buy box
+     over the content it belongs to. */
+  .buybox { position: static; }
+
+  .feature,
+  .feature:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Alternating sides stop meaning anything in one column; every feature
+     reads heading, list, then screenshot. */
+  .feature__text,
+  .feature:nth-child(even) .feature__text { order: 1; }
+
+  .feature__media,
+  .feature:nth-child(even) .feature__media { order: 2; }
+
+  .inbox__grid { grid-template-columns: 1fr; }
+
+  .casestudy { grid-template-columns: 1fr; }
+  .casestudy__stats { grid-template-columns: repeat(3, 1fr); }
+
+  .reviews { grid-template-columns: 1fr; }
+  .related__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Shop ----------------------------------------------------------------- */
+  .shop-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .shop-controls { flex-wrap: wrap; }
+  .shop-controls .search { flex: 1 0 100%; width: 100%; }
+  .shop-controls__sort-label { margin-left: 0; }
+
+  .shop-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .shop-tabs::-webkit-scrollbar { display: none; }
+  .shop-tab { white-space: nowrap; }
+
+  .shop-aa {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 36px;
+  }
+
+  /* All Access ----------------------------------------------------------- */
+  .included__grid { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: minmax(0, 440px); justify-content: center; }
+
+  /* Checkout ------------------------------------------------------------- */
+  .checkout__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .summary { position: static; }
+
+  /* Thank you ------------------------------------------------------------ */
+  .steps__grid { grid-template-columns: 1fr; }
+
+  /* Account -------------------------------------------------------------- */
+  .account__layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .account-nav {
+    position: static;
+    display: flex;
+    overflow-x: auto;
+    gap: 2px;
+    padding: 6px;
+    scrollbar-width: none;
+  }
+
+  .account-nav::-webkit-scrollbar { display: none; }
+
+  .account-nav__item {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .account-nav .menu-sep { display: none; }
+
+  .stat-row { grid-template-columns: 1fr; }
+  .order-foot { grid-template-columns: 1fr; }
+  .licence-card__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Six columns of order history don't collapse into anything readable, so
+     the table scrolls inside its card rather than squeezing. */
+  .panel-card:has(> .table) { overflow-x: auto; }
+  .table { min-width: 560px; }
+  .order-detail__table { overflow-x: auto; }
+
+  /* Docs ----------------------------------------------------------------- */
+  .docs-start__grid { grid-template-columns: repeat(2, 1fr); }
+  .docs-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Support -------------------------------------------------------------- */
+  .channels__grid { grid-template-columns: 1fr; }
+  .answers__grid { grid-template-columns: 1fr; }
+
+  /* Contact -------------------------------------------------------------- */
+  .contact { grid-template-columns: 1fr; gap: 36px; }
+  .statement__grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* =========================================================================
+   620 — phone
+   ====================================================================== */
+
+@media (max-width: 620px) {
+  :root {
+    --gutter: 18px;
+    --gutter-edge: 16px;
+  }
+
+  .h-hero { font-size: 31px; }
+  .h-section { font-size: 23px; }
+  .h-band { font-size: 24px; }
+  .lede { font-size: 15.5px; }
+
+  .section { padding-block: 48px; }
+  .section--tight { padding-block: 40px; }
+
+  .grid-4,
+  .grid-3,
+  .grid-2 { grid-template-columns: 1fr; }
+
+  /* One offer, one line. The code is the part that has to survive. */
+  .promo__inner { justify-content: center; font-size: 11.5px; }
+  .promo__link { display: none; }
+
+  .site-header { height: 62px; }
+  .site-header__logo img { height: 28px; }
+
+  /* Slim headers: the support offer is the line that has to give. */
+  .site-header--slim .site-header__actions > .muted,
+  .secure-mark { display: none; }
+
+  .site-header--slim .account-chip__name { display: none; }
+
+  /* Footer bottom: three groups that no longer fit on one line. */
+  .site-footer__bottom {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .f-lang { margin-left: 0; }
+  .site-footer__social { margin-left: auto; }
+  .site-footer__cols { grid-template-columns: 1fr; gap: 28px; }
+
+  /* 19px of text with 10px between rows is a fiddly thing to hit with a
+     thumb; the extra gap costs nothing in a single column. */
+  .site-footer__links { gap: 15px; }
+  .site-footer__signup { flex-wrap: wrap; }
+  .site-footer__signup .input { flex: 1 1 180px; }
+
+  /* Buttons that sat in a row become full-width stacks. */
+  .hero__actions,
+  .cta-band__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn,
+  .hero__actions .cta-solid,
+  .hero__actions .cta-ghost,
+  .cta-band__actions .cta-solid,
+  .cta-band__actions .cta-ghost { justify-content: center; width: 100%; }
+
+  /* A row of three guarantees, each wrapping onto two lines, reads worse
+     than three lines that each say one thing. */
+  .trust-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Home ----------------------------------------------------------------- */
+  .cat-grid,
+  .plugin-grid,
+  .case-grid,
+  .tstm-grid,
+  .blog-grid,
+  .why-grid { grid-template-columns: 1fr; }
+
+  .aa-band__checks { grid-template-columns: 1fr; }
+  .aa-card { max-width: none; }
+
+  .mock__body { grid-template-columns: 1fr; }
+
+  /* The floating stat card has nowhere to float to at this width. */
+  .mock__stat { display: none; }
+
+  /* Product -------------------------------------------------------------- */
+  .casestudy__stats { grid-template-columns: 1fr; }
+  .related__grid { grid-template-columns: 1fr; }
+  .gallery__thumbs { overflow-x: auto; scrollbar-width: none; }
+  .gallery__thumbs::-webkit-scrollbar { display: none; }
+  .gallery__thumb { flex: 0 0 96px; }
+
+  .tablist {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tablist::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; }
+
+  .sticky-buy { display: none; }
+
+  /* Shop ----------------------------------------------------------------- */
+  .shop-grid { grid-template-columns: 1fr; }
+  .shop-aa { padding: 28px 22px; }
+  .shop-aa__checks { flex-direction: column; gap: 8px; }
+
+  /* All Access ----------------------------------------------------------- */
+  .plans { grid-template-columns: 1fr; }
+
+  /* The comparison table keeps three columns but loses the padding that
+     made them roomy; below this it would be unreadable either way. */
+  .compare__row { grid-template-columns: 1.6fr 1fr 1fr; font-size: 12.5px; }
+
+  /* Product -------------------------------------------------------------- */
+  .buybox__rating { flex-wrap: wrap; }
+
+  /* Stars, title and badge on one line leaves the title two words wide. */
+  .review__head {
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+  }
+
+  .review__title { flex: 1 0 100%; order: 3; }
+
+  /* All Access ----------------------------------------------------------- */
+  .aa-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aa-hero__actions .btn {
+    justify-content: center;
+    padding-inline: 16px;
+  }
+
+  .aa-hero__trust { flex-wrap: wrap; justify-content: center; gap: 8px 16px; }
+
+  /* The headline's no-wrap spans keep "One license." whole; at this width
+     the line has to be allowed to break wherever it can. */
+  .aa-hero h1 { font-size: 30px; }
+  .aa-hero h1 span { white-space: normal; }
+
+  /* Checkout ------------------------------------------------------------- */
+  .who { flex-wrap: wrap; }
+  .who__body { flex: 1 0 calc(100% - 44px); }
+  .who > a { flex: 1 0 100%; padding-left: 44px; }
+
+  .step__country { width: 100%; }
+  .paytabs { grid-template-columns: 1fr; }
+  .payfields { grid-template-columns: 1fr 1fr; }
+  .payfields > :first-child { grid-column: 1 / -1; }
+  .guarantee__points li { flex-wrap: wrap; }
+
+  .guarantee__cards {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+
+  .checkout-footer {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .checkout-footer__built { margin-left: 0; }
+
+  /* Account -------------------------------------------------------------- */
+  .licence-card__grid { grid-template-columns: 1fr; }
+  .order-meta { grid-template-columns: 1fr; }
+
+  /* The order table becomes a stack of rows: an id and a status on top, the
+     plugin and the amount below. */
+  .order-row {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 14px 16px;
+  }
+
+  .order-row__id { width: auto; }
+  .order-row__items { flex: 1 0 100%; order: 3; }
+  .order-row__date { order: 4; }
+  .order-row__total { width: auto; margin-left: auto; order: 5; }
+  .order-row .badge { margin-left: auto; order: 2; }
+
+  /* Docs ----------------------------------------------------------------- */
+  .docs-hero__popular { flex-wrap: wrap; justify-content: center; }
+  .docs-chip { padding: 7px 14px; }
+
+  .docs-help,
+  .confirm-help {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 22px 20px;
+  }
+
+  .docs-help .btn,
+  .confirm-help .btn { width: 100%; justify-content: center; }
+
+  /* Docs ----------------------------------------------------------------- */
+  .docs-start__grid,
+  .docs-grid { grid-template-columns: 1fr; }
+
+  /* Contact -------------------------------------------------------------- */
+  .contact-form { padding: 26px 20px; }
+  .statement__stats { grid-template-columns: 1fr; }
+
+  /* Thank you ------------------------------------------------------------ */
+  .licence__row { flex-wrap: wrap; }
+}
+
