@@ -152,9 +152,13 @@
     border-radius: var(--r-inline);
   }
 
-  /* In the bar this is a 72px-tall flex cell; in the drawer it has to grow
-     with the list it now contains. */
-  .has-mega {
+  /* In the bar these are 72px-tall flex cells holding a trigger, with the
+     panel floated out of them. In the drawer the panel is part of the list,
+     so each wrapper has to be a plain block that grows with its contents —
+     left as a flex row it would sit the menu beside its trigger and spill
+     it over whatever follows. */
+  .has-mega,
+  .has-account {
     position: static;
     display: block;
     height: auto;
@@ -205,8 +209,6 @@
     padding-top: 14px;
     border-top: 1px solid var(--line-3);
   }
-
-  .has-account { position: static; }
 
   .account-chip {
     padding: 8px 12px;
