@@ -142,13 +142,28 @@ a.is-plain:hover,
 a.btn:hover,
 a.nav-link:hover,
 a.menu-item:hover,
+a.mega-row:hover,
+a.cart-link:hover,
+a.account-chip:hover,
+a.account-nav__item:hover,
 a.card:hover,
 a.plugin-card:hover,
+a.cat-card:hover,
+a.shop-card:hover,
 a.blog-card:hover,
+a.gs-card:hover,
+a.docs-card__head:hover,
+a.answer:hover,
+a.buybox__bundle:hover,
 a.cta-solid:hover,
 a.cta-ghost:hover,
-a.mega-row:hover,
-a.f-social:hover { text-decoration: none; }
+a.pay__paypal:hover,
+a.f-social:hover,
+.cta-band a:hover,
+/* Safety net: anything built as a card opts out whatever it is called. */
+a:has(> div):hover,
+a:has(> img):hover,
+a:has(> span):hover { text-decoration: none; }
 
 /* =========================================================================
    Typography scale used across the marketing pages

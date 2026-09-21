@@ -483,8 +483,11 @@
 
 .cta-ghost:hover { background: rgba(30, 30, 30, .08); color: var(--brand-ink); }
 
-.cta-band__trust {
+/* Selector carries the element too: .cta-band p caps the lede at 520px and
+   would otherwise outrank a bare class and wrap this row onto two lines. */
+.cta-band p.cta-band__trust {
   position: relative;
+  max-width: none;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -289,11 +289,10 @@ a.panel:hover {
   border-radius: var(--r-card);
   box-shadow: var(--sh-soft);
   color: inherit;
-  transition: box-shadow .15s ease, border-color .15s ease;
+  transition: box-shadow .15s ease;
 }
 
 .cat-card:hover {
-  border-color: var(--ink-3);
   box-shadow: var(--sh-card-hover);
   color: inherit;
 }
@@ -322,11 +321,10 @@ a.panel:hover {
   border-radius: var(--r-card);
   box-shadow: var(--sh-card);
   color: inherit;
-  transition: box-shadow .15s ease, border-color .15s ease;
+  transition: box-shadow .15s ease;
 }
 
 .blog-card:hover {
-  border-color: var(--accent);
   box-shadow: var(--sh-blog-hover);
   color: inherit;
 }

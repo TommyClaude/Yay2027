@@ -679,6 +679,10 @@
 
 .casestudy__link { color: #72aee6; font-size: 14px; font-weight: 500; }
 
+/* Keep the light blue on hover — the global link hover would drop it to
+   #2145e6, which is unreadable on the dark band. */
+.casestudy__link:hover { color: #72aee6; }
+
 .casestudy__stats {
   position: relative;
   display: grid;
@@ -891,7 +895,7 @@
   color: #fff;
 }
 
-.pager__page.is-active:hover { background: var(--dark-2); }
+.pager button.pager__page.is-active:hover { background: var(--dark-2); }
 
 /* Changelog -------------------------------------------------------------- */
 .changelog {
