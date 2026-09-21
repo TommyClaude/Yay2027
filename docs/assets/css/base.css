@@ -53,11 +53,16 @@
   --warning: #f0b849;
   --danger: #cc1818;
 
-  /* --- Shape (elevated style) ------------------------------------------- */
+  /* --- Shape (elevated style) -------------------------------------------
+     Elevated only rounds the surfaces it lifts. Chrome that never leaves
+     the flat plane — hover fills, code chips, meters, card-brand logos —
+     keeps the underlying WordPress radii, so those two steps are here too. */
   --r-card: 10px;
   --r-control: 8px;
   --r-badge: 6px;
   --r-tile: 6px;
+  --r-inline: 4px;   /* hover fills: nav rows, promo link, social buttons */
+  --r-hair: 2px;     /* meters, licence keys, payment-brand logos */
   --r-pill: 9999px;
 
   /* --- Elevation (elevated style) --------------------------------------- */

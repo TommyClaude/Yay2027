@@ -57,7 +57,7 @@
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--r-card);
   box-shadow: var(--sh-float);
 }
 
@@ -174,7 +174,7 @@
   overflow: hidden;
   margin-bottom: 12px;
   border: 1px solid var(--line);
-  border-radius: var(--r-tile);
+  border-radius: var(--r-card);
 }
 
 .mock__table-head,
@@ -483,6 +483,8 @@
   margin-bottom: 20px;
 }
 
+.case-card__head .ptile { border-radius: 7px; }
+
 .case-card__plugin { font-size: 13px; font-weight: 600; }
 .case-card__store { margin-left: auto; font-size: 12.5px; color: var(--ink-3); }
 
@@ -592,7 +594,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: var(--r-tile);
+  border-radius: var(--r-inline);
   background: var(--surface-2);
 }
 

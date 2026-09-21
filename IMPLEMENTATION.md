@@ -91,6 +91,13 @@ rather than styling:
    prototypes used click handlers on divs.
 4. **Light DOM cleanup.** `<dl>` for spec and totals lists, `<table>` for the
    purchases table, headings in order.
+5. **Two corner radii are held consistent** where the prototypes contradict
+   themselves. The account chip is a 2px hover target on Home, the product page,
+   All Access and My account, but 4px on Shop, Docs, Support and Contact; this
+   build uses 2px everywhere the chip opens a menu, and 4px on the checkout and
+   thank-you headers where it is a plain link. The Profile panel on My account
+   is a design-system card at 4px while every other panel on that page is a
+   hand-styled 10px card; all panels are 10px here.
 
 ## Known limits
 

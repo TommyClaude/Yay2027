@@ -123,7 +123,7 @@
   padding: 18px 20px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
+  border-radius: var(--r-control);
   box-shadow: var(--sh-card);
 }
 
@@ -407,7 +407,7 @@
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  border-radius: var(--r-control);
+  border-radius: 12px;
   background: var(--surface-3) center / cover no-repeat;
 }
 
@@ -439,7 +439,7 @@
   padding: 18px 20px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
+  border-radius: var(--r-control);
   box-shadow: var(--sh-card);
 }
 

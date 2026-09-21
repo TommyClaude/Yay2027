@@ -141,7 +141,7 @@
 .buybox__head img {
   width: 40px;
   height: 40px;
-  border-radius: var(--r-control);
+  border-radius: 12px;
 }
 
 .buybox__head h1 {
@@ -215,7 +215,7 @@
   padding: 13px 14px;
   background: var(--surface-2);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
+  border-radius: var(--r-control);
   box-shadow: none;
   font-family: inherit;
   text-align: left;
@@ -281,7 +281,7 @@
   margin: -6px 0 14px;
   padding: 9px 12px;
   border: 1px dashed var(--ink-4);
-  border-radius: var(--r-control);
+  border-radius: var(--r-inline);
   color: var(--ink);
   font-size: 12.5px;
   transition: border-color .12s, background .12s;
@@ -357,7 +357,7 @@
 
 .buybox__pay img {
   height: 18px;
-  border-radius: var(--r-badge);
+  border-radius: var(--r-hair);
 }
 
 .buybox__pay img:last-child { filter: brightness(.96); }
@@ -403,7 +403,7 @@
 .sticky-buy img {
   width: 36px;
   height: 36px;
-  border-radius: var(--r-control);
+  border-radius: 12px;
 }
 
 .sticky-buy__name { font-size: 15px; font-weight: 600; line-height: 1.2; }
@@ -694,7 +694,7 @@
   padding: 24px 22px;
   background: rgba(255, 255, 255, .05);
   border: 1px solid rgba(255, 255, 255, .09);
-  border-radius: var(--r-control);
+  border-radius: var(--r-inline);
 }
 
 .casestudy__stat strong {
@@ -792,7 +792,7 @@
   height: 8px;
   overflow: hidden;
   background: var(--surface-3);
-  border-radius: var(--r-badge);
+  border-radius: var(--r-hair);
 }
 
 .histogram__fill { height: 100%; background: var(--warning); }
