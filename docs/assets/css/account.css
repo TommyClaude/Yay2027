@@ -60,7 +60,8 @@
   cursor: pointer;
 }
 
-.account-nav__item:hover { background: var(--surface-hover); }
+/* No hover fill: the active item is the only thing that should read as
+   filled here, so a grey wash on the others competes with it. */
 
 .account-nav__item svg { fill: var(--ink-2); }
 
