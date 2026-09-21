@@ -1,0 +1,616 @@
+<!--@
+{
+  "title": "YayPricing — dynamic pricing & discounts for WooCommerce",
+  "desc": "Every kind of WooCommerce discount in one rule builder: BOGO deals, bulk and tiered pricing, cart discounts, scheduled flash sales and role-based prices.",
+  "css": ["product"],
+  "js": ["product"],
+  "nav": "plugins",
+  "search": true
+}
+@-->
+
+<nav class="breadcrumb wrap--edge" aria-label="Breadcrumb">
+  <a href="index.html">Home</a>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M10.6 6L9.4 7.1l4.6 4.9-4.6 4.9 1.2 1.1 5.4-6z"/></svg>
+  <a href="shop.html">Plugins</a>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M10.6 6L9.4 7.1l4.6 4.9-4.6 4.9 1.2 1.1 5.4-6z"/></svg>
+  <a href="shop.html?cat=Marketing%20%26%20Sales">Marketing &amp; Sales</a>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M10.6 6L9.4 7.1l4.6 4.9-4.6 4.9 1.2 1.1 5.4-6z"/></svg>
+  <span aria-current="page">YayPricing</span>
+</nav>
+
+<!-- ====================================================================
+     Hero — screenshots next to the buy box, the way app stores do it
+     ================================================================= -->
+<section class="product-hero wrap--edge">
+  <div>
+    <div class="gallery">
+      <div class="gallery__frame">
+        <img src="https://yaycommerce.com/wp-content/uploads/2025/06/woocommerce-discount-rules-yaypricing.png" alt="YayPricing — dynamic pricing &amp; automated discounts for WooCommerce" data-gallery-main>
+      </div>
+      <p class="gallery__caption" data-gallery-caption>YayPricing — dynamic pricing &amp; automated discounts for WooCommerce</p>
+      <div class="gallery__thumbs">
+      <button type="button" class="gallery__thumb is-active" data-gallery-thumb aria-label="Show screenshot 1">
+        <img src="https://yaycommerce.com/wp-content/uploads/2025/06/woocommerce-discount-rules-yaypricing.png" alt="YayPricing — dynamic pricing &amp; automated discounts for WooCommerce">
+      </button>
+      <button type="button" class="gallery__thumb" data-gallery-thumb aria-label="Show screenshot 2">
+        <img src="https://yaycommerce.com/wp-content/uploads/2023/10/WooCommerce-Discount-rules-list.jpg" alt="Discount rules list — drag to prioritize, toggle to enable">
+      </button>
+      <button type="button" class="gallery__thumb" data-gallery-thumb aria-label="Show screenshot 3">
+        <img src="https://yaycommerce.com/wp-content/uploads/2023/06/Product-sale-display.jpg" alt="What customers see — sale price and offer description on the product page">
+      </button>
+      <button type="button" class="gallery__thumb" data-gallery-thumb aria-label="Show screenshot 4">
+        <img src="https://yaycommerce.com/wp-content/uploads/2023/06/YayPricing-countdown-timer-end-time.png" alt="Countdown timer — schedule a campaign&#x27;s start and end time">
+      </button>
+      <button type="button" class="gallery__thumb" data-gallery-thumb aria-label="Show screenshot 5">
+        <img src="https://yaycommerce.com/wp-content/uploads/2023/06/countdown-banner.jpg" alt="Countdown banner on the storefront during a flash sale">
+      </button>
+      </div>
+    </div>
+
+    <ul class="product-compat">
+      <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Works with any theme &amp; page builder</span></li>
+      <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Tested with Woo 10.5 and WordPress 7.1</span></li>
+      <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>HPOS &amp; WPML ready</span></li>
+    </ul>
+
+    <div class="product-intro">
+      <p>YayPricing puts every kind of discount in one rule builder — BOGO deals, bulk and tiered pricing, cart discounts, scheduled flash sales and role-based prices — and applies them automatically at checkout.</p>
+      <p>Write rules the way you'd say them (“if the cart is over $80, take 15% off”), decide how they stack with coupons and sale prices, and let campaigns start and stop themselves.</p>
+    </div>
+  </div>
+
+  <aside class="buybox">
+    <div class="buybox__head">
+      <img src="https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580" alt="">
+      <h1>YayPricing</h1>
+      <span class="chip-card chip-card--best">Bestseller</span>
+    </div>
+    <p class="buybox__tagline">Dynamic pricing &amp; discounts for WooCommerce</p>
+
+    <div class="buybox__rating">
+      <span class="stars"><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+      <span><strong>4.9</strong> <a href="#tabs">(113 reviews)</a> · 30,000+ active installs</span>
+    </div>
+
+    <div class="billing" role="group" aria-label="Billing period">
+      <button type="button" class="is-active" data-billing="annual" aria-pressed="true">Annual</button>
+      <button type="button" data-billing="lifetime" aria-pressed="false">Lifetime <small>· pay once</small></button>
+    </div>
+
+    <div class="tiers" role="group" aria-label="License tier">
+      <button type="button" class="tier is-active" aria-pressed="true">
+        <span class="tier__dot" aria-hidden="true"></span>
+        <span class="tier__body">
+          <span class="tier__sites">Single site</span>
+          <span class="tier__note">For one store</span>
+        </span>
+        <span class="tier__price"><strong data-tier-price>$99</strong></span>
+      </button>
+      <button type="button" class="tier" aria-pressed="false">
+        <span class="tier__dot" aria-hidden="true"></span>
+        <span class="tier__body">
+          <span class="tier__sites">5 sites</span>
+          <span class="tier__note">Up to 5 stores</span>
+        </span>
+        <span class="tier__flag">Most popular</span>
+        <span class="tier__price"><span class="strike" data-tier-anchor>$495</span><strong data-tier-price>$199</strong></span>
+      </button>
+      <button type="button" class="tier" aria-pressed="false">
+        <span class="tier__dot" aria-hidden="true"></span>
+        <span class="tier__body">
+          <span class="tier__sites">Unlimited sites</span>
+          <span class="tier__note">For agencies</span>
+        </span>
+        <span class="tier__price"><strong data-tier-price>$499</strong></span>
+      </button>
+    </div>
+
+    <a href="all-access.html" class="buybox__bundle is-plain">
+      <span><strong>All Access</strong> — all 10 plugins</span>
+      <b>from $299 →</b>
+    </a>
+
+    <div class="buybox__cta">
+      <a href="checkout.html" class="btn btn--primary"><span data-cta-label>Purchase — $99</span></a>
+      <span class="buybox__save" data-save-badge hidden></span>
+    </div>
+
+    <p class="buybox__demo"><a href="#" target="_blank" rel="noopener">View live demo ↗</a></p>
+
+    <div class="buybox__guarantee">
+      <span class="tick"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+      <span>30-day money-back guarantee — no questions asked</span>
+    </div>
+
+    <div class="buybox__pay"><img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/visa.svg" alt="Visa"><img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/mastercard.svg" alt="Mastercard"><img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/amex.svg" alt="Amex"><img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/discover.svg" alt="Discover"><img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/paypal.svg" alt="Paypal"></div>
+
+    <dl class="buybox__specs">
+      <div><dt>Version</dt><dd class="mono">3.2.1</dd></div>
+      <div><dt>Last updated</dt><dd>July 9, 2026</dd></div>
+      <div><dt>Requires</dt><dd>WooCommerce 7.0+ · WP 6.2+</dd></div>
+      <div><dt>Documentation</dt><dd><a href="docs.html">Read the docs</a></dd></div>
+      <div><dt>Support</dt><dd><a href="support.html">Live chat 24/7</a></dd></div>
+    </dl>
+  </aside>
+</section>
+
+<!-- ====================================================================
+     Features
+     ================================================================= -->
+<section class="product-why wrap--edge">
+  <div class="eyebrow">Why YayPricing</div>
+  <h2>Discounts that sell, without the spreadsheet</h2>
+  <p>Native WordPress admin UI — no learning curve, no design surprises.</p>
+</section>
+
+<section class="features wrap--edge">
+    <div class="feature">
+      <div class="feature__text">
+        <h3>Dynamic pricing &amp; automated discounts</h3>
+        <ul>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Create unlimited discounts with unique pricing rules.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Auto-apply gift items or discounted prices when conditions are met.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Run time-based offers during Black Friday with a countdown timer.</span></li>
+        </ul>
+      </div>
+      <div class="feature__media"><img src="https://yaycommerce.com/wp-content/uploads/2023/10/YayPricing-Dynamic-Pricing-Automated-Discounts.png" alt="Dynamic pricing &amp; automated discounts"></div>
+    </div>
+    <div class="feature">
+      <div class="feature__text">
+        <h3>Personalized discounts</h3>
+        <ul>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Trigger discounts based on WordPress user roles.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Offer related-product discounts based on items ordered in the past.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Show an offer only when the customer has placed more than 5 orders.</span></li>
+        </ul>
+      </div>
+      <div class="feature__media"><img src="https://yaycommerce.com/wp-content/uploads/2023/10/WooCommerce-Personalized-Discounts.png" alt="Personalized discounts"></div>
+    </div>
+    <div class="feature">
+      <div class="feature__text">
+        <h3>Effective upsell funnel</h3>
+        <ul>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Display upsell notices suggesting the closest possible discount in real time.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Encourage existing customers to buy more and increase order value.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Reward repeat purchases to improve customer loyalty.</span></li>
+        </ul>
+      </div>
+      <div class="feature__media"><img src="https://yaycommerce.com/wp-content/uploads/2023/10/YayPricing-Upsell-Funnel.png" alt="Effective upsell funnel"></div>
+    </div>
+    <div class="feature">
+      <div class="feature__text">
+        <h3>Smart coupons</h3>
+        <ul>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Create advanced buy X get Y deals — auto-apply or coupon-based.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Display dynamic cart notices that guide customers to unlock rewards.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Choose whether a coupon combines with other coupons, pricing rules, or sale discounts.</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span>Send personalized smart coupons directly to customers via email.</span></li>
+        </ul>
+      </div>
+      <div class="feature__media"><img src="https://yaycommerce.com/wp-content/uploads/2023/10/WooCommerce-Smart-Coupons.png" alt="Smart coupons"></div>
+    </div>
+</section>
+
+<section class="inbox wrap--edge">
+  <h2>Everything in the box</h2>
+  <p class="inbox__lede">Every license includes all features — no add-ons to buy later.</p>
+  <div class="inbox__grid">
+      <div>
+        <div class="inbox__head">Discount types</div>
+        <ul class="inbox__list">
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Percentage, fixed &amp; tiered discounts</strong> — on products, categories, or the whole cart</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>BOGO &amp; “buy X get Y”</strong> — including cheapest-item-free logic</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Quantity-break tables</strong> — shown right on the product page</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="inbox__head">Campaigns</div>
+        <ul class="inbox__list">
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Scheduled flash sales</strong> — with automatic start and cleanup</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Countdown timers</strong> — on product pages and the cart</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>First-order &amp; win-back offers</strong> — based on purchase history</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="inbox__head">Control &amp; targeting</div>
+        <ul class="inbox__list">
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Role-based &amp; B2B pricing</strong> — by user role or customer group</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Coupon-stacking controls</strong> — combine, override, or exclude</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Exclusions &amp; priorities</strong> — decide exactly which rule wins</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="inbox__head">Confidence &amp; insights</div>
+        <ul class="inbox__list">
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Live cart preview</strong> — test any rule before you publish</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Performance dashboard</strong> — revenue and orders per rule</span></li>
+          <li><span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span><span><strong>Currency, tax, WPML &amp; HPOS aware</strong> — works with your whole stack</span></li>
+        </ul>
+      </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Case study
+     ================================================================= -->
+<section class="casestudy wrap--edge">
+  <div class="dotgrid" aria-hidden="true"></div>
+  <div class="casestudy__glow" aria-hidden="true"></div>
+
+  <div class="casestudy__copy">
+    <div class="casestudy__kicker">Case study — Maison Linen</div>
+    <h2>“We stopped guessing at discounts. AOV went up 23% in two months.”</h2>
+    <p class="casestudy__lede">Maison Linen replaced site-wide sales with tiered quantity breaks and a $120 free-shipping goal built in YayPricing. Margins went up, discounting went down.</p>
+    <div class="casestudy__who">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">
+      <div>
+        <strong>Claire Fontaine</strong>
+        <span>Founder, Maison Linen — Lyon, France</span>
+      </div>
+    </div>
+    <a href="#" class="casestudy__link">Read the full case study →</a>
+  </div>
+
+  <div class="casestudy__stats">
+    <div class="casestudy__stat"><strong>+23%</strong><span>average order value</span></div>
+    <div class="casestudy__stat"><strong>−41%</strong><span>blanket discounting</span></div>
+    <div class="casestudy__stat"><strong class="is-neutral">60</strong><span>days to results</span></div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Reviews · Changelog · FAQ
+     ================================================================= -->
+<section id="tabs" class="product-tabs wrap--edge">
+  <div class="tablist" role="tablist">
+    <button type="button" class="tab is-active" role="tab" aria-selected="true" data-tab="reviews">Reviews (113)</button>
+    <button type="button" class="tab" role="tab" aria-selected="false" data-tab="changelog">Changelog</button>
+    <button type="button" class="tab" role="tab" aria-selected="false" data-tab="faq">FAQ</button>
+  </div>
+
+  <div class="tabpanel" role="tabpanel" data-tabpanel="reviews">
+    <div class="reviews">
+      <div class="reviews__summary">
+        <div class="reviews__score">4.9</div>
+        <span class="stars"><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="16" height="16" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+        <div class="reviews__count">113 verified reviews</div>
+        <ul class="histogram">
+            <li><span class="histogram__label">5★</span><span class="histogram__track"><span class="histogram__fill" style="width:92%"></span></span><span class="histogram__pct">92%</span></li>
+            <li><span class="histogram__label">4★</span><span class="histogram__track"><span class="histogram__fill" style="width:6%"></span></span><span class="histogram__pct">6%</span></li>
+            <li><span class="histogram__label">3★</span><span class="histogram__track"><span class="histogram__fill" style="width:1%"></span></span><span class="histogram__pct">1%</span></li>
+            <li><span class="histogram__label">2★</span><span class="histogram__track"><span class="histogram__fill" style="width:0.5%"></span></span><span class="histogram__pct">&lt;1%</span></li>
+            <li><span class="histogram__label">1★</span><span class="histogram__track"><span class="histogram__fill" style="width:0.5%"></span></span><span class="histogram__pct">&lt;1%</span></li>
+        </ul>
+        <button type="button" class="btn reviews__write" data-review-open>Write a review</button>
+      </div>
+
+      <div class="reviews__list">
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Great design, simple to set up</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">I love YayPricing! Great design, simple to set up, and quick and nice support! Would recommend this plugin for small and medium businesses.</p>
+            <div class="review__meta">Jack — Wholesaler · June 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Easy to get, even for non-developers</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">I was far from a developer but this one is just easy to get. Totally recommended!</p>
+            <div class="review__meta">Rebecca — Merchant · May 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Clean design, simple tabs</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">Very easy to understand! I really like its clean design and simple tabs in a single user interface.</p>
+            <div class="review__meta">Juan — Ecommerce expert · May 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">2x better than I expected</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">This plugin has helped me a lot! It is 2x better than I expected to create bundles of my products. And after the help from Trace from the customer support team, I was able to get it up and running quickly.</p>
+            <div class="review__meta">Stephanie — Career coach · April 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Wonderful plugin and awesome support</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">Can recommend for all those who are in need of a quick cross &amp; upsell plan!</p>
+            <div class="review__meta">Nirmaan — Instructor · March 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Cart discounts finally work the way I want</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">Tiered cart discounts with exclusions for sale items — set up in ten minutes. Support answered a question about stacking within the hour.</p>
+            <div class="review__meta">Daniel — Store owner · Apr 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Replaced three plugins</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">BOGO, bulk pricing and scheduled promos used to need three separate plugins. Now one. Fewer conflicts, faster checkout.</p>
+            <div class="review__meta">Priya — Agency lead · Mar 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Solid, well-maintained</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">Updates land regularly and nothing has broken across two WooCommerce major versions. That&#x27;s rare.</p>
+            <div class="review__meta">Marco — Developer · Feb 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Clear reporting</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">The performance dashboard shows exactly which rule drove revenue. Helped us kill two campaigns that weren&#x27;t working.</p>
+            <div class="review__meta">Sofia — Marketing · Jan 2026</div>
+          </article>
+          <article class="review">
+            <div class="review__head">
+              <span class="stars"><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg><svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></span>
+              <span class="review__title">Good, one small wish</span>
+              <span class="badge badge--success push">Verified buyer</span>
+            </div>
+            <p class="review__body">Everything works. Would love per-variation exclusions in the rule builder — told support and it&#x27;s on the roadmap.</p>
+            <div class="review__meta">Tom — Merchant · Dec 2025</div>
+          </article>
+        <div class="pager">
+          <span class="pager__count">Showing <span data-review-range>1–5 of 113</span> reviews</span>
+          <div class="pager__nav">
+            <button type="button" data-review-prev>‹ Prev</button>
+            <button type="button" class="pager__page is-active" data-review-page="1">1</button>
+            <button type="button" class="pager__page" data-review-page="2">2</button>
+            <button type="button" data-review-next>Next ›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpanel" role="tabpanel" data-tabpanel="changelog" hidden>
+    <div class="changelog">
+        <div>
+          <div class="changelog__ver"><strong>3.2.1</strong><span>July 9, 2026</span></div>
+          <ul>
+            <li><span class="tag tag--fixed">Fixed</span><span>Rounding issue with tax-inclusive tiered prices.</span></li>
+            <li><span class="tag tag--fixed">Fixed</span><span>Countdown timer flicker on cached product pages.</span></li>
+            <li><span class="tag tag--improved">Improved</span><span>Rule list loads 2× faster on stores with 100+ rules.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="changelog__ver"><strong>3.2.0</strong><span>June 12, 2026</span></div>
+          <ul>
+            <li><span class="tag tag--new">New</span><span>Scheduled campaigns with countdown timers on product pages.</span></li>
+            <li><span class="tag tag--new">New</span><span>Role-based pricing for B2B and wholesale stores.</span></li>
+            <li><span class="tag tag--improved">Improved</span><span>Full HPOS (High-Performance Order Storage) compatibility.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="changelog__ver"><strong>3.1.4</strong><span>May 2, 2026</span></div>
+          <ul>
+            <li><span class="tag tag--fixed">Fixed</span><span>Coupon-stacking edge case with per-user limits.</span></li>
+            <li><span class="tag tag--improved">Improved</span><span>WPML string registration for rule labels.</span></li>
+          </ul>
+        </div>
+      <a href="#" style="font-size:14px; font-weight:500;">Full changelog →</a>
+    </div>
+  </div>
+
+  <div class="tabpanel" role="tabpanel" data-tabpanel="faq" hidden>
+    <div class="faq">
+        <div class="faq__item is-open">
+          <button type="button" class="faq__q" aria-expanded="true">
+            <span>Does YayPricing work with my theme?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">Yes. Discounts are applied server-side through standard WooCommerce hooks, so they work with any properly-coded theme and page builder. If anything looks off, support will fix it with you.</p>
+        </div>
+        <div class="faq__item">
+          <button type="button" class="faq__q" aria-expanded="false">
+            <span>Will it slow down my store?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">No. Rules are evaluated in memory at cart-calculation time and results are cached. Stores running 100+ active rules typically see no measurable difference.</p>
+        </div>
+        <div class="faq__item">
+          <button type="button" class="faq__q" aria-expanded="false">
+            <span>Can I combine it with coupons and sale prices?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">Yes — and you decide how. Every rule has stacking controls: combine with coupons, override sale prices, or skip products that are already discounted.</p>
+        </div>
+        <div class="faq__item">
+          <button type="button" class="faq__q" aria-expanded="false">
+            <span>What happens when my license expires?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">The plugin keeps working and your rules stay exactly as configured. You stop receiving updates and support until you renew.</p>
+        </div>
+        <div class="faq__item">
+          <button type="button" class="faq__q" aria-expanded="false">
+            <span>How is this different from YayPricing Lite?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">The Lite version only handles simple percentage discounts. Everything on this page — BOGO, tiered pricing, scheduled campaigns, role-based pricing, and the performance dashboard — is Pro-only, and Pro is covered by the 30-day money-back guarantee.</p>
+        </div>
+        <div class="faq__item">
+          <button type="button" class="faq__q" aria-expanded="false">
+            <span>How does the 30-day refund work?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </button>
+          <p class="faq__a">Buy it, run it on your live store for up to 30 days. Not a fit? Chat with us and we refund 100% — no forms, no questions asked.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Related plugins
+     ================================================================= -->
+<section class="related wrap--edge">
+  <div class="related__head">
+    <h2>Pairs well with YayPricing</h2>
+    <a href="shop.html" style="font-size:14px; font-weight:500;">View all plugins →</a>
+  </div>
+  <div class="related__grid">
+      <a href="#" class="plugin-card">
+        <span class="ptile ptile--44" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+        <div class="plugin-card__name">YayBoost</div>
+        <p class="plugin-card__tag">10+ sales boosters: order bumps, cart goals &amp; trust badges.</p>
+        <div class="plugin-card__meta">
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <strong>5.0</strong><span style="color:var(--ink-3)">(146)</span>
+          <span class="plugin-card__price">From $49<span>/yr</span></span>
+        </div>
+      </a>
+      <a href="#" class="plugin-card">
+        <span class="ptile ptile--44" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+        <div class="plugin-card__name">YayCurrency</div>
+        <p class="plugin-card__tag">Multi-currency switcher — show local prices, win global buyers.</p>
+        <div class="plugin-card__meta">
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <strong>4.8</strong><span style="color:var(--ink-3)">(976)</span>
+          <span class="plugin-card__price">From $49<span>/yr</span></span>
+        </div>
+      </a>
+      <a href="#" class="plugin-card">
+        <span class="ptile ptile--44" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+        <div class="plugin-card__name">YayMail</div>
+        <p class="plugin-card__tag">Design pro WooCommerce emails — premade patterns &amp; 80+ integrations.</p>
+        <div class="plugin-card__meta">
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <strong>4.8</strong><span style="color:var(--ink-3)">(1,842)</span>
+          <span class="plugin-card__price">From $59<span>/yr</span></span>
+        </div>
+      </a>
+      <a href="#" class="plugin-card">
+        <span class="ptile ptile--44" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+        <div class="plugin-card__name">YaySwatches</div>
+        <p class="plugin-card__tag">Color, image &amp; button swatches for product variations.</p>
+        <div class="plugin-card__meta">
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <strong>5.0</strong><span style="color:var(--ink-3)">(734)</span>
+          <span class="plugin-card__price">From $39<span>/yr</span></span>
+        </div>
+      </a>
+  </div>
+  <p class="related__more">Need more than one? <a href="all-access.html">Get all 10 plugins with All Access — from $299/yr →</a></p>
+</section>
+
+<!-- ====================================================================
+     Closing CTA
+     ================================================================= -->
+<section class="cta-band wrap--edge">
+  <div class="dotgrid dotgrid--ink" aria-hidden="true"></div>
+  <div class="cta-band__logo" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></div>
+  <h2 class="is-product">Ready to lift your average order value?</h2>
+  <p>Install YayPricing today — if it doesn't earn its keep in 30 days, we refund every cent.</p>
+  <div class="cta-band__actions">
+    <a href="checkout.html" class="cta-solid">Purchase YayPricing — from $99/yr</a>
+    <a href="#" target="_blank" rel="noopener" class="cta-ghost">Try the live demo ↗</a>
+  </div>
+  <p class="cta-band__trust">
+    <span><svg width="13" height="13" viewBox="4.4 4.4 15.2 15.2" fill="currentColor" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>4.9/5 from 113 reviews</span>
+    <span>·</span><span>Instant download</span><span>·</span><span>30-day money-back guarantee</span>
+  </p>
+</section>
+
+<!-- ====================================================================
+     Sticky purchase bar
+     ================================================================= -->
+<div class="sticky-buy" hidden>
+  <div class="sticky-buy__inner wrap--edge">
+    <img src="https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580" alt="">
+    <div>
+      <div class="sticky-buy__name">YayPricing</div>
+      <div class="sticky-buy__note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg>30-day money-back guarantee</div>
+    </div>
+
+    <div class="sticky-buy__tiers">
+        <button type="button" class="sticky-buy__tier is-active">
+          <span>Single site</span><em data-tier-price>$99</em>
+        </button>
+        <button type="button" class="sticky-buy__tier">
+          <span>5 sites</span><span class="strike" data-tier-anchor style="font-size:12px">$495</span><em data-tier-price>$199</em>
+        </button>
+        <button type="button" class="sticky-buy__tier">
+          <span>Unlimited sites</span><em data-tier-price>$499</em>
+        </button>
+    </div>
+
+    <div class="sticky-buy__price">
+      <span class="sticky-buy__save" data-save-badge hidden></span>
+      <span data-bar-price>$99/yr</span>
+    </div>
+
+    <a href="checkout.html" class="btn btn--primary">Purchase</a>
+  </div>
+</div>
+
+<!-- ====================================================================
+     Review modal
+     ================================================================= -->
+<div class="modal" data-review-modal hidden>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Review YayPricing">
+    <div class="modal__head">
+      <div class="modal__title"><img src="https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580" alt="">Review YayPricing</div>
+      <button type="button" class="modal__close" aria-label="Close" data-review-close><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"/></svg></button>
+    </div>
+
+    <div class="modal__body">
+      <div data-review-form>
+        <div class="field-label">Your rating</div>
+        <div class="rating-picker">
+          <button type="button" class="is-on" aria-label="1 star"><svg width="30" height="30" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></button>
+          <button type="button" class="is-on" aria-label="2 stars"><svg width="30" height="30" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></button>
+          <button type="button" class="is-on" aria-label="3 stars"><svg width="30" height="30" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></button>
+          <button type="button" class="is-on" aria-label="4 stars"><svg width="30" height="30" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></button>
+          <button type="button" class="is-on" aria-label="5 stars"><svg width="30" height="30" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg></button>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="rv-title">Title</label>
+          <input class="input" id="rv-title" placeholder="Sum it up in a line" style="height:40px; font-size:14px;">
+        </div>
+        <div class="field">
+          <label class="field-label" for="rv-body">Review</label>
+          <textarea class="textarea" id="rv-body" rows="7" placeholder="What did YayPricing help you do?" style="font-size:14px; min-height:160px; line-height:1.55;"></textarea>
+        </div>
+
+        <div class="modal__foot">
+          <span class="modal__byline">Posting as <strong>Trung Nguyen</strong> · verified customer</span>
+          <button type="button" class="btn btn--primary" style="height:40px; padding:0 20px; font-size:14px; font-weight:600;" data-review-submit>Submit review</button>
+        </div>
+      </div>
+
+      <div class="modal__done" data-review-done hidden>
+        <div class="modal__done-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></div>
+        <h3>Thanks — your review is in.</h3>
+        <p>It appears here once a moderator approves it, usually within a day.</p>
+        <button type="button" class="btn btn--primary" style="height:40px; padding:0 22px; font-size:14px; font-weight:600;" data-review-close>Done</button>
+      </div>
+    </div>
+  </div>
+</div>

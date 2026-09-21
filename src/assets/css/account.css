@@ -1,0 +1,667 @@
+/* ===========================================================================
+   YayCommerce — My account
+
+   Five views behind a sidebar (dashboard, purchases, downloads, licenses,
+   profile) plus an order-detail view. Denser than the marketing pages: this
+   is a management screen, so it keeps wp-admin's compact rhythm.
+   ======================================================================== */
+
+.account {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 36px 40px 72px;
+}
+
+.account h1 {
+  margin-bottom: 4px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.account__howdy {
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.account__layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* =========================================================================
+   Sidebar
+   ====================================================================== */
+
+.account-nav {
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.account-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  border-radius: var(--r-control);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.account-nav__item:hover { background: var(--surface-hover); }
+
+.account-nav__item svg { fill: var(--ink-2); }
+
+.account-nav__item.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.account-nav__item.is-active svg { fill: var(--accent); }
+
+.account-nav .menu-sep { margin: 6px 4px; }
+
+/* =========================================================================
+   Panels
+   ====================================================================== */
+
+.panel-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.panel-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-card__head strong { font-size: 14px; font-weight: 600; }
+
+.panel-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Dashboard
+   ====================================================================== */
+
+.account-notice {
+  margin-bottom: 16px;
+  border-left-color: #dba617;
+}
+
+.account-notice span { font-size: 13px; }
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat-tile {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.stat-tile__label {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.stat-tile__value { font-size: 26px; font-weight: 600; }
+
+.stat-tile__value small {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.stat-tile__note {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.stat-tile__note--warn { color: #614d02; }
+
+/* Bundle upsell, sized as a note rather than a banner ------------------- */
+.upsell {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: rgba(56, 88, 233, .05);
+  border: 1px solid rgba(56, 88, 233, .25);
+  border-radius: var(--r-control);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.upsell svg { flex-shrink: 0; margin-top: 1px; }
+
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.order-row:last-child { border-bottom: none; }
+
+.order-row__id {
+  width: 90px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-row__items { flex: 1; font-size: 13px; }
+.order-row__date { font-size: 13px; color: var(--ink-2); }
+
+.order-row__total {
+  width: 64px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* =========================================================================
+   Purchases table
+   ====================================================================== */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table thead th {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  text-align: left;
+}
+
+.table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-3);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: var(--surface-2); }
+
+.table__id { font-weight: 600; white-space: nowrap; }
+.table__total { font-weight: 600; }
+
+/* =========================================================================
+   Order detail
+   ====================================================================== */
+
+.order-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.order-crumb a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-2);
+}
+
+.order-crumb a:hover { color: var(--ink); }
+.order-crumb strong { color: var(--ink); font-weight: 500; white-space: nowrap; }
+
+.order-detail {
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.order-detail__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.order-detail__title {
+  flex: 1;
+  min-width: 200px;
+}
+
+.order-detail__title > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-detail__title b { font-size: 18px; font-weight: 600; white-space: nowrap; }
+
+.order-detail__when {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.order-detail__table { padding: 6px 20px 0; }
+
+.order-detail__product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-detail__product img {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+}
+
+.order-detail__product span { font-size: 12px; color: var(--ink-2); }
+
+.order-keys {
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  background: #fafafa;
+}
+
+.order-keys__label,
+.order-meta__label {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--ink-2);
+}
+
+.order-keys__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: 13.5px;
+}
+
+.order-keys__row > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-keys code {
+  padding: 3px 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-badge);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.order-foot {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
+  padding: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.order-meta {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 32px;
+  align-content: start;
+  justify-content: start;
+}
+
+.order-meta__label { margin-bottom: 6px; }
+.order-meta div > div:last-child { font-size: 13.5px; }
+
+.order-sums { font-size: 13.5px; }
+
+.order-sums > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.order-sums dt { color: var(--ink-2); }
+
+.order-sums__total {
+  margin-top: 4px;
+  padding: 9px 0 0;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.order-sums__total dt { color: var(--ink); }
+.order-sums__discount dd { color: var(--danger); }
+
+.order-help {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Downloads
+   ====================================================================== */
+
+.download-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.download-row__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-control);
+  background: var(--surface-3) center / cover no-repeat;
+}
+
+.download-row__body { flex: 1; min-width: 0; }
+.download-row__name { font-size: 14px; font-weight: 600; }
+.download-row__meta { font-size: 12.5px; color: var(--ink-2); }
+.download-row__lic { font-size: 12.5px; color: var(--ink-2); }
+
+.download-row .btn--primary {
+  height: 32px;
+  padding: 0 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.download-row .btn--tertiary { height: 24px; font-size: 11px; padding: 0 8px; }
+
+/* =========================================================================
+   Licenses
+   ====================================================================== */
+
+.licence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.licence-card {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.licence-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.licence-card__name { font-size: 15px; font-weight: 600; }
+
+.licence-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Renewing early is a discount, not a chore — the saving rides the button */
+.renew-save {
+  padding: 2px 7px;
+  border-radius: var(--r-pill);
+  background: var(--success);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.licence-card__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 20px;
+}
+
+.licence-card__label {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  color: var(--ink-2);
+}
+
+.licence-card__key {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.licence-card__key code {
+  padding: 4px 8px;
+  background: var(--surface-3);
+  border-radius: var(--r-badge);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.licence-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.licence-copy:hover { text-decoration: underline; }
+.licence-copy.is-copied { color: var(--success); }
+.licence-copy svg { display: none; }
+.licence-copy.is-copied svg { display: block; }
+
+.licence-card__value { font-size: 13.5px; }
+
+.licence-toggle {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.licence-toggle:hover { text-decoration: underline; }
+
+/* Activated sites -------------------------------------------------------- */
+.sites {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.sites__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.site-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+}
+
+.site-row__url {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.site-row__date { font-size: 12px; color: var(--ink-2); }
+
+.site-row__off {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--danger);
+}
+
+.site-row__off:hover { color: var(--danger); text-decoration: underline; }
+
+.sites__add {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sites__add .input {
+  flex: 1;
+  max-width: 380px;
+  height: 36px;
+  font-size: 13px;
+}
+
+.sites__add .btn { height: 36px; padding: 0 14px; font-size: 13px; font-weight: 600; }
+
+.sites__slots { font-size: 12px; color: var(--ink-2); }
+
+.sites__note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Profile
+   ====================================================================== */
+
+.profile__body { padding: 20px; }
+
+.profile__foot {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.section-title { font-size: 14px; font-weight: 600; }
+
+.divider {
+  height: 1px;
+  margin: 20px -20px;
+  background: var(--line);
+}
+
+/* Toggle ------------------------------------------------------------------ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle__track {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+  height: 18px;
+  border-radius: var(--r-pill);
+  background: var(--ink-2);
+  transition: background .15s;
+}
+
+.toggle__track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left .15s;
+}
+
+.toggle input:checked + .toggle__track { background: var(--accent); }
+.toggle input:checked + .toggle__track::after { left: 21px; }
+
+.toggle input:focus-visible + .toggle__track {
+  box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px var(--accent);
+}

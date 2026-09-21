@@ -1,0 +1,686 @@
+/* ===========================================================================
+   YayCommerce — Home
+   ======================================================================== */
+
+/* =========================================================================
+   Hero
+   ====================================================================== */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding-block: 112px 96px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px;
+  padding: 6px 14px 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  box-shadow: var(--sh-hairline);
+}
+
+.hero__badge-text {
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.hero__badge-text strong { color: var(--ink); }
+
+.hero h1 { margin-bottom: 20px; }
+
+.hero__lede {
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+/* Storefront mock -------------------------------------------------------- */
+
+.mock {
+  position: relative;
+  padding: 20px 30px 34px 0;
+}
+
+.mock__window {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--sh-float);
+}
+
+.mock__chrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.mock__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.mock__url {
+  margin-left: 10px;
+  padding: 3px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+
+.mock__body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.mock__media { position: relative; }
+
+.mock__photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 3 / 3.6;
+  background: var(--surface-3);
+  border-radius: var(--r-tile);
+}
+
+.mock__sale {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 9px;
+  border-radius: var(--r-badge);
+  background: var(--danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.mock__title {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.mock__price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 10px;
+}
+
+.mock__price-was { font-size: 13px; }
+.mock__price-now { font-size: 17px; font-weight: 600; color: var(--ink); }
+
+.mock__currency {
+  margin-left: auto;
+  padding: 2px 8px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-badge);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.mock__swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.mock__swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--line-2);
+}
+
+.mock__swatch.is-selected {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.mock__swatch-label {
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.mock__table {
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-tile);
+}
+
+.mock__table-head,
+.mock__table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.mock__table-head {
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 11.5px;
+}
+
+.mock__table-row {
+  border-top: 1px solid var(--line-3);
+  font-size: 12px;
+}
+
+.mock__table span,
+.mock__table strong { padding: 5px 10px; }
+
+.mock__table strong { color: var(--success-deep); }
+.mock__table-row span { color: var(--ink-2); }
+
+.mock__cart {
+  width: 100%;
+  height: 38px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mock__toast {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 20px 10px 150px;
+  background: var(--surface);
+  border-top: 1px solid var(--line-3);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.mock__toast strong { color: var(--ink); }
+
+/* Feature call-out pills floating over the mock -------------------------- */
+.mock__tag {
+  position: absolute;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .2);
+}
+
+.mock__tag--currency { top: 44px; right: 0; }
+.mock__tag--swatches { top: 148px; right: 8px; }
+.mock__tag--pricing { bottom: 96px; right: -6px; }
+.mock__tag--boost { bottom: 26px; right: 24px; }
+
+.mock__stat {
+  position: absolute;
+  bottom: 0;
+  left: -20px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  box-shadow: var(--sh-lift);
+}
+
+.mock__stat-value {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--success-deep);
+}
+
+.mock__stat-label { font-size: 12px; color: var(--ink-2); }
+
+/* =========================================================================
+   Catalogue bands
+   ====================================================================== */
+
+.band-categories {
+  border-top: 1px solid var(--line);
+  padding-block: 96px 8px;
+}
+
+.band-categories .eyebrow { margin-bottom: 10px; }
+
+.band-featured { padding-block: 80px 96px; }
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* 6 plugins shown → 3 per row (the locked v3.2 default). */
+.plugin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* =========================================================================
+   All Access band
+   ====================================================================== */
+
+.aa-band {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 64px;
+  align-items: center;
+  padding-block: 96px;
+  background: var(--dark);
+  color: #fff;
+}
+
+.aa-band__glow {
+  position: absolute;
+  top: -140px;
+  right: 280px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 196, 33, .22), transparent 65%);
+  pointer-events: none;
+}
+
+.aa-band__glow--soft {
+  top: auto;
+  right: auto;
+  bottom: -40px;
+  left: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 255, 255, .05), transparent 65%);
+}
+
+.aa-band__wallpaper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 44%;
+  display: grid;
+  grid-template-columns: repeat(4, 72px);
+  gap: 18px;
+  align-content: center;
+  justify-content: end;
+  padding-right: 40px;
+  transform: rotate(8deg);
+  opacity: .08;
+  pointer-events: none;
+}
+
+.aa-band__wallpaper div {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: #fff center / cover no-repeat;
+}
+
+.aa-band__copy { position: relative; }
+
+.aa-band__copy .pill-outline { margin-bottom: 16px; }
+
+.aa-band__copy h2 { margin: 0 0 14px; color: #fff; }
+
+.aa-band__copy p {
+  max-width: 520px;
+  margin: 0 0 28px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-4);
+}
+
+.aa-band__checks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 28px;
+}
+
+.aa-band__checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--surface-3);
+}
+
+.aa-band__checks .tick { margin-top: 1px; }
+
+/* Price card ------------------------------------------------------------- */
+.aa-card {
+  position: relative;
+  padding: 28px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, .4);
+  color: var(--ink);
+}
+
+.aa-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.aa-card__label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-2);
+}
+
+.aa-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.aa-card__anchor { font-size: 14px; }
+
+.aa-card__amount {
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.aa-card__per { font-size: 15px; color: var(--ink-2); }
+
+.aa-card__icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+}
+
+.aa-card__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-badge);
+  background: var(--surface-3);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.aa-card .btn--lg { margin: 18px 0 10px; }
+
+.aa-card__alt {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.aa-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.aa-card__list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Case studies
+   ====================================================================== */
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+}
+
+.case-card__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.case-card__plugin { font-size: 13px; font-weight: 600; }
+.case-card__store { margin-left: auto; font-size: 12.5px; color: var(--ink-3); }
+
+.case-card__metric {
+  margin-bottom: 8px;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--success-deep);
+}
+
+.case-card__label {
+  margin-bottom: 14px;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.case-card__quote {
+  flex: 1;
+  margin: 0 0 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.case-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 13px;
+  border-top: 1px solid var(--line-3);
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Why stores stay — bento
+   ====================================================================== */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.why-photo {
+  position: relative;
+  grid-row: span 2;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: var(--r-card);
+}
+
+.why-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.why-photo__stat {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  box-shadow: var(--sh-lift);
+  pointer-events: none;
+}
+
+.why-photo__stat strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.why-photo__stat span { font-size: 11.5px; color: var(--ink-2); }
+
+.why-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-soft);
+}
+
+.why-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: auto;
+}
+
+.why-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-tile);
+  background: var(--surface-2);
+}
+
+.why-card__stat {
+  text-align: right;
+}
+
+.why-card__stat strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  line-height: 1;
+}
+
+.why-card__stat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--ink-2);
+}
+
+.why-card__title {
+  margin: 22px 0 5px;
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+.why-card__body {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Testimonials
+   ====================================================================== */
+
+.tstm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.tstm-card {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+}
+
+.tstm-card .stars { margin-bottom: 14px; }
+
+.tstm-card__quote {
+  flex: 1;
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.tstm-card__who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tstm-card__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-3) center / cover no-repeat;
+}
+
+.tstm-card__name { font-size: 14px; font-weight: 600; }
+.tstm-card__role { font-size: 13px; color: var(--ink-2); }
+
+.tstm-card .badge { margin-left: auto; }
+
+/* =========================================================================
+   Blog
+   ====================================================================== */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}

@@ -1,0 +1,647 @@
+/* ===========================================================================
+   YayCommerce — Checkout
+
+   Single page, three numbered cards, sticky order summary. EDD Recurring only
+   allows one subscription per order, so the cart holds a single item and the
+   order bump swaps it rather than adding to it.
+   ======================================================================== */
+
+body.is-checkout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-2);
+}
+
+body.is-checkout main { flex: 1; }
+
+.checkout {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 40px 80px;
+}
+
+.checkout h1 {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.checkout__grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 24px;
+  align-items: start;
+}
+
+.checkout__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================================================================
+   Step cards
+   ====================================================================== */
+
+.step {
+  padding: 24px 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.step__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.step__title { font-size: 15px; font-weight: 600; }
+
+/* Signed-in chip --------------------------------------------------------- */
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+}
+
+.who__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.who__body { flex: 1; }
+.who__name { font-size: 13.5px; font-weight: 600; }
+.who__mail { font-size: 12.5px; color: var(--ink-2); }
+
+/* Billing fields --------------------------------------------------------- */
+.step .field:last-child { margin-bottom: 0; }
+.step__country { width: calc(50% - 8px); }
+
+/* =========================================================================
+   Payment method tabs
+
+   The border width never changes between states — the heavier ring is an
+   inset shadow — so selecting a method doesn't nudge the layout.
+   ====================================================================== */
+
+.paytabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.paytab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.paytab.is-active {
+  background: var(--surface);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent), 0 1px 2px rgba(0, 0, 0, .06), 0 4px 12px -4px rgba(0, 0, 0, .1);
+}
+
+/* A tick, not just a colour, so the selection reads without relying on hue */
+.paytab__check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.paytab:not(.is-active) .paytab__check { display: none; }
+
+.paytab__label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.paytab__cards {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.paytab__cards img {
+  height: 18px;
+  border-radius: var(--r-badge);
+}
+
+.paytab__paypal {
+  height: 56px;
+  margin: -14px 0;
+}
+
+.paytab__note { font-size: 12px; color: var(--ink-2); }
+
+.payfields {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+}
+
+.payfields .field { margin-bottom: 0; }
+.payfields .input { background: var(--surface); }
+.payfields .input--card { font-family: var(--font-mono); }
+
+.payredirect {
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.paynote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Order summary
+   ====================================================================== */
+
+.summary {
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summary__card {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.summary__applied {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 20px;
+  background: var(--success-badge-bg);
+  border-bottom: 1px solid #b8e6bf;
+  font-size: 12.5px;
+  color: var(--success-badge-ink);
+}
+
+.summary__applied svg { flex-shrink: 0; }
+
+.summary__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary__head strong { font-size: 15px; font-weight: 600; }
+.summary__count { font-size: 12.5px; color: var(--ink-2); }
+
+.summary__line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.summary__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-control);
+  background: var(--surface-3) center / cover no-repeat;
+}
+
+.summary__icon--bundle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+}
+
+.summary__body { flex: 1; min-width: 0; }
+.summary__name { font-size: 13.5px; font-weight: 600; }
+.summary__meta { font-size: 12px; color: var(--ink-2); }
+.summary__price { font-size: 13.5px; font-weight: 600; }
+
+.summary__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: none;
+  border: none;
+  border-radius: var(--r-control);
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.summary__remove:hover { background: var(--surface-hover); color: var(--danger); }
+
+/* Empty cart -------------------------------------------------------------- */
+.summary__empty {
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.summary__empty strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.summary__empty p {
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.summary__empty div {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.summary__empty .btn { height: 38px; padding: 0 16px; font-size: 13px; }
+
+/* Order bump -------------------------------------------------------------- */
+.bump {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin: 14px 20px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1.5px dashed var(--ink-3);
+  border-radius: var(--r-control);
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.bump.is-on {
+  background: rgba(56, 88, 233, .04);
+  border-color: var(--accent);
+}
+
+.bump__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink-2);
+  border-radius: var(--r-badge);
+}
+
+.bump__box svg { fill: transparent; }
+
+.bump.is-on .bump__box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.bump.is-on .bump__box svg { fill: #fff; }
+
+.bump__title { display: block; font-size: 13px; font-weight: 600; }
+.bump__note { font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
+
+/* Coupon ------------------------------------------------------------------ */
+.coupon {
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+}
+
+/* A quiet link, not an open field — an empty coupon box sends people off to
+   hunt for codes. */
+.coupon__toggle {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.coupon__toggle:hover { color: var(--accent); text-decoration: underline; }
+
+.coupon__form { display: flex; gap: 8px; }
+
+.coupon__form .input {
+  flex: 1;
+  height: 36px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.coupon__form .btn { height: 36px; padding: 0 14px; font-size: 13px; font-weight: 600; }
+
+.coupon__error {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--danger);
+}
+
+.coupon__applied {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.coupon__remove {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 12.5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Totals ------------------------------------------------------------------ */
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+}
+
+.totals__row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totals__row dt { color: var(--ink-2); }
+.totals__row--discount { color: var(--success-deep); }
+
+.totals__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.totals__total dt { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+.totals__total dd {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+/* Pay --------------------------------------------------------------------- */
+.pay { padding: 0 20px 20px; }
+
+.pay .btn {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* PayPal's own button — their SDK renders this, so it is never restyled. */
+.pay__paypal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-radius: var(--r-control);
+  background: #ffc439;
+}
+
+.pay__paypal:hover { background: #f2ba36; }
+.pay__paypal img { height: 44px; }
+
+/* Auto-renewal disclosure — required next to the pay button, kept quiet. */
+.pay__fineprint {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.pay__fineprint a { color: var(--ink-3); text-decoration: underline; }
+.pay__fineprint a:hover { color: var(--ink); }
+
+/* =========================================================================
+   Guarantee + proof
+   ====================================================================== */
+
+.guarantee {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.guarantee__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.guarantee__seal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--success-deep);
+  border-radius: 50%;
+  color: var(--success-deep);
+}
+
+.guarantee__seal::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1.5px dashed var(--success-deep);
+  border-radius: 50%;
+}
+
+.guarantee__seal b { font-size: 16px; font-weight: 700; line-height: 1; }
+
+.guarantee__seal span {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.guarantee__title { font-size: 14px; font-weight: 600; line-height: 1.35; }
+
+.guarantee__note {
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.guarantee__points {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guarantee__points li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.guarantee__cards {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.guarantee__cards img { height: 16px; border-radius: var(--r-badge); }
+
+.proof {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.proof .stars { margin-bottom: 10px; }
+
+.proof p {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.proof__who {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.proof__name { font-size: 13px; font-weight: 600; }
+
+.proof__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--success-deep);
+}
+
+/* =========================================================================
+   Slim footer
+   ====================================================================== */
+
+.checkout-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-block: 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.checkout-footer a { color: var(--ink-2); }
+.checkout-footer a:hover { color: var(--accent); }
+
+.checkout-footer__built {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkout-footer__built img {
+  width: 15px;
+  height: 15px;
+  filter: invert(.35);
+}

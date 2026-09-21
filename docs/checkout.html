@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — YayCommerce</title>
+<meta name="description" content="Secure checkout for your YayCommerce licence.">
+<link rel="icon" href="assets/img/yaycommerce-logo.png">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/checkout.css">
+</head>
+<body class="is-checkout">
+<!-- ====================================================================
+     Promo bar — no offer link on checkout: every pixel here serves the order
+     ================================================================= -->
+<div class="promo wrap--edge">
+  <div class="promo__inner">
+    <span class="chip-brand chip-brand--square">Sale</span>
+    <span>Summer sale: 30% off All Access with code <span class="promo__code">SUNNY30</span></span>
+    <span class="promo__timer">Ends in <span data-countdown>2d 00:00:00</span></span>
+  </div>
+</div>
+
+<!-- ====================================================================
+     Slim checkout header — no nav, no search, nothing that leads away
+     ================================================================= -->
+<header class="site-header site-header--slim wrap--edge">
+  <a href="index.html" class="site-header__logo is-plain">
+    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
+  </a>
+
+  <div class="secure-mark">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="#4ab866" aria-hidden="true"><path d="M12 4a4 4 0 00-4 4v2H6.5c-.8 0-1.5.7-1.5 1.5v7c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5v-7c0-.8-.7-1.5-1.5-1.5H16V8a4 4 0 00-4-4zm2.5 6h-5V8a2.5 2.5 0 015 0v2z"/></svg>
+    Secure checkout
+  </div>
+
+  <div class="site-header__actions">
+    <span class="muted">Questions? <a href="support.html">Chat with us</a></span>
+    <a href="account.html" class="account-chip is-plain">
+      <span class="avatar">TN</span>
+      <span class="account-chip__name">Trung</span>
+    </a>
+  </div>
+</header>
+
+<main>
+<div class="checkout">
+  <h1>Checkout</h1>
+
+  <div class="checkout__grid">
+    <div class="checkout__steps">
+
+      <!-- Step 1 — account ------------------------------------------- -->
+      <section class="step">
+        <div class="step__head">
+          <span class="step__num">1</span>
+          <span class="step__title">Your account</span>
+        </div>
+
+        <div class="who">
+          <span class="who__avatar">TN</span>
+          <div class="who__body">
+            <div class="who__name">Trung Nguyen</div>
+            <div class="who__mail">trung@yaystore.com · licenses will be added to this account</div>
+          </div>
+          <a href="#" style="font-size:13px">Switch account</a>
+        </div>
+      </section>
+
+      <!-- Step 2 — billing ------------------------------------------- -->
+      <section class="step">
+        <div class="step__head">
+          <span class="step__num">2</span>
+          <span class="step__title">Billing details</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label" for="b-first">First name</label>
+            <input class="input" id="b-first" value="Trung">
+          </div>
+          <div class="field">
+            <label class="field-label" for="b-last">Last name</label>
+            <input class="input" id="b-last" value="Nguyen">
+          </div>
+        </div>
+
+        <div class="field step__country">
+          <label class="field-label" for="b-country">Country</label>
+          <span class="select-wrap" style="width:100%">
+            <select class="select" id="b-country">
+              <option>Vietnam</option><option>United States</option><option>Germany</option><option>France</option><option>United Kingdom</option>
+            </select>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+          </span>
+        </div>
+      </section>
+
+      <!-- Step 3 — payment ------------------------------------------- -->
+      <section class="step">
+        <div class="step__head">
+          <span class="step__num">3</span>
+          <span class="step__title">Payment</span>
+        </div>
+
+        <div class="paytabs" role="group" aria-label="Payment method">
+          <button type="button" class="paytab is-active" data-pay="card" aria-pressed="true">
+            <span class="paytab__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+            <span class="paytab__label">Credit / debit card</span>
+            <span class="paytab__cards">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/visa.svg" alt="Visa">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/mastercard.svg" alt="Mastercard">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/amex.svg" alt="Amex">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/discover.svg" alt="Discover">
+            </span>
+          </button>
+
+          <button type="button" class="paytab" data-pay="paypal" aria-pressed="false">
+            <span class="paytab__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+            <img class="paytab__paypal" src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/logo/paypal.svg" alt="PayPal">
+            <span class="paytab__note">Pay with your PayPal balance</span>
+          </button>
+        </div>
+
+        <div data-pay-panel="card">
+          <div class="payfields">
+            <div class="field">
+              <label class="field-label" for="p-num">Card number</label>
+              <input class="input input--card" id="p-num" placeholder="1234 5678 9012 3456" inputmode="numeric" autocomplete="cc-number">
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-exp">Expiry</label>
+              <input class="input" id="p-exp" placeholder="MM / YY" autocomplete="cc-exp">
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-cvc">CVC</label>
+              <input class="input" id="p-cvc" placeholder="123" autocomplete="cc-csc">
+            </div>
+          </div>
+
+          <p class="paynote">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12 4a4 4 0 00-4 4v2H6.5c-.8 0-1.5.7-1.5 1.5v7c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5v-7c0-.8-.7-1.5-1.5-1.5H16V8a4 4 0 00-4-4zm2.5 6h-5V8a2.5 2.5 0 015 0v2z"/></svg>
+            Payments are processed by Stripe. Card details never touch our servers.
+          </p>
+        </div>
+
+        <div class="payredirect" data-pay-panel="paypal" hidden>
+          After clicking the pay button you'll be redirected to PayPal to confirm your purchase, then returned here for instant access.
+        </div>
+      </section>
+    </div>
+
+    <!-- Order summary ------------------------------------------------- -->
+    <aside class="summary">
+      <div class="summary__card">
+        <div class="summary__applied" data-auto-applied hidden>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#008a20" aria-hidden="true"><path d="M21.3 11.2l-8.5-8.5c-.3-.3-.7-.4-1.1-.4H4.5C3.7 2.3 3 3 3 3.8v7.2c0 .4.2.8.4 1.1l8.5 8.5c.6.6 1.5.6 2.1 0l7.3-7.3c.6-.6.6-1.5 0-2.1zM7.5 9A1.5 1.5 0 117.5 6a1.5 1.5 0 010 3z"/></svg>
+          <span><strong>Special offer applied</strong> — 30% off your order today</span>
+        </div>
+
+        <div class="summary__head">
+          <strong>Order summary</strong>
+          <span class="summary__count" data-summary-count>1 item</span>
+        </div>
+
+        <div class="summary__line" data-line-item>
+          <span class="summary__icon" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+          <div class="summary__body">
+            <div class="summary__name">YayPricing Pro</div>
+            <div class="summary__meta">5 sites · Annual license (renews yearly)</div>
+          </div>
+          <span class="summary__price">$99.50</span>
+          <button type="button" class="summary__remove" aria-label="Remove YayPricing Pro" data-remove-item>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 11.9l5.5-5.5-1-1L12 11 6.5 5.5l-1 1 5.5 5.4-5.5 5.6 1 1 5.5-5.5 5.5 5.5 1-1z"/></svg>
+          </button>
+        </div>
+
+        <div class="summary__line" data-line-bundle hidden>
+          <span class="summary__icon summary__icon--bundle">
+            <svg width="20" height="20" viewBox="4.4 4.4 15.2 15.2" fill="#3858e9" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          </span>
+          <div class="summary__body">
+            <div class="summary__name">All Access — Annual</div>
+            <div class="summary__meta">All 10 plugins · 25 sites · replaces your items</div>
+          </div>
+          <span class="summary__price">$299.00</span>
+        </div>
+
+        <div class="summary__empty" data-cart-empty hidden>
+          <strong>Your cart is empty</strong>
+          <p>Note: annual licenses renew automatically, so each checkout covers one subscription.</p>
+          <div>
+            <a href="shop.html" class="btn btn--secondary">Browse plugins</a>
+            <button type="button" class="btn btn--tertiary" data-restore-cart>Undo remove</button>
+          </div>
+        </div>
+
+        <div data-order-body>
+          <button type="button" class="bump" data-bump aria-pressed="false">
+            <span class="bump__box"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.7 7.1l-1.4-1L10 13.5 7.3 11l-1.3 1 4 3.5z"/></svg></span>
+            <span>
+              <span class="bump__title">Upgrade to All Access — $299/yr</span>
+              <span class="bump__note">Get all 10 plugins on 25 sites instead. <span data-bump-note></span></span>
+            </span>
+          </button>
+
+          <div class="coupon">
+            <div data-coupon-entry>
+              <button type="button" class="coupon__toggle" data-coupon-toggle>Have a coupon?</button>
+
+              <form class="coupon__form" data-coupon-form hidden>
+                <input class="input" placeholder="Coupon code" aria-label="Coupon code" data-coupon-field>
+                <button type="submit" class="btn btn--secondary">Apply</button>
+              </form>
+              <p class="coupon__error" data-coupon-error hidden>That code isn't valid. Try <strong class="mono">SUNNY30</strong> from the sale banner.</p>
+            </div>
+
+            <div class="coupon__applied" data-coupon-applied hidden>
+              <span class="tick"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+              <span>Coupon <strong class="mono">SUNNY30</strong> applied</span>
+              <button type="button" class="coupon__remove" data-coupon-remove>Remove</button>
+            </div>
+          </div>
+
+          <dl class="totals">
+            <div class="totals__row" data-row-subtotal hidden>
+              <dt>Subtotal</dt><dd data-subtotal>$99.50</dd>
+            </div>
+            <div class="totals__row totals__row--discount" data-row-discount hidden>
+              <dt>Discount (30%)</dt><dd data-discount>−$29.85</dd>
+            </div>
+            <div class="totals__total">
+              <dt>Total</dt><dd data-total>$99.50</dd>
+            </div>
+          </dl>
+
+          <div class="pay">
+            <a href="thank-you.html" class="btn btn--primary" data-pay-card><span data-pay-label>Pay $99.50</span></a>
+            <a href="thank-you.html" class="pay__paypal" data-pay-paypal hidden>
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/logo/paypal.svg" alt="Pay with PayPal">
+            </a>
+            <p class="pay__fineprint">By purchasing you agree to our <a href="#">license terms</a>. Annual licenses renew automatically — cancel anytime.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk reversal, right where the hesitation is ----------------- -->
+      <div class="guarantee">
+        <div class="guarantee__head">
+          <div class="guarantee__seal"><b>30</b><span>days</span></div>
+          <div>
+            <div class="guarantee__title">100% risk-free — unconditional money-back guarantee</div>
+            <div class="guarantee__note">Not a fit? Full refund within 30 days, no questions asked.</div>
+          </div>
+        </div>
+
+        <ul class="guarantee__points">
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>Instant delivery — download &amp; license keys in your inbox</li>
+          <li>
+            <span class="tick"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+            <span>Secure payments</span>
+            <span class="guarantee__cards">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/visa.svg" alt="Visa">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/mastercard.svg" alt="Mastercard">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/amex.svg" alt="Amex">
+              <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/paypal.svg" alt="PayPal">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="proof">
+        <span class="stars">
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        </span>
+        <p>“Support is the real feature. They debugged a conflict on a staging copy and shipped a patch in two days.”</p>
+        <div class="proof__who">
+          <span class="proof__name">Alicia T.</span>
+          <span class="proof__verified">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#008a20" aria-hidden="true"><path d="M12 2l2.4 2.4 3.4-.5 1 3.3 3.2 1-.5 3.4L24 12l-2.5 2.4.5 3.4-3.2 1-1 3.3-3.4-.5L12 24l-2.4-2.4-3.4.5-1-3.3-3.2-1 .5-3.4L0 12l2.5-2.4-.5-3.4 3.2-1 1-3.3 3.4.5L12 2zm-1.8 14.3l6.5-6.5-1.2-1.2-5.3 5.3-2.5-2.5-1.2 1.2 3.7 3.7z"/></svg>
+            Verified customer
+          </span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</main>
+<!-- ====================================================================
+     Slim checkout footer — policy links only
+     ================================================================= -->
+<footer class="checkout-footer wrap--edge">
+  <span>© 2026 YayCommerce, Inc.</span>
+  <a href="#">Refund policy</a>
+  <a href="#">License terms</a>
+  <a href="#">Privacy</a>
+  <span class="checkout-footer__built"><img src="assets/img/wordpress-logomark-mono.svg" alt="">Built for WordPress &amp; WooCommerce</span>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

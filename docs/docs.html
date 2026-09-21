@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — YayCommerce</title>
+<meta name="description" content="Guides and answers for every YayCommerce plugin: installation, license activation, updates, and per-plugin how-tos.">
+<link rel="icon" href="assets/img/yaycommerce-logo.png">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+</head>
+<body class="">
+<!-- ====================================================================
+     Promo bar
+     ================================================================= -->
+<div class="promo wrap--edge">
+  <div class="promo__inner">
+    <span class="chip-brand chip-brand--square">Sale</span>
+    <span>Summer sale: 30% off All Access with code <span class="promo__code">SUNNY30</span></span>
+    <span class="promo__timer">Ends in <span data-countdown>2d 00:00:00</span></span>
+    <a href="all-access.html" class="promo__link">Get the deal →</a>
+  </div>
+</div>
+
+<!-- ====================================================================
+     Header
+     ================================================================= -->
+<header class="site-header wrap--edge">
+  <a href="index.html" class="site-header__logo is-plain">
+    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
+  </a>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="has-mega">
+      <a href="shop.html" class="nav-link" aria-haspopup="true">
+        Plugins
+        <svg class="nav-link__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </a>
+
+      <div class="mega">
+        <div class="mega__grid">
+          <div class="mega__groups">
+            <div>
+              <div class="mega__group-title">Emails &amp; Notifications</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail Addons</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span><span class="mega-row__name">YaySMTP</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Marketing &amp; Sales</div>
+              <a href="yaypricing.html" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span><span class="mega-row__name">YayPricing</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span><span class="mega-row__name">YayBoost</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Product Page</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span><span class="mega-row__name">YaySwatches</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span><span class="mega-row__name">YayExtra</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span><span class="mega-row__name">YayReviews</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Payments &amp; B2B</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span><span class="mega-row__name">YayCurrency</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span><span class="mega-row__name">Yay Wholesale B2B</span></a>
+            </div>
+          </div>
+
+          <div class="mega__bundle">
+            <div class="mega__bundle-kicker">Product bundle</div>
+            <div class="mega__bundle-name">All Access</div>
+            <div class="mega__bundle-icons">
+              <span class="ptile ptile--32" data-name="YayMail" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+              <span class="ptile ptile--32" data-name="YayPricing" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+              <span class="ptile ptile--32" data-name="YaySMTP" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+              <span class="ptile ptile--32" data-name="YayCurrency" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+              <span class="ptile ptile--32" data-name="YaySwatches" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+              <span class="ptile ptile--32" data-name="YayExtra" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+              <span class="ptile ptile--32" data-name="YayReviews" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+              <span class="ptile ptile--32" data-name="YayBoost" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+              <span class="ptile ptile--32" data-name="Yay Wholesale B2B" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+            </div>
+            <p class="mega__bundle-copy">All 10 plugins + every future release, on up to 25 sites.</p>
+            <div class="mega__bundle-price"><strong>From $299/yr</strong> <span class="muted">· save $200+</span></div>
+            <a href="all-access.html" class="btn btn--primary mega__bundle-cta">View All Access</a>
+          </div>
+        </div>
+
+        <div class="mega__foot">
+          <a href="shop.html" class="mega__foot-link">View all plugins →</a>
+          <span class="mega__foot-note">30-day money-back guarantee on every plugin</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="nav-link">All Access</a>
+    <a href="docs.html" class="nav-link is-active">Docs</a>
+    <a href="#" class="nav-link">Blog</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+  <div class="site-header__actions">
+    
+    <a href="checkout.html" class="cart-link" aria-label="Cart, 1 item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 17.4a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zm9.4 0a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zM6.9 6l-.5-2H2v1.5h3.2l2.2 8.9c.17.66.77 1.1 1.45 1.1h8.4c.68 0 1.27-.45 1.45-1.1l1.65-6.1c.26-.95-.46-1.9-1.45-1.9H6.9zm2.1 8L7.4 7.5h11.4L17.1 14H9z"/></svg>
+      <span class="cart-link__count">1</span>
+    </a>
+
+    <div class="has-account">
+      <div class="account-chip" role="button" tabindex="0" aria-haspopup="true">
+        <span class="avatar">TN</span>
+        <span class="account-chip__name">Trung</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </div>
+
+      <div class="account-menu">
+        <div class="account-menu__head">
+          <strong>Trung Nguyen</strong>
+          <span>trung@yaystore.com</span>
+        </div>
+        <a href="account.html" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+        <a href="account.html#purchases" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM18 9H6V7h12v2zm0 4H6v-2h12v2zm0 4H6v-2h12v2z"/></svg><span>Purchases</span></a>
+        <a href="account.html#downloads" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg><span>Downloads</span></a>
+        <a href="account.html#licenses" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12.65 10A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg><span>Licenses</span></a>
+        <a href="account.html#profile" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>Profile</span></a>
+        <div class="menu-sep"></div>
+        <a href="#" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg><span>Log out</span></a>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="btn btn--primary btn--md">Get All Access</a>
+  </div>
+</header>
+
+<main>
+<!-- ====================================================================
+     Search
+     ================================================================= -->
+<section class="docs-hero wrap--edge">
+  <h1>How can we help?</h1>
+  <p class="docs-hero__lede">Guides and answers for every YayCommerce plugin.</p>
+
+  <div class="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#757575" stroke-width="1.5" aria-hidden="true"><circle cx="13" cy="11" r="4.75"/><path d="M9.3 14.7l-4.1 4.1"/></svg>
+    <input class="input" type="search" placeholder="Search the docs — try “license”, “email template”, “currency”…" aria-label="Search the documentation" data-docs-search>
+  </div>
+
+  <div class="docs-hero__popular">
+    <span>Popular:</span>
+    <button type="button" class="docs-chip" data-docs-chip>License activation</button>
+    <button type="button" class="docs-chip" data-docs-chip>Email template</button>
+    <button type="button" class="docs-chip" data-docs-chip>Currency rates</button>
+    <button type="button" class="docs-chip" data-docs-chip>Countdown timer</button>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Getting started
+     ================================================================= -->
+<section class="docs-start wrap--edge">
+  <h2 class="docs-h2">Getting started</h2>
+  <div class="docs-start__grid">
+    <a href="#" class="gs-card">
+      <span class="gs-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M11 12.5V18h1.5v-5.5H18V11h-5.5V5.5H11V11H5.5v1.5H11z"/></svg></span>
+      <span>Install a plugin</span>
+    </a>
+    <a href="#" class="gs-card">
+      <span class="gs-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M10 17.5H7.5a3.5 3.5 0 010-7H10V9H7.5a5 5 0 000 10H10v-1.5zm4-9h-2.5V10H14a3.5 3.5 0 010 7h-2.5v1.5H14a5 5 0 000-10zM8 12.25h8v1.5H8z"/></svg></span>
+      <span>Activate your license</span>
+    </a>
+    <a href="#" class="gs-card">
+      <span class="gs-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M15 9H9c-2.2 0-4 1.8-4 4s1.8 4 4 4h3v-1.5H9c-1.4 0-2.5-1.1-2.5-2.5S7.6 10.5 9 10.5h6V13l4-3.25L15 6.5V9z"/></svg></span>
+      <span>Update your plugins</span>
+    </a>
+    <a href="#" class="gs-card">
+      <span class="gs-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13zm-.75-3.5h1.5v1.5h-1.5V15zm.75-7c-1.4 0-2.5 1.1-2.5 2.5h1.5c0-.55.45-1 1-1s1 .45 1 1c0 .5-.3.75-.8 1.1-.55.4-1.2.9-1.2 2.05h1.5c0-.5.3-.75.8-1.1.55-.4 1.2-.9 1.2-2.05C14.5 9.1 13.4 8 12 8z"/></svg></span>
+      <span>Billing &amp; refunds</span>
+    </a>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Browse by plugin
+     ================================================================= -->
+<section class="docs-plugins wrap--edge">
+  <h2 class="docs-h2">Browse by plugin</h2>
+
+  <div class="docs-grid">
+    <div class="docs-card" data-doc="YayMail" data-keywords="license activation install update email template">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+        <span>
+          <span class="docs-card__name">YayMail</span>
+          <span class="docs-card__count">48 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Customize your first email template</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Add dynamic shortcodes to emails</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Send a test email</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YayPricing" data-keywords="license activation install update discount coupon countdown timer">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+        <span>
+          <span class="docs-card__name">YayPricing</span>
+          <span class="docs-card__count">36 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Create your first pricing rule</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Set up BOGO deals</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Schedule a flash sale with countdown</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YaySMTP" data-keywords="license activation install update email smtp deliverability">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+        <span>
+          <span class="docs-card__name">YaySMTP</span>
+          <span class="docs-card__count">22 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Connect Gmail / Google Workspace</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Set up Amazon SES</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Read your email logs</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YayCurrency" data-keywords="license activation install update currency rates exchange">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+        <span>
+          <span class="docs-card__name">YayCurrency</span>
+          <span class="docs-card__count">31 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Add currencies &amp; set rates</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Auto-detect currency by location</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Checkout in customer&#x27;s currency</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YaySwatches" data-keywords="license activation install update variation swatches">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+        <span>
+          <span class="docs-card__name">YaySwatches</span>
+          <span class="docs-card__count">19 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Create color &amp; image swatches</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Show swatches on shop pages</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Style swatch tooltips</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YayExtra" data-keywords="license activation install update product options addons">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+        <span>
+          <span class="docs-card__name">YayExtra</span>
+          <span class="docs-card__count">17 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Add extra product options</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Charge for add-ons</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Conditional option logic</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YayReviews" data-keywords="license activation install update reviews ratings">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+        <span>
+          <span class="docs-card__name">YayReviews</span>
+          <span class="docs-card__count">14 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Enable photo reviews</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Send review reminder emails</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Reward reviews with coupons</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="YayBoost" data-keywords="license activation install update fomo countdown timer free shipping">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+        <span>
+          <span class="docs-card__name">YayBoost</span>
+          <span class="docs-card__count">16 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Set a free-shipping goal bar</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Add sales popups (FOMO)</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Product page countdown timers</a>
+      </div>
+    </div>
+    <div class="docs-card" data-doc="Yay Wholesale B2B" data-keywords="license activation install update wholesale b2b roles">
+      <a href="#" class="docs-card__head is-plain">
+        <span class="docs-card__icon" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+        <span>
+          <span class="docs-card__name">Yay Wholesale B2B</span>
+          <span class="docs-card__count">12 articles</span>
+        </span>
+      </a>
+      <div class="docs-card__links">
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Set wholesale prices by role</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>B2B registration form</a>
+        <a href="#"><svg width="15" height="15" viewBox="0 0 24 24" fill="#949494" aria-hidden="true"><path d="M15.5 4H6.6C5.7 4 5 4.7 5 5.6v12.8c0 .9.7 1.6 1.6 1.6h10.8c.9 0 1.6-.7 1.6-1.6V7.5L15.5 4zM17.5 18.4l-.1.1H6.6l-.1-.1V5.6l.1-.1h8.3v2.6h2.6v10.3zM8 11h8v1.5H8V11zm0 3h8v1.5H8v-1.5zm0-6h5v1.5H8V8z"/></svg>Hide prices for guests</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="docs-empty" data-docs-empty hidden>
+    <div class="docs-empty__title">No docs match “<span data-docs-empty-term></span>”</div>
+    <p class="docs-empty__body">Try another keyword — or ask us directly, we answer 24/7.</p>
+    <button type="button" class="btn btn--secondary" style="height:40px; padding:0 18px; font-size:13.5px; font-weight:600;" data-docs-clear>Clear search</button>
+  </div>
+
+  <div class="docs-help">
+    <span class="docs-help__icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13zm-.75-3.5h1.5v1.5h-1.5V15zm.75-7c-1.4 0-2.5 1.1-2.5 2.5h1.5c0-.55.45-1 1-1s1 .45 1 1c0 .5-.3.75-.8 1.1-.55.4-1.2.9-1.2 2.05h1.5c0-.5.3-.75.8-1.1.55-.4 1.2-.9 1.2-2.05C14.5 9.1 13.4 8 12 8z"/></svg>
+    </span>
+    <div class="docs-help__body">
+      <div class="docs-help__title">Can't find what you need?</div>
+      <div class="docs-help__note">Real engineers on live chat 24/7 — replies within 8 business hours, usually much faster.</div>
+    </div>
+    <a href="support.html" class="btn btn--primary">Start live chat</a>
+  </div>
+</section>
+</main>
+<!-- ====================================================================
+     Footer
+     ================================================================= -->
+<footer class="site-footer wrap--edge">
+  <div class="site-footer__cols">
+    <div>
+      <div class="site-footer__head">Plugins</div>
+      <div class="site-footer__links">
+        <a href="yaypricing.html" class="f-link">YayPricing</a>
+        <a href="#" class="f-link">YayMail</a>
+        <a href="#" class="f-link">YayCurrency</a>
+        <a href="#" class="f-link">YaySMTP</a>
+        <a href="shop.html" class="f-link">View all plugins →</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Company</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">About us</a>
+        <a href="#" class="f-link">Blog</a>
+        <a href="#" class="f-link">Testimonials</a>
+        <a href="#" class="f-link">Affiliate program</a>
+        <a href="contact.html" class="f-link">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Support</div>
+      <div class="site-footer__links">
+        <a href="docs.html" class="f-link">Documentation</a>
+        <a href="support.html" class="f-link">Help center</a>
+        <a href="#" class="f-link">Roadmap</a>
+        <a href="#" class="f-link">Feature requests</a>
+        <a href="#" class="f-link">System status</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Policies</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">Refund policy</a>
+        <a href="#" class="f-link">License terms</a>
+        <a href="#" class="f-link">Privacy</a>
+        <a href="#" class="f-link">Terms of service</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Get plugin updates</div>
+      <p class="site-footer__blurb">One email a month: new plugins, feature releases, and honest WooCommerce advice.</p>
+      <form class="site-footer__signup" onsubmit="return false">
+        <input class="input" type="email" placeholder="you@store.com" aria-label="Email address">
+        <button type="submit" class="btn btn--primary btn--md">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <span>© 2026 YayCommerce, Inc.</span>
+    <span class="site-footer__built"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt="">Built for WordPress &amp; WooCommerce</span>
+
+    <div class="f-lang">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.4a15.7 15.7 0 00-1.2-5.9A8 8 0 0119.9 11zM12 4.3c.9 1.1 2 3.2 2.4 6.7H9.6c.4-3.5 1.5-5.6 2.4-6.7zM4.1 13h3.4c.1 2.2.6 4.2 1.2 5.9A8 8 0 014.1 13zm3.4-2H4.1a8 8 0 014.6-5.9A15.7 15.7 0 007.5 11zm4.5 8.7c-.9-1.1-2-3.2-2.4-6.7h4.8c-.4 3.5-1.5 5.6-2.4 6.7zm3.3-.8c.6-1.7 1.1-3.7 1.2-5.9h3.4a8 8 0 01-4.6 5.9z"/></svg>
+      <span class="select-wrap">
+        <select class="f-lang-sel" aria-label="Language">
+          <option>English</option><option>Tiếng Việt</option><option>Deutsch</option><option>Français</option><option>Español</option><option>日本語</option>
+        </select>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </span>
+    </div>
+
+    <div class="site-footer__social">
+      <a href="https://facebook.com/YayCommercePlugins" class="f-social" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg></a>
+      <a href="https://x.com/YayCommerceHQ" class="f-social" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.7H5.3L17.8 20z"/></svg></a>
+      <a href="https://youtube.com/@yaycommerce" class="f-social" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 00-2.1-2.2C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2 31.4 31.4 0 000 12a31.4 31.4 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.4 31.4 0 0024 12a31.4 31.4 0 00-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg></a>
+      <a href="https://www.instagram.com/YayCommerce/" class="f-social" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8 0-3.2 0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+      <a href="https://profiles.wordpress.org/yaycommerce/" class="f-social" aria-label="WordPress.org"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt=""></a>
+    </div>
+  </div>
+
+  <p class="site-footer__legal">YayCommerce is an independent company, not affiliated with WooCommerce or Automattic. WordPress® and WooCommerce® are registered trademarks of their respective owners.</p>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script src="assets/js/docs.js"></script>
+</body>
+</html>

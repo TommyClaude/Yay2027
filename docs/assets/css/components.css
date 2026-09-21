@@ -1,0 +1,641 @@
+/* ===========================================================================
+   YayCommerce — components
+
+   Buttons, badges, cards, form controls and the small repeated atoms
+   (rating stars, green check bullets, plugin icon tiles).
+   ======================================================================== */
+
+/* =========================================================================
+   Buttons
+
+   Yellow is the primary action on every screen — one per screen, always the
+   best next step. Blue stays on links, focus rings and selection.
+   ====================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: var(--r-control);
+  background: none;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .1s, box-shadow .1s, color .1s;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px var(--accent);
+}
+
+.btn svg { fill: currentColor; }
+
+.btn--primary {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.btn--primary:hover {
+  background: var(--brand-hover);
+  color: var(--brand-ink);
+}
+
+.btn--secondary {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.btn--secondary:hover {
+  background: rgba(56, 88, 233, .04);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  color: var(--accent);
+}
+
+.btn--tertiary { color: var(--accent); }
+.btn--tertiary:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+
+.btn--neutral {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+}
+
+.btn--neutral:hover {
+  background: var(--surface-hover);
+  box-shadow: inset 0 0 0 1px var(--ink-2);
+  color: var(--ink);
+}
+
+.btn--danger {
+  color: var(--danger);
+  box-shadow: inset 0 0 0 1px var(--danger);
+}
+
+.btn--danger:hover { background: rgba(204, 24, 24, .04); }
+
+.btn[disabled],
+.btn:disabled {
+  background: var(--surface-3);
+  color: var(--ink-3);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Sizes ---------------------------------------------------------------- */
+.btn--sm { height: 30px; padding: 0 10px; font-size: 12px; }
+.btn--md { height: 40px; padding: 0 16px; font-weight: 600; }
+.btn--lg { height: 48px; padding: 0 24px; font-size: 15px; font-weight: 600; }
+.btn--xl { height: 50px; padding: 0 28px; font-size: 15px; font-weight: 600; }
+.btn--block { width: 100%; }
+
+/* A text link that behaves like a quiet secondary action ---------------- */
+.link-quiet {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.link-quiet:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* =========================================================================
+   Badges & chips
+   ====================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--r-badge);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge--default { background: var(--surface-3); color: #2f2f2f; }
+.badge--success { background: var(--success-badge-bg); color: var(--success-badge-ink); }
+.badge--warning { background: #fcf9e8; color: #614d02; }
+.badge--error { background: #f7ebeb; color: #8a0303; }
+.badge--accent { background: var(--accent-soft); color: var(--accent); }
+
+/* Brand chip — the yellow "Sale" / rating pill -------------------------- */
+.chip-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chip-brand--square {
+  padding: 2px 8px;
+  border-radius: var(--r-badge);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.chip-save {
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--success);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chip-card {
+  padding: 3px 8px;
+  border-radius: var(--r-badge);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chip-card--best { background: var(--success-badge-bg); color: var(--success-badge-ink); }
+.chip-card--top { background: var(--accent-soft); color: var(--accent); }
+.chip-card--new { background: var(--accent); color: #fff; }
+
+/* Outline pill used on the dark All Access band ------------------------- */
+.pill-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* =========================================================================
+   Cards
+
+   Elevated style: white surface, hairline border, 10px radius, soft shadow.
+   Only interactive cards (links) change on hover — static content cards stay
+   put, which is what the design brief settled on.
+   ====================================================================== */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.card--flat {
+  box-shadow: none;
+  background: var(--surface-2);
+}
+
+/* Nested cards sit flat inside their parent ----------------------------- */
+.card .card {
+  box-shadow: none;
+  background: var(--surface-2);
+}
+
+/* A borderless panel that used to be a gray fill ------------------------ */
+.panel {
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-soft);
+}
+
+a.card,
+a.panel { color: inherit; display: block; }
+
+a.card:hover,
+a.panel:hover {
+  box-shadow: var(--sh-card-hover);
+  color: inherit;
+}
+
+/* Plugin card ------------------------------------------------------------ */
+.plugin-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-soft);
+  color: inherit;
+  transition: box-shadow .15s ease;
+}
+
+.plugin-card:hover {
+  box-shadow: var(--sh-card-hover);
+  color: inherit;
+}
+
+.plugin-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.plugin-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.plugin-card__tag {
+  flex: 1;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.plugin-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line-3);
+  font-size: 13px;
+}
+
+.plugin-card__price { margin-left: auto; font-weight: 600; }
+.plugin-card__price span { font-weight: 400; color: var(--ink-2); }
+
+/* Category card ---------------------------------------------------------- */
+.cat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-soft);
+  color: inherit;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+.cat-card:hover {
+  border-color: var(--ink-3);
+  box-shadow: var(--sh-card-hover);
+  color: inherit;
+}
+
+.cat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-tile);
+  background: var(--surface-2);
+}
+
+.cat-card__body { flex: 1; }
+.cat-card__name { display: block; font-size: 15px; font-weight: 600; }
+.cat-card__count { display: block; font-size: 13px; color: var(--ink-2); }
+
+/* Blog card -------------------------------------------------------------- */
+.blog-card {
+  display: block;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+  color: inherit;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--sh-blog-hover);
+  color: inherit;
+}
+
+.blog-card__img {
+  aspect-ratio: 16 / 9;
+  background: var(--surface-3) center / cover no-repeat;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.blog-card__body { padding: 20px 24px 22px; }
+
+.blog-card__cat {
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent);
+}
+
+.blog-card__title {
+  margin-bottom: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.blog-card__meta { font-size: 13px; color: var(--ink-2); }
+
+/* =========================================================================
+   Form controls
+   ====================================================================== */
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--ink-2);
+  border-radius: var(--r-control);
+  color: var(--ink);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: box-shadow .1s, border-color .1s;
+}
+
+.textarea {
+  height: auto;
+  padding: 10px 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .5px var(--accent);
+}
+
+.input::placeholder,
+.textarea::placeholder { color: var(--ink-2); }
+
+.input[disabled] { background: var(--surface-3); color: var(--ink-3); }
+
+.select {
+  appearance: none;
+  padding-right: 32px;
+}
+
+/* A select wrapper that draws its own chevron so nothing gets clipped. */
+.select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.select-wrap > svg {
+  position: absolute;
+  right: 7px;
+  pointer-events: none;
+}
+
+.field { margin-bottom: 18px; }
+
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+
+.help-text {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.field-row { display: flex; gap: 16px; }
+.field-row > .field { flex: 1; }
+
+/* Search box ------------------------------------------------------------- */
+.search {
+  position: relative;
+  display: block;
+}
+
+.search > svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search .input { padding-left: 34px; }
+
+/* =========================================================================
+   Rating stars
+
+   The viewBox is cropped tight to the glyph so the stars read solid and
+   close together rather than small and sparse.
+   ====================================================================== */
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.stars svg { fill: var(--warning); }
+
+/* =========================================================================
+   Green check bullet — circle + thick rounded tick
+   ====================================================================== */
+
+.tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--success-soft);
+}
+
+.tick--lg { width: 19px; height: 19px; }
+
+.trust-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check-list li,
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Plugin icon tiles + name tooltip
+   ====================================================================== */
+
+.ptile {
+  position: relative;
+  flex-shrink: 0;
+  background: var(--surface-3) center / cover no-repeat;
+  border-radius: var(--r-tile);
+}
+
+.ptile--28 { width: 28px; height: 28px; }
+.ptile--26 { width: 26px; height: 26px; border-radius: var(--r-badge); }
+.ptile--32 { width: 32px; height: 32px; border-radius: 7px; }
+.ptile--44 { width: 44px; height: 44px; border-radius: var(--r-control); }
+
+.ptile[data-name]:hover::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 4px 8px;
+  border-radius: var(--r-badge);
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ptile[data-name]:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-bottom: 2px;
+  border: 4px solid transparent;
+  border-top-color: var(--ink);
+}
+
+/* =========================================================================
+   Notice — the wp-admin style left-rule callout
+   ====================================================================== */
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--r-badge) var(--r-badge) 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.notice--success { border-left-color: var(--success); }
+.notice--warning { border-left-color: #d63638; }
+.notice--update { border-left-color: #d63638; }
+
+/* =========================================================================
+   Code chip — license keys, coupon codes, versions
+   ====================================================================== */
+
+.code {
+  padding: 2px 6px;
+  border-radius: var(--r-badge);
+  background: var(--surface-3);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* =========================================================================
+   FAQ accordion — shared by the product and All Access pages
+   ====================================================================== */
+.faq {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.faq__item { border-bottom: 1px solid var(--line); }
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 18px 4px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq__q > span {
+  flex: 1;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.faq__q svg {
+  flex-shrink: 0;
+  transition: transform .15s ease;
+}
+
+.faq__item.is-open .faq__q svg { transform: rotate(180deg); }
+
+.faq__a {
+  margin: 0;
+  padding: 0 40px 18px 4px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.faq__item:not(.is-open) .faq__a { display: none; }

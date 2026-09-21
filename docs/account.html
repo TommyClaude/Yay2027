@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My account — YayCommerce</title>
+<meta name="description" content="Manage your YayCommerce plugins, licenses, downloads and profile.">
+<link rel="icon" href="assets/img/yaycommerce-logo.png">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/account.css">
+</head>
+<body class="">
+<!-- ====================================================================
+     Promo bar
+     ================================================================= -->
+<div class="promo wrap--edge">
+  <div class="promo__inner">
+    <span class="chip-brand chip-brand--square">Sale</span>
+    <span>Summer sale: 30% off All Access with code <span class="promo__code">SUNNY30</span></span>
+    <span class="promo__timer">Ends in <span data-countdown>2d 00:00:00</span></span>
+    <a href="all-access.html" class="promo__link">Get the deal →</a>
+  </div>
+</div>
+
+<!-- ====================================================================
+     Header
+     ================================================================= -->
+<header class="site-header wrap--edge">
+  <a href="index.html" class="site-header__logo is-plain">
+    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
+  </a>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="has-mega">
+      <a href="shop.html" class="nav-link" aria-haspopup="true">
+        Plugins
+        <svg class="nav-link__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </a>
+
+      <div class="mega">
+        <div class="mega__grid">
+          <div class="mega__groups">
+            <div>
+              <div class="mega__group-title">Emails &amp; Notifications</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail Addons</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span><span class="mega-row__name">YaySMTP</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Marketing &amp; Sales</div>
+              <a href="yaypricing.html" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span><span class="mega-row__name">YayPricing</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span><span class="mega-row__name">YayBoost</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Product Page</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span><span class="mega-row__name">YaySwatches</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span><span class="mega-row__name">YayExtra</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span><span class="mega-row__name">YayReviews</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Payments &amp; B2B</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span><span class="mega-row__name">YayCurrency</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span><span class="mega-row__name">Yay Wholesale B2B</span></a>
+            </div>
+          </div>
+
+          <div class="mega__bundle">
+            <div class="mega__bundle-kicker">Product bundle</div>
+            <div class="mega__bundle-name">All Access</div>
+            <div class="mega__bundle-icons">
+              <span class="ptile ptile--32" data-name="YayMail" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+              <span class="ptile ptile--32" data-name="YayPricing" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+              <span class="ptile ptile--32" data-name="YaySMTP" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+              <span class="ptile ptile--32" data-name="YayCurrency" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+              <span class="ptile ptile--32" data-name="YaySwatches" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+              <span class="ptile ptile--32" data-name="YayExtra" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+              <span class="ptile ptile--32" data-name="YayReviews" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+              <span class="ptile ptile--32" data-name="YayBoost" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+              <span class="ptile ptile--32" data-name="Yay Wholesale B2B" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+            </div>
+            <p class="mega__bundle-copy">All 10 plugins + every future release, on up to 25 sites.</p>
+            <div class="mega__bundle-price"><strong>From $299/yr</strong> <span class="muted">· save $200+</span></div>
+            <a href="all-access.html" class="btn btn--primary mega__bundle-cta">View All Access</a>
+          </div>
+        </div>
+
+        <div class="mega__foot">
+          <a href="shop.html" class="mega__foot-link">View all plugins →</a>
+          <span class="mega__foot-note">30-day money-back guarantee on every plugin</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="nav-link">All Access</a>
+    <a href="docs.html" class="nav-link">Docs</a>
+    <a href="#" class="nav-link">Blog</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+  <div class="site-header__actions">
+    
+    <a href="checkout.html" class="cart-link" aria-label="Cart, 1 item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 17.4a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zm9.4 0a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zM6.9 6l-.5-2H2v1.5h3.2l2.2 8.9c.17.66.77 1.1 1.45 1.1h8.4c.68 0 1.27-.45 1.45-1.1l1.65-6.1c.26-.95-.46-1.9-1.45-1.9H6.9zm2.1 8L7.4 7.5h11.4L17.1 14H9z"/></svg>
+      <span class="cart-link__count">1</span>
+    </a>
+
+    <div class="has-account">
+      <div class="account-chip" role="button" tabindex="0" aria-haspopup="true">
+        <span class="avatar">TN</span>
+        <span class="account-chip__name">Trung</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </div>
+
+      <div class="account-menu">
+        <div class="account-menu__head">
+          <strong>Trung Nguyen</strong>
+          <span>trung@yaystore.com</span>
+        </div>
+        <a href="account.html" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+        <a href="account.html#purchases" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM18 9H6V7h12v2zm0 4H6v-2h12v2zm0 4H6v-2h12v2z"/></svg><span>Purchases</span></a>
+        <a href="account.html#downloads" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg><span>Downloads</span></a>
+        <a href="account.html#licenses" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12.65 10A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg><span>Licenses</span></a>
+        <a href="account.html#profile" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>Profile</span></a>
+        <div class="menu-sep"></div>
+        <a href="#" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg><span>Log out</span></a>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="btn btn--primary btn--md">Get All Access</a>
+  </div>
+</header>
+
+<main>
+<div class="account">
+  <h1>My account</h1>
+  <p class="account__howdy">Howdy, Trung — manage your plugins, licenses, and profile.</p>
+
+  <div class="account__layout">
+    <!-- ================================================================
+         Sidebar
+         ============================================================= -->
+    <nav class="account-nav" aria-label="Account sections">
+        <button type="button" class="account-nav__item is-active" data-view-link="dashboard" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button type="button" class="account-nav__item" data-view-link="purchases" aria-current="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM18 9H6V7h12v2zm0 4H6v-2h12v2zm0 4H6v-2h12v2z"/></svg>
+          <span>Purchases</span>
+        </button>
+        <button type="button" class="account-nav__item" data-view-link="downloads" aria-current="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Downloads</span>
+        </button>
+        <button type="button" class="account-nav__item" data-view-link="licenses" aria-current="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.65 10A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          <span>Licenses</span>
+        </button>
+        <button type="button" class="account-nav__item" data-view-link="profile" aria-current="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span>Profile</span>
+        </button>
+      <div class="menu-sep"></div>
+      <a href="#" class="menu-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        <span style="font-size:13.5px">Log out</span>
+      </a>
+    </nav>
+
+    <div>
+      <!-- ==============================================================
+           Dashboard
+           =========================================================== -->
+      <div class="account-view" data-view="dashboard">
+        <div class="notice account-notice">
+          <span><strong>Update available:</strong> YayPricing 3.2.1 is out — you're running 3.2.0. <a href="#" data-goto="downloads">Get the update →</a></span>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-tile">
+            <div class="stat-tile__label">Active licenses</div>
+            <div class="stat-tile__value">3</div>
+            <div class="stat-tile__note stat-tile__note--warn">1 expiring soon</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-tile__label">Sites activated</div>
+            <div class="stat-tile__value">4 <small>of 11</small></div>
+            <div class="stat-tile__note">across 3 plugins</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-tile__label">Next renewal</div>
+            <div class="stat-tile__value">Aug 2</div>
+            <div class="stat-tile__note">YaySMTP Pro · $29/yr</div>
+          </div>
+        </div>
+
+        <div class="upsell">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#3858e9" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+          <span>You own 3 plugins ($188/yr). <strong>All Access</strong> unlocks all 10 for $299/yr — upgrade any time and we credit your unused license term. <a href="all-access.html" style="font-weight:600">Compare →</a></span>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-card__head">
+            <strong>Recent purchases</strong>
+            <a href="#" data-goto="purchases" style="font-size:13px; font-weight:500">View all →</a>
+          </div>
+          <div class="order-row">
+            <a href="#" class="order-row__id" data-open-order="0">#YC-10482</a>
+            <span class="order-row__items">YaySMTP Pro — 1 site</span>
+            <span class="order-row__date">Jul 2, 2026</span>
+            <span class="order-row__total">$29.00</span>
+            <span class="badge badge--success">Complete</span>
+          </div>
+          <div class="order-row">
+            <a href="#" class="order-row__id" data-open-order="1">#YC-10221</a>
+            <span class="order-row__items">YayMail Pro — 5 sites</span>
+            <span class="order-row__date">Mar 4, 2026</span>
+            <span class="order-row__total">$99.50</span>
+            <span class="badge badge--success">Complete</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================================
+           Purchases
+           =========================================================== -->
+      <div class="account-view" data-view="purchases" hidden>
+        <div class="panel-card" style="overflow:hidden">
+          <div class="panel-card__head"><strong>Purchase history</strong></div>
+          <table class="table">
+            <thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Receipt</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><a href="#" class="table__id" data-open-order="0">#YC-10482</a></td>
+                <td>Jul 2, 2026</td>
+                <td>YaySMTP Pro — 1 site</td>
+                <td class="table__total">$29.00</td>
+                <td><span class="badge badge--success">Complete</span></td>
+                <td><a href="#" data-open-order="0">View</a> · <a href="#">Invoice</a></td>
+              </tr>
+              <tr>
+                <td><a href="#" class="table__id" data-open-order="1">#YC-10221</a></td>
+                <td>Mar 4, 2026</td>
+                <td>YayMail Pro — 5 sites</td>
+                <td class="table__total">$99.50</td>
+                <td><span class="badge badge--success">Complete</span></td>
+                <td><a href="#" data-open-order="1">View</a> · <a href="#">Invoice</a></td>
+              </tr>
+              <tr>
+                <td><a href="#" class="table__id" data-open-order="2">#YC-09876</a></td>
+                <td>Jan 18, 2026</td>
+                <td>YayPricing Pro — 5 sites</td>
+                <td class="table__total">$99.50</td>
+                <td><span class="badge badge--success">Complete</span></td>
+                <td><a href="#" data-open-order="2">View</a> · <a href="#">Invoice</a></td>
+              </tr>
+              <tr>
+                <td><a href="#" class="table__id" data-open-order="3">#YC-09540</a></td>
+                <td>Dec 2, 2025</td>
+                <td>YayRecover Pro — 1 site</td>
+                <td class="table__total">$59.00</td>
+                <td><span class="badge badge--default">Refunded</span></td>
+                <td><a href="#" data-open-order="3">View</a> · <a href="#">Invoice</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="panel-note">Receipts include EU VAT details. Need a correction? <a href="#">Contact billing support</a>.</p>
+      </div>
+
+      <!-- ==============================================================
+           Order detail
+           =========================================================== -->
+      <div class="account-view" data-order-view="0" hidden>
+        <div class="order-crumb">
+          <a href="#" data-close-order><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg>Purchases</a>
+          <span>/</span><strong>Order #YC-10482</strong>
+        </div>
+
+        <div class="order-detail">
+          <div class="order-detail__head">
+            <div class="order-detail__title">
+              <div><b>Order #YC-10482</b><span class="badge badge--success">Complete</span></div>
+              <div class="order-detail__when">Placed Jul 2, 2026 · Paid with Visa ending 4242</div>
+            </div>
+            <a href="#" class="btn btn--neutral" style="height:36px; padding:0 14px; font-size:13px; font-weight:600;">View invoice</a>
+          </div>
+
+          <div class="order-detail__table">
+            <table class="table">
+              <thead><tr><th>Product</th><th>Files</th><th style="text-align:right">Price</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="order-detail__product">
+                      <img src="https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583" alt="">
+                      <div>
+                        <div style="font-weight:600">YaySMTP Pro</div>
+                        <span>1 site · Annual license</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><a href="#" style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>yaysmtp-pro-2.0.3.zip</a></td>
+                  <td style="text-align:right; font-weight:600">$29.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order-keys">
+            <div class="order-keys__label">License keys</div>
+            <div class="order-keys__row">
+              <span>YaySMTP Pro <span class="muted">· 1 site · Annual license</span></span>
+              <span><code>YAYS-C7D9-****-****-1A6F</code><a href="#" data-goto="licenses" style="font-size:12.5px; font-weight:500; white-space:nowrap">Manage →</a></span>
+            </div>
+          </div>
+
+          <div class="order-foot">
+            <div class="order-meta">
+              <div>
+                <div class="order-meta__label">Payment method</div>
+                <div>Visa ending 4242</div>
+              </div>
+              <div>
+                <div class="order-meta__label">Email</div>
+                <div>trung@yaystore.com</div>
+              </div>
+            </div>
+            <dl class="order-sums">
+              <div><dt>Subtotal</dt><dd>$29.00</dd></div>
+              <div class="order-sums__total"><dt>Total</dt><dd>$29.00</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="order-help">
+          <span>Need help with this order? Our team replies in minutes on live chat.</span>
+          <a href="support.html" style="font-weight:600; white-space:nowrap">Get support →</a>
+        </div>
+      </div>
+      <div class="account-view" data-order-view="1" hidden>
+        <div class="order-crumb">
+          <a href="#" data-close-order><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg>Purchases</a>
+          <span>/</span><strong>Order #YC-10221</strong>
+        </div>
+
+        <div class="order-detail">
+          <div class="order-detail__head">
+            <div class="order-detail__title">
+              <div><b>Order #YC-10221</b><span class="badge badge--success">Complete</span></div>
+              <div class="order-detail__when">Placed Mar 4, 2026 · Paid with PayPal</div>
+            </div>
+            <a href="#" class="btn btn--neutral" style="height:36px; padding:0 14px; font-size:13px; font-weight:600;">View invoice</a>
+          </div>
+
+          <div class="order-detail__table">
+            <table class="table">
+              <thead><tr><th>Product</th><th>Files</th><th style="text-align:right">Price</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="order-detail__product">
+                      <img src="https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992" alt="">
+                      <div>
+                        <div style="font-weight:600">YayMail Pro</div>
+                        <span>5 sites · Annual license</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><a href="#" style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>yaymail-pro-4.1.0.zip</a></td>
+                  <td style="text-align:right; font-weight:600">$199.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order-keys">
+            <div class="order-keys__label">License keys</div>
+            <div class="order-keys__row">
+              <span>YayMail Pro <span class="muted">· 5 sites · Annual license</span></span>
+              <span><code>YAYM-8B31-****-****-E204</code><a href="#" data-goto="licenses" style="font-size:12.5px; font-weight:500; white-space:nowrap">Manage →</a></span>
+            </div>
+          </div>
+
+          <div class="order-foot">
+            <div class="order-meta">
+              <div>
+                <div class="order-meta__label">Payment method</div>
+                <div>PayPal</div>
+              </div>
+              <div>
+                <div class="order-meta__label">Email</div>
+                <div>trung@yaystore.com</div>
+              </div>
+            </div>
+            <dl class="order-sums">
+              <div><dt>Subtotal</dt><dd>$199.00</dd></div>
+            <div class="order-sums__discount">
+              <dt>Discount <code class="code">SPRING50</code> <span style="font-size:12px">(50%)</span></dt>
+              <dd>−$99.50</dd>
+            </div>
+              <div class="order-sums__total"><dt>Total</dt><dd>$99.50</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="order-help">
+          <span>Need help with this order? Our team replies in minutes on live chat.</span>
+          <a href="support.html" style="font-weight:600; white-space:nowrap">Get support →</a>
+        </div>
+      </div>
+      <div class="account-view" data-order-view="2" hidden>
+        <div class="order-crumb">
+          <a href="#" data-close-order><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg>Purchases</a>
+          <span>/</span><strong>Order #YC-09876</strong>
+        </div>
+
+        <div class="order-detail">
+          <div class="order-detail__head">
+            <div class="order-detail__title">
+              <div><b>Order #YC-09876</b><span class="badge badge--success">Complete</span></div>
+              <div class="order-detail__when">Placed Jan 18, 2026 · Paid with Visa ending 4242</div>
+            </div>
+            <a href="#" class="btn btn--neutral" style="height:36px; padding:0 14px; font-size:13px; font-weight:600;">View invoice</a>
+          </div>
+
+          <div class="order-detail__table">
+            <table class="table">
+              <thead><tr><th>Product</th><th>Files</th><th style="text-align:right">Price</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="order-detail__product">
+                      <img src="https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580" alt="">
+                      <div>
+                        <div style="font-weight:600">YayPricing Pro</div>
+                        <span>5 sites · Annual license</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><a href="#" style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>yaypricing-pro-3.2.1.zip</a></td>
+                  <td style="text-align:right; font-weight:600">$199.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order-keys">
+            <div class="order-keys__label">License keys</div>
+            <div class="order-keys__row">
+              <span>YayPricing Pro <span class="muted">· 5 sites · Annual license</span></span>
+              <span><code>YAYP-4F2A-****-****-9C1D</code><a href="#" data-goto="licenses" style="font-size:12.5px; font-weight:500; white-space:nowrap">Manage →</a></span>
+            </div>
+          </div>
+
+          <div class="order-foot">
+            <div class="order-meta">
+              <div>
+                <div class="order-meta__label">Payment method</div>
+                <div>Visa ending 4242</div>
+              </div>
+              <div>
+                <div class="order-meta__label">Email</div>
+                <div>trung@yaystore.com</div>
+              </div>
+            </div>
+            <dl class="order-sums">
+              <div><dt>Subtotal</dt><dd>$199.00</dd></div>
+            <div class="order-sums__discount">
+              <dt>Discount <code class="code">NEWYEAR50</code> <span style="font-size:12px">(50%)</span></dt>
+              <dd>−$99.50</dd>
+            </div>
+              <div class="order-sums__total"><dt>Total</dt><dd>$99.50</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="order-help">
+          <span>Need help with this order? Our team replies in minutes on live chat.</span>
+          <a href="support.html" style="font-weight:600; white-space:nowrap">Get support →</a>
+        </div>
+      </div>
+      <div class="account-view" data-order-view="3" hidden>
+        <div class="order-crumb">
+          <a href="#" data-close-order><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg>Purchases</a>
+          <span>/</span><strong>Order #YC-09540</strong>
+        </div>
+
+        <div class="order-detail">
+          <div class="order-detail__head">
+            <div class="order-detail__title">
+              <div><b>Order #YC-09540</b><span class="badge badge--default">Refunded</span></div>
+              <div class="order-detail__when">Placed Dec 2, 2025 · Paid with Visa ending 4242</div>
+            </div>
+            <a href="#" class="btn btn--neutral" style="height:36px; padding:0 14px; font-size:13px; font-weight:600;">View invoice</a>
+          </div>
+
+          <div class="order-detail__table">
+            <table class="table">
+              <thead><tr><th>Product</th><th>Files</th><th style="text-align:right">Price</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="order-detail__product">
+                      <img src="https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580" alt="">
+                      <div>
+                        <div style="font-weight:600">YayRecover Pro</div>
+                        <span>1 site · Annual license</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><a href="#" style="display:inline-flex; align-items:center; gap:5px; white-space:nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>yayrecover-pro-1.4.2.zip</a></td>
+                  <td style="text-align:right; font-weight:600">$59.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order-keys">
+            <div class="order-keys__label">License keys</div>
+            <div class="order-keys__row">
+              <span>YayRecover Pro <span class="muted">· 1 site · Annual license</span></span>
+              <span><code>YAYR-E1F0-****-****-77B2</code><a href="#" data-goto="licenses" style="font-size:12.5px; font-weight:500; white-space:nowrap">Manage →</a></span>
+            </div>
+          </div>
+
+          <div class="order-foot">
+            <div class="order-meta">
+              <div>
+                <div class="order-meta__label">Payment method</div>
+                <div>Visa ending 4242</div>
+              </div>
+              <div>
+                <div class="order-meta__label">Email</div>
+                <div>trung@yaystore.com</div>
+              </div>
+            </div>
+            <dl class="order-sums">
+              <div><dt>Subtotal</dt><dd>$59.00</dd></div>
+              <div class="order-sums__total"><dt>Total</dt><dd>$59.00</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="order-help">This order was refunded on Dec 9, 2025. The amount was returned to your original payment method and the license was deactivated.</div>
+      </div>
+
+      <!-- ==============================================================
+           Downloads
+           =========================================================== -->
+      <div class="account-view" data-view="downloads" hidden>
+        <div class="panel-card">
+          <div class="panel-card__head"><strong>Downloads</strong></div>
+          <div class="download-row">
+            <span class="download-row__icon" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+            <div class="download-row__body">
+              <div class="download-row__name">YayPricing Pro</div>
+              <div class="download-row__meta">v3.2.1 · Released Jul 9, 2026 · 1.8 MB</div>
+            </div>
+            <span class="download-row__lic">5-site license</span>
+            <a href="#" class="btn btn--tertiary">Changelog</a>
+            <a href="#" class="btn btn--primary">Download zip</a>
+          </div>
+          <div class="download-row">
+            <span class="download-row__icon" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+            <div class="download-row__body">
+              <div class="download-row__name">YayMail Pro</div>
+              <div class="download-row__meta">v4.1.0 · Released Jun 28, 2026 · 2.3 MB</div>
+            </div>
+            <span class="download-row__lic">5-site license</span>
+            <a href="#" class="btn btn--tertiary">Changelog</a>
+            <a href="#" class="btn btn--primary">Download zip</a>
+          </div>
+          <div class="download-row">
+            <span class="download-row__icon" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+            <div class="download-row__body">
+              <div class="download-row__name">YaySMTP Pro</div>
+              <div class="download-row__meta">v2.0.3 · Released Jun 15, 2026 · 0.9 MB</div>
+            </div>
+            <span class="download-row__lic">1-site license</span>
+            <a href="#" class="btn btn--tertiary">Changelog</a>
+            <a href="#" class="btn btn--primary">Download zip</a>
+          </div>
+          <p style="padding:12px 20px; font-size:12.5px; color:var(--ink-2)">Updates also arrive automatically in wp-admin while your license is active.</p>
+        </div>
+      </div>
+
+      <!-- ==============================================================
+           Licenses
+           =========================================================== -->
+      <div class="account-view" data-view="licenses" hidden>
+        <div class="licence-list">
+        <div class="licence-card">
+          <div class="licence-card__head">
+            <span class="licence-card__name">YayPricing Pro</span>
+            <span class="badge badge--success">Active</span>
+            <a href="#" class="btn btn--neutral licence-card__cta"><span>Renew early</span><span class="renew-save">Save 15%</span></a>
+          </div>
+
+          <div class="licence-card__grid">
+            <div>
+              <div class="licence-card__label">License key</div>
+              <div class="licence-card__key">
+                <code>YAYP-4F2A-****-****-9C1D</code>
+                <button type="button" class="licence-copy" data-copy-key="YAYP-4F2A-XXXX-XXXX-9C1D">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="licence-card__label">Activations</div>
+              <div class="licence-card__value">2 of 5 sites · <button type="button" class="licence-toggle" data-sites-toggle="sites-0" aria-expanded="false">Manage sites</button></div>
+            </div>
+            <div>
+              <div class="licence-card__label">Expires</div>
+              <div class="licence-card__value">Jan 18, 2027</div>
+            </div>
+          </div>
+
+          <div class="sites" id="sites-0" hidden>
+            <div class="licence-card__label">Activated sites</div>
+            <div class="sites__list">
+              <div class="site-row">
+                <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+                <span class="site-row__url">yaystore.com</span>
+                <span class="site-row__date">Activated Jan 18, 2026</span>
+                <a href="#" class="site-row__off">Deactivate</a>
+              </div>
+              <div class="site-row">
+                <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+                <span class="site-row__url">shop.maisonlinen.fr</span>
+                <span class="site-row__date">Activated Feb 3, 2026</span>
+                <a href="#" class="site-row__off">Deactivate</a>
+              </div>
+            </div>
+            <form class="sites__add" onsubmit="return false">
+              <input class="input" placeholder="https://yourstore.com" aria-label="Site URL">
+              <button type="submit" class="btn btn--secondary">Activate site</button>
+              <span class="sites__slots">3 slots left</span>
+            </form>
+            <p class="sites__note">Deactivating a site frees the slot instantly — staging and dev sites (localhost, *.staging) don't count against your limit.</p>
+          </div>
+        </div>
+        <div class="licence-card">
+          <div class="licence-card__head">
+            <span class="licence-card__name">YayMail Pro</span>
+            <span class="badge badge--success">Active</span>
+            <a href="#" class="btn btn--neutral licence-card__cta"><span>Renew early</span><span class="renew-save">Save 15%</span></a>
+          </div>
+
+          <div class="licence-card__grid">
+            <div>
+              <div class="licence-card__label">License key</div>
+              <div class="licence-card__key">
+                <code>YAYM-8B31-****-****-E204</code>
+                <button type="button" class="licence-copy" data-copy-key="YAYM-8B31-XXXX-XXXX-E204">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="licence-card__label">Activations</div>
+              <div class="licence-card__value">1 of 5 sites · <button type="button" class="licence-toggle" data-sites-toggle="sites-1" aria-expanded="false">Manage sites</button></div>
+            </div>
+            <div>
+              <div class="licence-card__label">Expires</div>
+              <div class="licence-card__value">Mar 4, 2027</div>
+            </div>
+          </div>
+
+          <div class="sites" id="sites-1" hidden>
+            <div class="licence-card__label">Activated sites</div>
+            <div class="sites__list">
+              <div class="site-row">
+                <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+                <span class="site-row__url">yaystore.com</span>
+                <span class="site-row__date">Activated Mar 4, 2026</span>
+                <a href="#" class="site-row__off">Deactivate</a>
+              </div>
+            </div>
+            <form class="sites__add" onsubmit="return false">
+              <input class="input" placeholder="https://yourstore.com" aria-label="Site URL">
+              <button type="submit" class="btn btn--secondary">Activate site</button>
+              <span class="sites__slots">4 slots left</span>
+            </form>
+            <p class="sites__note">Deactivating a site frees the slot instantly — staging and dev sites (localhost, *.staging) don't count against your limit.</p>
+          </div>
+        </div>
+        <div class="licence-card">
+          <div class="licence-card__head">
+            <span class="licence-card__name">YaySMTP Pro</span>
+            <span class="badge badge--warning">Expires in 16 days</span>
+            <a href="#" class="btn btn--primary licence-card__cta"><span>Renew now — $29/yr</span></a>
+          </div>
+
+          <div class="licence-card__grid">
+            <div>
+              <div class="licence-card__label">License key</div>
+              <div class="licence-card__key">
+                <code>YAYS-C7D9-****-****-1A6F</code>
+                <button type="button" class="licence-copy" data-copy-key="YAYS-C7D9-XXXX-XXXX-1A6F">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="licence-card__label">Activations</div>
+              <div class="licence-card__value">1 of 1 sites · <button type="button" class="licence-toggle" data-sites-toggle="sites-2" aria-expanded="false">Manage sites</button></div>
+            </div>
+            <div>
+              <div class="licence-card__label">Expires</div>
+              <div class="licence-card__value">Aug 2, 2026</div>
+            </div>
+          </div>
+
+          <div class="sites" id="sites-2" hidden>
+            <div class="licence-card__label">Activated sites</div>
+            <div class="sites__list">
+              <div class="site-row">
+                <span class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+                <span class="site-row__url">yaystore.com</span>
+                <span class="site-row__date">Activated Aug 2, 2025</span>
+                <a href="#" class="site-row__off">Deactivate</a>
+              </div>
+            </div>
+            <form class="sites__add" onsubmit="return false">
+              <input class="input" placeholder="https://yourstore.com" aria-label="Site URL">
+              <button type="submit" class="btn btn--secondary">Activate site</button>
+              <span class="sites__slots">0 slots left — deactivate a site or upgrade</span>
+            </form>
+            <p class="sites__note">Deactivating a site frees the slot instantly — staging and dev sites (localhost, *.staging) don't count against your limit.</p>
+          </div>
+        </div>
+          <p style="font-size:12.5px; color:var(--ink-2)">Renew before expiry to keep updates, support, and your renewal discount. <a href="#">Renewal policy →</a></p>
+        </div>
+      </div>
+
+      <!-- ==============================================================
+           Profile
+           =========================================================== -->
+      <div class="account-view" data-view="profile" hidden>
+        <div class="panel-card">
+          <div class="panel-card__head"><strong>Profile</strong></div>
+          <form class="profile__body" onsubmit="return false">
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="p-first">First name</label>
+                <input class="input" id="p-first" value="Trung">
+              </div>
+              <div class="field">
+                <label class="field-label" for="p-last">Last name</label>
+                <input class="input" id="p-last" value="Nguyen">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-email">Email</label>
+              <input class="input" id="p-email" type="email" value="trung@yaystore.com">
+              <p class="help-text">Receipts, license reminders, and update notices go here.</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-company">Company (optional)</label>
+              <input class="input" id="p-company" value="YayStore">
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-title" style="margin-bottom:4px">Billing address</div>
+            <p class="help-text" style="margin-bottom:14px">Appears on your receipts and invoices — required for a valid EU VAT invoice.</p>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="p-a1">Address line 1</label>
+                <input class="input" id="p-a1" value="123 Nguyen Hue">
+              </div>
+              <div class="field">
+                <label class="field-label" for="p-a2">Address line 2</label>
+                <input class="input" id="p-a2" placeholder="Apartment, suite, unit…">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="p-city">City</label>
+                <input class="input" id="p-city" value="Ho Chi Minh City">
+              </div>
+              <div class="field">
+                <label class="field-label" for="p-zip">Postal / ZIP code</label>
+                <input class="input" id="p-zip" value="700000">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="p-country">Country</label>
+                <span class="select-wrap" style="width:100%">
+                  <select class="select" id="p-country"><option>Vietnam</option><option>United States</option><option>Germany</option><option>France</option></select>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+                </span>
+              </div>
+              <div class="field">
+                <label class="field-label" for="p-state">State / Province</label>
+                <span class="select-wrap" style="width:100%">
+                  <select class="select" id="p-state"><option>Ho Chi Minh</option><option>Ha Noi</option><option>Da Nang</option></select>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="p-vat">VAT number (optional)</label>
+              <input class="input" id="p-vat" placeholder="e.g. DE123456789">
+              <p class="help-text">EU businesses: add your VAT ID for reverse-charge invoicing.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-title" style="margin-bottom:14px">Change password</div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="p-pw">New password</label>
+                <input class="input" id="p-pw" type="password" placeholder="••••••••">
+              </div>
+              <div class="field">
+                <label class="field-label" for="p-pw2">Confirm password</label>
+                <input class="input" id="p-pw2" type="password" placeholder="••••••••">
+              </div>
+            </div>
+
+            <label class="toggle">
+              <input type="checkbox" checked>
+              <span class="toggle__track"></span>
+              <span>Email me product updates and release notes</span>
+            </label>
+          </form>
+
+          <div class="profile__foot">
+            <button type="button" class="btn btn--primary">Save changes</button>
+            <span class="help-text push">Last saved July 12, 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<!-- ====================================================================
+     Footer
+     ================================================================= -->
+<footer class="site-footer wrap--edge">
+  <div class="site-footer__cols">
+    <div>
+      <div class="site-footer__head">Plugins</div>
+      <div class="site-footer__links">
+        <a href="yaypricing.html" class="f-link">YayPricing</a>
+        <a href="#" class="f-link">YayMail</a>
+        <a href="#" class="f-link">YayCurrency</a>
+        <a href="#" class="f-link">YaySMTP</a>
+        <a href="shop.html" class="f-link">View all plugins →</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Company</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">About us</a>
+        <a href="#" class="f-link">Blog</a>
+        <a href="#" class="f-link">Testimonials</a>
+        <a href="#" class="f-link">Affiliate program</a>
+        <a href="contact.html" class="f-link">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Support</div>
+      <div class="site-footer__links">
+        <a href="docs.html" class="f-link">Documentation</a>
+        <a href="support.html" class="f-link">Help center</a>
+        <a href="#" class="f-link">Roadmap</a>
+        <a href="#" class="f-link">Feature requests</a>
+        <a href="#" class="f-link">System status</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Policies</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">Refund policy</a>
+        <a href="#" class="f-link">License terms</a>
+        <a href="#" class="f-link">Privacy</a>
+        <a href="#" class="f-link">Terms of service</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Get plugin updates</div>
+      <p class="site-footer__blurb">One email a month: new plugins, feature releases, and honest WooCommerce advice.</p>
+      <form class="site-footer__signup" onsubmit="return false">
+        <input class="input" type="email" placeholder="you@store.com" aria-label="Email address">
+        <button type="submit" class="btn btn--primary btn--md">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <span>© 2026 YayCommerce, Inc.</span>
+    <span class="site-footer__built"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt="">Built for WordPress &amp; WooCommerce</span>
+
+    <div class="f-lang">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.4a15.7 15.7 0 00-1.2-5.9A8 8 0 0119.9 11zM12 4.3c.9 1.1 2 3.2 2.4 6.7H9.6c.4-3.5 1.5-5.6 2.4-6.7zM4.1 13h3.4c.1 2.2.6 4.2 1.2 5.9A8 8 0 014.1 13zm3.4-2H4.1a8 8 0 014.6-5.9A15.7 15.7 0 007.5 11zm4.5 8.7c-.9-1.1-2-3.2-2.4-6.7h4.8c-.4 3.5-1.5 5.6-2.4 6.7zm3.3-.8c.6-1.7 1.1-3.7 1.2-5.9h3.4a8 8 0 01-4.6 5.9z"/></svg>
+      <span class="select-wrap">
+        <select class="f-lang-sel" aria-label="Language">
+          <option>English</option><option>Tiếng Việt</option><option>Deutsch</option><option>Français</option><option>Español</option><option>日本語</option>
+        </select>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </span>
+    </div>
+
+    <div class="site-footer__social">
+      <a href="https://facebook.com/YayCommercePlugins" class="f-social" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg></a>
+      <a href="https://x.com/YayCommerceHQ" class="f-social" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.7H5.3L17.8 20z"/></svg></a>
+      <a href="https://youtube.com/@yaycommerce" class="f-social" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 00-2.1-2.2C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2 31.4 31.4 0 000 12a31.4 31.4 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.4 31.4 0 0024 12a31.4 31.4 0 00-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg></a>
+      <a href="https://www.instagram.com/YayCommerce/" class="f-social" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8 0-3.2 0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+      <a href="https://profiles.wordpress.org/yaycommerce/" class="f-social" aria-label="WordPress.org"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt=""></a>
+    </div>
+  </div>
+
+  <p class="site-footer__legal">YayCommerce is an independent company, not affiliated with WooCommerce or Automattic. WordPress® and WooCommerce® are registered trademarks of their respective owners.</p>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script src="assets/js/account.js"></script>
+</body>
+</html>

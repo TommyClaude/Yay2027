@@ -1,0 +1,397 @@
+/* ===========================================================================
+   YayCommerce — All Access bundle
+   ======================================================================== */
+
+/* =========================================================================
+   Hero
+   ====================================================================== */
+
+.aa-hero {
+  padding-block: 112px 96px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.aa-hero .eyebrow { margin-bottom: 16px; }
+
+.aa-hero h1 {
+  margin: 0 auto 18px;
+  font-size: 54px;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.02em;
+}
+
+.aa-hero h1 span { white-space: nowrap; }
+
+.aa-hero__lede {
+  max-width: 620px;
+  margin: 0 auto 32px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.aa-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.aa-hero__actions .btn { padding-inline: 26px; }
+
+.aa-hero__trust {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.aa-hero__trust span { display: flex; align-items: center; gap: 6px; }
+
+/* =========================================================================
+   What's included
+   ====================================================================== */
+
+.included { padding-block: 96px; }
+
+.included__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.included__head h2 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+}
+
+.included__value { font-size: 14px; color: var(--ink-2); }
+.included__value strong { color: var(--ink); }
+
+.included__lede {
+  margin: 0 0 32px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.included__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* These are a checklist, not a set of cards — flat, no shadow. */
+.included__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+
+.included__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-control);
+  background: var(--surface-3) center / cover no-repeat;
+}
+
+.included__body { flex: 1; min-width: 0; }
+.included__name { font-size: 14.5px; font-weight: 600; }
+.included__tag { font-size: 13px; color: var(--ink-2); }
+
+.included__price {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.included__price s {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.included__flag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--success-badge-ink);
+}
+
+.included__future {
+  border-style: dashed;
+  border-color: var(--ink-3);
+  background: var(--surface-2);
+}
+
+.included__future .included__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+}
+
+/* =========================================================================
+   Pricing
+   ====================================================================== */
+
+.aa-pricing {
+  padding-block: 96px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.aa-pricing__head {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.aa-pricing__head h2 {
+  margin-bottom: 8px;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+}
+
+.aa-pricing__head p { font-size: 15px; color: var(--ink-2); }
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 440px));
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.plan--best { border: 1.5px solid var(--accent); }
+
+.plan__flag {
+  position: absolute;
+  top: -11px;
+  left: 28px;
+  padding: 3px 9px;
+  border-radius: var(--r-badge);
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.plan__name {
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.plan__amount {
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.plan__per { font-size: 15px; color: var(--ink-2); }
+
+.plan__note {
+  margin: 4px 0 20px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.plan__feats {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  flex: 1;
+  margin-bottom: 26px;
+}
+
+.plan__feats li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.plan__feats .tick { width: 18px; height: 18px; margin-top: 2px; }
+
+.plan .btn { height: 48px; font-size: 15px; font-weight: 600; }
+
+.aa-pricing__alt {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+/* =========================================================================
+   Comparison table
+   ====================================================================== */
+
+.compare { padding-block: 96px; }
+
+.compare h2 {
+  margin-bottom: 32px;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+  text-align: center;
+}
+
+.compare__table {
+  max-width: 860px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+
+.compare__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--line-3);
+  font-size: 14px;
+}
+
+.compare__row:last-child { border-bottom: none; }
+
+.compare__row > * { padding: 14px 20px; }
+
+.compare__row--head {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.compare__row--head span:nth-child(2) { text-align: center; color: var(--ink-2); }
+.compare__row--head span:nth-child(3) { text-align: center; color: var(--accent); }
+
+.compare__key { font-weight: 500; }
+.compare__single { text-align: center; color: var(--ink-2); }
+.compare__aa { text-align: center; font-weight: 600; }
+
+/* =========================================================================
+   Testimonial band
+   ====================================================================== */
+
+.aa-quote {
+  padding-block: 96px;
+  background: var(--dark);
+  color: #fff;
+  text-align: center;
+}
+
+.aa-quote .stars {
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.aa-quote blockquote {
+  max-width: 720px;
+  margin: 0 auto 24px;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--surface-3);
+}
+
+.aa-quote__who {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.aa-quote__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--dark-2) center / cover no-repeat;
+}
+
+.aa-quote__who div { text-align: left; }
+.aa-quote__name { font-size: 14px; font-weight: 600; }
+.aa-quote__place { font-size: 13px; color: #a7aaad; }
+
+/* =========================================================================
+   FAQ section wrapper
+   ====================================================================== */
+
+.aa-faq { padding-block: 96px; }
+
+.aa-faq h2 {
+  margin-bottom: 32px;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+  text-align: center;
+}
+
+/* =========================================================================
+   Split closing band
+   ====================================================================== */
+
+.cta-band--split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding-block: 80px;
+  text-align: left;
+}
+
+.cta-band--split h2 {
+  max-width: none;
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -.012em;
+}
+
+.cta-band--split p {
+  max-width: none;
+  margin: 0;
+  font-size: 15px;
+}
+
+.cta-band--split .cta-band__actions {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.cta-band--split .cta-solid,
+.cta-band--split .cta-ghost {
+  height: 48px;
+  padding: 0 24px;
+}

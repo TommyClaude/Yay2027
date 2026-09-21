@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WooCommerce plugins — YayCommerce</title>
+<meta name="description" content="10 WooCommerce plugins on one shared framework. Every license includes a year of updates, support, and a 30-day money-back guarantee.">
+<link rel="icon" href="assets/img/yaycommerce-logo.png">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/shop.css">
+</head>
+<body class="">
+<!-- ====================================================================
+     Promo bar
+     ================================================================= -->
+<div class="promo wrap--edge">
+  <div class="promo__inner">
+    <span class="chip-brand chip-brand--square">Sale</span>
+    <span>Summer sale: 30% off All Access with code <span class="promo__code">SUNNY30</span></span>
+    <span class="promo__timer">Ends in <span data-countdown>2d 00:00:00</span></span>
+    <a href="all-access.html" class="promo__link">Get the deal →</a>
+  </div>
+</div>
+
+<!-- ====================================================================
+     Header
+     ================================================================= -->
+<header class="site-header wrap--edge">
+  <a href="index.html" class="site-header__logo is-plain">
+    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
+  </a>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="has-mega">
+      <a href="shop.html" class="nav-link is-active" aria-haspopup="true">
+        Plugins
+        <svg class="nav-link__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </a>
+
+      <div class="mega">
+        <div class="mega__grid">
+          <div class="mega__groups">
+            <div>
+              <div class="mega__group-title">Emails &amp; Notifications</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span><span class="mega-row__name">YayMail Addons</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span><span class="mega-row__name">YaySMTP</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Marketing &amp; Sales</div>
+              <a href="yaypricing.html" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span><span class="mega-row__name">YayPricing</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span><span class="mega-row__name">YayBoost</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Product Page</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span><span class="mega-row__name">YaySwatches</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span><span class="mega-row__name">YayExtra</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span><span class="mega-row__name">YayReviews</span></a>
+            </div>
+            <div>
+              <div class="mega__group-title">Payments &amp; B2B</div>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span><span class="mega-row__name">YayCurrency</span></a>
+              <a href="#" class="mega-row"><span class="ptile ptile--28" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span><span class="mega-row__name">Yay Wholesale B2B</span></a>
+            </div>
+          </div>
+
+          <div class="mega__bundle">
+            <div class="mega__bundle-kicker">Product bundle</div>
+            <div class="mega__bundle-name">All Access</div>
+            <div class="mega__bundle-icons">
+              <span class="ptile ptile--32" data-name="YayMail" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+              <span class="ptile ptile--32" data-name="YayPricing" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+              <span class="ptile ptile--32" data-name="YaySMTP" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+              <span class="ptile ptile--32" data-name="YayCurrency" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+              <span class="ptile ptile--32" data-name="YaySwatches" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+              <span class="ptile ptile--32" data-name="YayExtra" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+              <span class="ptile ptile--32" data-name="YayReviews" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+              <span class="ptile ptile--32" data-name="YayBoost" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+              <span class="ptile ptile--32" data-name="Yay Wholesale B2B" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+            </div>
+            <p class="mega__bundle-copy">All 10 plugins + every future release, on up to 25 sites.</p>
+            <div class="mega__bundle-price"><strong>From $299/yr</strong> <span class="muted">· save $200+</span></div>
+            <a href="all-access.html" class="btn btn--primary mega__bundle-cta">View All Access</a>
+          </div>
+        </div>
+
+        <div class="mega__foot">
+          <a href="shop.html" class="mega__foot-link">View all plugins →</a>
+          <span class="mega__foot-note">30-day money-back guarantee on every plugin</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="nav-link">All Access</a>
+    <a href="docs.html" class="nav-link">Docs</a>
+    <a href="#" class="nav-link">Blog</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+  <div class="site-header__actions">
+    
+    <a href="checkout.html" class="cart-link" aria-label="Cart, 1 item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 17.4a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zm9.4 0a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2zM6.9 6l-.5-2H2v1.5h3.2l2.2 8.9c.17.66.77 1.1 1.45 1.1h8.4c.68 0 1.27-.45 1.45-1.1l1.65-6.1c.26-.95-.46-1.9-1.45-1.9H6.9zm2.1 8L7.4 7.5h11.4L17.1 14H9z"/></svg>
+      <span class="cart-link__count">1</span>
+    </a>
+
+    <div class="has-account">
+      <div class="account-chip" role="button" tabindex="0" aria-haspopup="true">
+        <span class="avatar">TN</span>
+        <span class="account-chip__name">Trung</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </div>
+
+      <div class="account-menu">
+        <div class="account-menu__head">
+          <strong>Trung Nguyen</strong>
+          <span>trung@yaystore.com</span>
+        </div>
+        <a href="account.html" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+        <a href="account.html#purchases" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM18 9H6V7h12v2zm0 4H6v-2h12v2zm0 4H6v-2h12v2z"/></svg><span>Purchases</span></a>
+        <a href="account.html#downloads" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg><span>Downloads</span></a>
+        <a href="account.html#licenses" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12.65 10A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg><span>Licenses</span></a>
+        <a href="account.html#profile" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>Profile</span></a>
+        <div class="menu-sep"></div>
+        <a href="#" class="menu-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M14.6 6.4L13.5 5.3 6.8 12l6.7 6.7 1.1-1.1L9 12z"/></svg><span>Log out</span></a>
+      </div>
+    </div>
+
+    <a href="all-access.html" class="btn btn--primary btn--md">Get All Access</a>
+  </div>
+</header>
+
+<main>
+<!-- ====================================================================
+     Catalogue head — search, sort and category tabs
+     ================================================================= -->
+<section class="shop-head wrap--edge">
+  <h1>WooCommerce plugins</h1>
+  <p class="shop-head__lede">10 plugins on one shared framework — every license includes a year of updates, support, and the 30-day guarantee.</p>
+
+  <div class="shop-controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#757575" stroke-width="1.5" aria-hidden="true"><circle cx="13" cy="11" r="4.75"/><path d="M9.3 14.7l-4.1 4.1"/></svg>
+      <input class="input" type="search" placeholder="Search plugins…" aria-label="Search plugins" data-shop-search>
+    </div>
+
+    <span class="shop-controls__sort-label" id="sort-label">Sort by</span>
+    <span class="select-wrap">
+      <select class="select" aria-labelledby="sort-label" data-shop-sort>
+        <option value="popular">Most popular</option>
+        <option value="rating">Top rated</option>
+        <option value="priceAsc">Price: low to high</option>
+      </select>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#757575" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+    </span>
+  </div>
+
+  <div class="shop-tabs" role="group" aria-label="Filter by category">
+      <button type="button" class="shop-tab is-active" data-cat="All" aria-pressed="true">All <span>(10)</span></button>
+      <button type="button" class="shop-tab" data-cat="Marketing &amp; Sales" aria-pressed="false">Marketing &amp; Sales <span>(2)</span></button>
+      <button type="button" class="shop-tab" data-cat="Emails &amp; Notifications" aria-pressed="false">Emails &amp; Notifications <span>(3)</span></button>
+      <button type="button" class="shop-tab" data-cat="Product Page" aria-pressed="false">Product Page <span>(3)</span></button>
+      <button type="button" class="shop-tab" data-cat="Payments &amp; B2B" aria-pressed="false">Payments &amp; B2B <span>(2)</span></button>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Results
+     ================================================================= -->
+<section class="shop-results wrap--edge">
+  <div class="shop-grid" data-shop-grid>
+    <a href="#" class="shop-card" data-plugin="YaySMTP" data-cat="Emails &amp; Notifications" data-tag="Reliable email delivery through 15+ SMTP providers, with logs." data-rating="4.9" data-installs="40000" data-price="29">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+      </div>
+      <div class="shop-card__name">YaySMTP</div>
+      <p class="shop-card__tag">Reliable email delivery through 15+ SMTP providers, with logs.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.9</strong>
+        <span class="shop-card__installs">· 40,000+ installs</span>
+        <span class="shop-card__price">From $29<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayCurrency" data-cat="Payments &amp; B2B" data-tag="Sell in 150+ currencies with live rates and checkout by currency." data-rating="4.9" data-installs="30000" data-price="49">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+      </div>
+      <div class="shop-card__name">YayCurrency</div>
+      <p class="shop-card__tag">Sell in 150+ currencies with live rates and checkout by currency.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.9</strong>
+        <span class="shop-card__installs">· 30,000+ installs</span>
+        <span class="shop-card__price">From $49<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayMail" data-cat="Emails &amp; Notifications" data-tag="Drag-and-drop customizer for every WooCommerce email." data-rating="4.9" data-installs="20000" data-price="59">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+        <span class="chip-card chip-card--best">Bestseller</span>
+      </div>
+      <div class="shop-card__name">YayMail</div>
+      <p class="shop-card__tag">Drag-and-drop customizer for every WooCommerce email.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.9</strong>
+        <span class="shop-card__installs">· 20,000+ installs</span>
+        <span class="shop-card__price">From $59<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YaySwatches" data-cat="Product Page" data-tag="Color, image &amp; button swatches for product variations." data-rating="4.8" data-installs="10000" data-price="39">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+      </div>
+      <div class="shop-card__name">YaySwatches</div>
+      <p class="shop-card__tag">Color, image &amp; button swatches for product variations.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.8</strong>
+        <span class="shop-card__installs">· 10,000+ installs</span>
+        <span class="shop-card__price">From $39<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayMail Addons" data-cat="Emails &amp; Notifications" data-tag="80+ integrations connecting YayMail to your plugin stack." data-rating="4.9" data-installs="10000" data-price="39">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+      </div>
+      <div class="shop-card__name">YayMail Addons</div>
+      <p class="shop-card__tag">80+ integrations connecting YayMail to your plugin stack.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.9</strong>
+        <span class="shop-card__installs">· 10,000+ installs</span>
+        <span class="shop-card__price">From $39<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="yaypricing.html" class="shop-card" data-plugin="YayPricing" data-cat="Marketing &amp; Sales" data-tag="Dynamic pricing, BOGO deals, bulk discounts &amp; scheduled flash sales." data-rating="4.9" data-installs="8000" data-price="49">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+        <span class="chip-card chip-card--best">Bestseller</span>
+      </div>
+      <div class="shop-card__name">YayPricing</div>
+      <p class="shop-card__tag">Dynamic pricing, BOGO deals, bulk discounts &amp; scheduled flash sales.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.9</strong>
+        <span class="shop-card__installs">· 8,000+ installs</span>
+        <span class="shop-card__price">From $49<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayExtra" data-cat="Product Page" data-tag="Extra product options &amp; add-ons, priced your way." data-rating="4.8" data-installs="4000" data-price="49">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+      </div>
+      <div class="shop-card__name">YayExtra</div>
+      <p class="shop-card__tag">Extra product options &amp; add-ons, priced your way.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.8</strong>
+        <span class="shop-card__installs">· 4,000+ installs</span>
+        <span class="shop-card__price">From $49<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayReviews" data-cat="Product Page" data-tag="Advanced customer reviews with photos, reminders &amp; rewards." data-rating="4.8" data-installs="3000" data-price="59">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+        <span class="chip-card chip-card--new">New</span>
+      </div>
+      <div class="shop-card__name">YayReviews</div>
+      <p class="shop-card__tag">Advanced customer reviews with photos, reminders &amp; rewards.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.8</strong>
+        <span class="shop-card__installs">· 3,000+ installs</span>
+        <span class="shop-card__price">From $59<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="YayBoost" data-cat="Marketing &amp; Sales" data-tag="Sales booster: free-shipping goals, FOMO popups &amp; countdowns." data-rating="4.8" data-installs="2000" data-price="49">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+        <span class="chip-card chip-card--new">New</span>
+      </div>
+      <div class="shop-card__name">YayBoost</div>
+      <p class="shop-card__tag">Sales booster: free-shipping goals, FOMO popups &amp; countdowns.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.8</strong>
+        <span class="shop-card__installs">· 2,000+ installs</span>
+        <span class="shop-card__price">From $49<span>/yr</span></span>
+      </div>
+    </a>
+    <a href="#" class="shop-card" data-plugin="Yay Wholesale B2B" data-cat="Payments &amp; B2B" data-tag="Wholesale pricing, B2B registration &amp; tiered customer roles." data-rating="4.7" data-installs="1000" data-price="69">
+      <div class="shop-card__top">
+        <span class="shop-card__icon" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+        <span class="chip-card chip-card--new">New</span>
+      </div>
+      <div class="shop-card__name">Yay Wholesale B2B</div>
+      <p class="shop-card__tag">Wholesale pricing, B2B registration &amp; tiered customer roles.</p>
+      <div class="shop-card__meta">
+        <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        <strong>4.7</strong>
+        <span class="shop-card__installs">· 1,000+ installs</span>
+        <span class="shop-card__price">From $69<span>/yr</span></span>
+      </div>
+    </a>
+  </div>
+
+  <div class="shop-empty" data-shop-empty hidden>
+    <div class="shop-empty__title">No plugins match “<span data-shop-empty-term></span>”</div>
+    <p class="shop-empty__body">Try a different keyword, or tell us what you're looking for — it might be on our roadmap.</p>
+    <button type="button" class="btn btn--secondary" style="height:40px; padding:0 18px; font-size:13.5px; font-weight:600;" data-shop-clear>Clear search</button>
+  </div>
+
+  <!-- Bundle upsell sits after the grid: the shopper has seen the prices. -->
+  <aside class="shop-aa">
+    <div class="dotgrid dotgrid--ink" aria-hidden="true"></div>
+    <div class="shop-aa__glow" aria-hidden="true"></div>
+
+    <div class="shop-aa__copy">
+      <span class="shop-aa__badge">
+        <svg width="12" height="12" viewBox="4.4 4.4 15.2 15.2" fill="currentColor" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
+        All Access bundle
+      </span>
+      <h2>Need more than one? Get all 10 plugins</h2>
+      <p class="shop-aa__lede">Every plugin on this page — plus future releases — on up to 25 sites, with priority support.</p>
+
+      <div class="shop-aa__icons">
+        <span class="ptile" data-name="YayMail" style="background-image:url(https://ps.w.org/yaymail/assets/icon-256x256.gif?rev=2900992)"></span>
+        <span class="ptile" data-name="YayPricing" style="background-image:url(https://ps.w.org/yaypricing/assets/icon-256x256.png?rev=3056580)"></span>
+        <span class="ptile" data-name="YaySMTP" style="background-image:url(https://ps.w.org/yaysmtp/assets/icon-256x256.png?rev=3056583)"></span>
+        <span class="ptile" data-name="YayCurrency" style="background-image:url(https://ps.w.org/yaycurrency/assets/icon-256x256.png?rev=3056587)"></span>
+        <span class="ptile" data-name="YaySwatches" style="background-image:url(https://ps.w.org/yayswatches/assets/icon-256x256.png?rev=3056591)"></span>
+        <span class="ptile" data-name="YayExtra" style="background-image:url(https://ps.w.org/yayextra/assets/icon-256x256.png?rev=3056586)"></span>
+        <span class="ptile" data-name="YayReviews" style="background-image:url(https://ps.w.org/yay-customer-reviews-woocommerce/assets/icon-256x256.png?rev=3340109)"></span>
+        <span class="ptile" data-name="YayBoost" style="background-image:url(https://ps.w.org/yayboost-sales-booster-for-woocommerce/assets/icon-256x256.png?rev=3498248)"></span>
+        <span class="ptile" data-name="Yay Wholesale B2B" style="background-image:url(https://ps.w.org/yay-wholesale-b2b/assets/icon-256x256.png?rev=3467762)"></span>
+      </div>
+
+      <ul class="shop-aa__checks">
+        <li><span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>All 10 plugins, one license</li>
+        <li><span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>Up to 25 sites</li>
+        <li><span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>Priority support</li>
+        <li><span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>Future plugins included</li>
+      </ul>
+    </div>
+
+    <div class="shop-aa__card">
+      <div class="shop-aa__plan">Annual plan</div>
+      <div class="shop-aa__price">
+        <span class="strike">$500+</span>
+        <span class="shop-aa__amount">$299</span>
+        <span class="shop-aa__per">/yr</span>
+      </div>
+      <div class="shop-aa__save">Save $200+ vs. buying separately</div>
+      <a href="all-access.html" class="btn btn--primary">View All Access</a>
+      <div class="shop-aa__guarantee">
+        <span class="tick"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00a32a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.7 4.3L19 7"/></svg></span>
+        30-day money-back guarantee
+      </div>
+    </div>
+  </aside>
+</section>
+</main>
+<!-- ====================================================================
+     Footer
+     ================================================================= -->
+<footer class="site-footer wrap--edge">
+  <div class="site-footer__cols">
+    <div>
+      <div class="site-footer__head">Plugins</div>
+      <div class="site-footer__links">
+        <a href="yaypricing.html" class="f-link">YayPricing</a>
+        <a href="#" class="f-link">YayMail</a>
+        <a href="#" class="f-link">YayCurrency</a>
+        <a href="#" class="f-link">YaySMTP</a>
+        <a href="shop.html" class="f-link">View all plugins →</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Company</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">About us</a>
+        <a href="#" class="f-link">Blog</a>
+        <a href="#" class="f-link">Testimonials</a>
+        <a href="#" class="f-link">Affiliate program</a>
+        <a href="contact.html" class="f-link">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Support</div>
+      <div class="site-footer__links">
+        <a href="docs.html" class="f-link">Documentation</a>
+        <a href="support.html" class="f-link">Help center</a>
+        <a href="#" class="f-link">Roadmap</a>
+        <a href="#" class="f-link">Feature requests</a>
+        <a href="#" class="f-link">System status</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Policies</div>
+      <div class="site-footer__links">
+        <a href="#" class="f-link">Refund policy</a>
+        <a href="#" class="f-link">License terms</a>
+        <a href="#" class="f-link">Privacy</a>
+        <a href="#" class="f-link">Terms of service</a>
+      </div>
+    </div>
+    <div>
+      <div class="site-footer__head">Get plugin updates</div>
+      <p class="site-footer__blurb">One email a month: new plugins, feature releases, and honest WooCommerce advice.</p>
+      <form class="site-footer__signup" onsubmit="return false">
+        <input class="input" type="email" placeholder="you@store.com" aria-label="Email address">
+        <button type="submit" class="btn btn--primary btn--md">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <span>© 2026 YayCommerce, Inc.</span>
+    <span class="site-footer__built"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt="">Built for WordPress &amp; WooCommerce</span>
+
+    <div class="f-lang">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.4a15.7 15.7 0 00-1.2-5.9A8 8 0 0119.9 11zM12 4.3c.9 1.1 2 3.2 2.4 6.7H9.6c.4-3.5 1.5-5.6 2.4-6.7zM4.1 13h3.4c.1 2.2.6 4.2 1.2 5.9A8 8 0 014.1 13zm3.4-2H4.1a8 8 0 014.6-5.9A15.7 15.7 0 007.5 11zm4.5 8.7c-.9-1.1-2-3.2-2.4-6.7h4.8c-.4 3.5-1.5 5.6-2.4 6.7zm3.3-.8c.6-1.7 1.1-3.7 1.2-5.9h3.4a8 8 0 01-4.6 5.9z"/></svg>
+      <span class="select-wrap">
+        <select class="f-lang-sel" aria-label="Language">
+          <option>English</option><option>Tiếng Việt</option><option>Deutsch</option><option>Français</option><option>Español</option><option>日本語</option>
+        </select>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"/></svg>
+      </span>
+    </div>
+
+    <div class="site-footer__social">
+      <a href="https://facebook.com/YayCommercePlugins" class="f-social" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg></a>
+      <a href="https://x.com/YayCommerceHQ" class="f-social" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.7H5.3L17.8 20z"/></svg></a>
+      <a href="https://youtube.com/@yaycommerce" class="f-social" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 00-2.1-2.2C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2 31.4 31.4 0 000 12a31.4 31.4 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.4 31.4 0 0024 12a31.4 31.4 0 00-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg></a>
+      <a href="https://www.instagram.com/YayCommerce/" class="f-social" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8 0-3.2 0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+      <a href="https://profiles.wordpress.org/yaycommerce/" class="f-social" aria-label="WordPress.org"><img class="f-wplogo" src="assets/img/wordpress-logomark-mono.svg" alt=""></a>
+    </div>
+  </div>
+
+  <p class="site-footer__legal">YayCommerce is an independent company, not affiliated with WooCommerce or Automattic. WordPress® and WooCommerce® are registered trademarks of their respective owners.</p>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script src="assets/js/shop.js"></script>
+</body>
+</html>

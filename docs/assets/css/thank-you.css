@@ -1,0 +1,263 @@
+/* ===========================================================================
+   YayCommerce — Order confirmation
+
+   The job here is time-to-value, not more selling: get the plugin installed
+   and the licence activated. Deliberately no refund reminder — that only
+   makes the exit prominent at the moment of buyer's remorse.
+   ======================================================================== */
+
+body.is-confirmation {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-2);
+}
+
+body.is-confirmation main { flex: 1; }
+
+.confirmation {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+/* =========================================================================
+   Headline
+   ====================================================================== */
+
+.confirmation__head {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.confirmation__seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--success-badge-bg);
+}
+
+.confirmation__head h1 {
+  margin-bottom: 8px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.confirmation__meta {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.confirmation__meta strong { color: var(--ink); }
+.confirmation__meta .mono { font-family: var(--font-mono); }
+
+/* =========================================================================
+   Order card
+   ====================================================================== */
+
+.order {
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.order__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.order__head strong { font-size: 15px; font-weight: 600; }
+.order__when { font-size: 12.5px; color: var(--ink-2); }
+
+.order__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.order__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: var(--surface-3) center / cover no-repeat;
+}
+
+.order__body { flex: 1; min-width: 0; }
+.order__name { font-size: 14.5px; font-weight: 600; }
+.order__terms { font-size: 12.5px; color: var(--ink-2); }
+
+.order__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.order__actions .btn { height: 38px; padding: 0 16px; font-size: 13px; font-weight: 600; }
+
+.order__docs {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.order__docs:hover { color: var(--accent); }
+
+/* Licence key ------------------------------------------------------------ */
+.licence {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line-3);
+}
+
+.licence__label {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--ink-2);
+}
+
+.licence__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.licence__key {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--surface-3);
+  border-radius: var(--r-badge);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.licence__row .btn { height: 36px; padding: 0 14px; font-size: 13px; font-weight: 600; }
+
+/* Totals — the saving stays visible, so the purchase keeps feeling good --- */
+.order__totals {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px 24px;
+}
+
+.order__totals > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.order__totals dt { color: var(--ink-2); }
+.order__discount dd { color: var(--danger); font-weight: 600; }
+
+.order__paid {
+  align-items: baseline;
+  margin-top: 2px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line-3);
+}
+
+.order__paid dt { font-size: 14px; font-weight: 600; color: var(--ink); }
+.order__paid dd { font-size: 18px; font-weight: 600; }
+
+/* =========================================================================
+   Three steps
+   ====================================================================== */
+
+.steps {
+  margin-bottom: 16px;
+  padding: 22px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.steps__title {
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.steps__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.steps__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.steps__name {
+  margin-bottom: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.steps__note {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* =========================================================================
+   Support nudge — replaces the refund reminder
+   ====================================================================== */
+
+.confirm-help {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-card);
+}
+
+.confirm-help__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-tile);
+  background: var(--accent-soft);
+}
+
+.confirm-help__body { flex: 1; }
+.confirm-help__title { font-size: 13.5px; font-weight: 600; }
+.confirm-help__note { font-size: 12.5px; color: var(--ink-2); }
+
+.confirm-help .btn { flex-shrink: 0; height: 36px; padding: 0 14px; font-size: 13px; }

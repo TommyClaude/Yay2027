@@ -1,0 +1,262 @@
+/* ===========================================================================
+   YayCommerce — base: design tokens, reset, typography, layout utilities
+
+   Tokens are the WordPress design system (Gutenberg / @wordpress/components)
+   values, with the YayCommerce brand yellow layered on top as the action
+   colour. The build is locked to the v3.2 design decisions:
+
+     accent      yellow-blue   yellow #ffc421 for actions, blue #3858e9 for
+                               links / focus / selection
+     designStyle elevated      white borderless-feeling cards, 10px radii,
+                               soft drop shadows
+     footer      light
+   ======================================================================== */
+
+:root {
+  /* --- Brand (actions) ------------------------------------------------- */
+  --brand: #ffc421;
+  --brand-hover: #f0b400;
+  --brand-ink: #1e1e1e;
+
+  /* --- Accent (links, focus, selection) -------------------------------- */
+  --accent: #3858e9;
+  --accent-hover: #2145e6;
+  --accent-active: #183ad6;
+  --accent-soft: rgba(56, 88, 233, .08);
+
+  /* --- Ink -------------------------------------------------------------- */
+  --ink: #1e1e1e;
+  --ink-2: #757575;
+  --ink-3: #949494;
+  --ink-4: #c3c4c7;
+
+  /* --- Surfaces --------------------------------------------------------- */
+  --surface: #fff;
+  --surface-2: #f6f7f7;
+  --surface-3: #f0f0f1;
+  --surface-hover: #f5f5f6;
+  --dark: #1d2327;
+  --dark-2: #2c3338;
+  --dark-3: #3c434a;
+
+  /* --- Lines ------------------------------------------------------------ */
+  --line: #e0e0e0;
+  --line-2: #ddd;
+  --line-3: #f0f0f0;
+
+  /* --- Semantic --------------------------------------------------------- */
+  --success: #00a32a;
+  --success-deep: #008a20;
+  --success-soft: #e2f5e9;
+  --success-badge-bg: #edfaef;
+  --success-badge-ink: #00450c;
+  --warning: #f0b849;
+  --danger: #cc1818;
+
+  /* --- Shape (elevated style) ------------------------------------------- */
+  --r-card: 10px;
+  --r-control: 8px;
+  --r-badge: 6px;
+  --r-tile: 6px;
+  --r-pill: 9999px;
+
+  /* --- Elevation (elevated style) --------------------------------------- */
+  --sh-card: 0 1px 2px rgba(0, 0, 0, .04), 0 8px 24px -8px rgba(0, 0, 0, .14);
+  --sh-card-hover: 0 2px 6px rgba(0, 0, 0, .05), 0 12px 28px -12px rgba(0, 0, 0, .16);
+  --sh-soft: 0 6px 20px -6px rgba(0, 0, 0, .10), 0 1px 3px rgba(0, 0, 0, .05);
+  --sh-soft-hover: 0 12px 28px -12px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .05);
+  --sh-blog-hover: 0 4px 10px rgba(0, 0, 0, .06), 0 22px 44px -16px rgba(0, 0, 0, .26);
+  --sh-header: 0 1px 0 #f6f7f7, 0 4px 16px -8px rgba(0, 0, 0, .08);
+  --sh-popover: 0 0.7px 1px rgba(0, 0, 0, .1), 0 1.2px 1.7px -0.2px rgba(0, 0, 0, .1), 0 2.3px 3.3px -0.5px rgba(0, 0, 0, .1);
+  --sh-hairline: 0 0.7px 1px rgba(0, 0, 0, .06);
+  --sh-float: 0 24px 48px -12px rgba(30, 30, 30, .18);
+  --sh-lift: 0 6px 20px rgba(0, 0, 0, .12);
+
+  /* --- Type -------------------------------------------------------------- */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-mono: Menlo, Consolas, monaco, monospace;
+
+  /* --- Layout ------------------------------------------------------------ */
+  --page: 1200px;
+  --gutter: 64px;
+  --gutter-edge: 40px;
+}
+
+/* =========================================================================
+   Reset
+   ====================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-width: 1280px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+img,
+svg { display: block; }
+
+/* The hidden attribute outranks any component's own display. */
+[hidden] { display: none !important; }
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote { margin: 0; }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+button,
+input,
+select,
+textarea { font: inherit; color: inherit; }
+
+/* =========================================================================
+   Links
+
+   Text links are blue and gain an underline on hover. Anything that already
+   signals itself another way — buttons, nav pills, cards, menu rows — opts
+   out via .is-plain or by being a card/button class.
+   ====================================================================== */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a.is-plain:hover,
+a.btn:hover,
+a.nav-link:hover,
+a.menu-item:hover,
+a.card:hover,
+a.plugin-card:hover,
+a.blog-card:hover,
+a.cta-solid:hover,
+a.cta-ghost:hover,
+a.mega-row:hover,
+a.f-social:hover { text-decoration: none; }
+
+/* =========================================================================
+   Typography scale used across the marketing pages
+   ====================================================================== */
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ink-2);
+}
+
+.h-hero {
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.018em;
+  color: var(--ink);
+}
+
+.h-section {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+
+.h-band {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+}
+
+.lede {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.mono { font-family: var(--font-mono); }
+
+.muted { color: var(--ink-2); }
+
+.strike {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+/* =========================================================================
+   Layout helpers
+
+   `.wrap` reproduces the prototype's centred 1200px column with a full-bleed
+   background: padding-inline collapses to a fixed gutter below 1200 + gutter.
+   ====================================================================== */
+
+.wrap { padding-inline: max(var(--gutter), calc((100% - var(--page)) / 2)); }
+
+.wrap--edge { padding-inline: max(var(--gutter-edge), calc((100% - var(--page)) / 2)); }
+
+.section { padding-block: 96px; }
+.section--tight { padding-block: 80px; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section--surface { background: var(--surface-2); }
+
+.grid { display: grid; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.push { margin-left: auto; }
+
+.dotgrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.dotgrid--ink { background-image: radial-gradient(rgba(0, 0, 0, .08) 1px, transparent 1px); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
