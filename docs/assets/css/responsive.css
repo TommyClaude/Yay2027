@@ -446,9 +446,67 @@
 
 @media (max-width: 620px) {
   :root {
-    --gutter: 18px;
+    --gutter: 16px;
     --gutter-edge: 16px;
   }
+
+  /* Space budget ---------------------------------------------------------
+     A 390px screen minus two gutters is 358px. A card that then pads 26px a
+     side leaves 306px for content — 78% of the screen — and a card inside
+     a card leaves less. Cards drop to 16px a side here; the vertical
+     rhythm stays where it was, since height is not what a phone lacks. */
+
+  /* Three pages carried their own 40px gutter instead of the token. */
+  .account,
+  .checkout,
+  .confirmation { padding-inline: var(--gutter); }
+
+  .card,
+  .buybox,
+  .step,
+  .shop-card,
+  .review,
+  .aa-card,
+  .why-card,
+  .tstm-card,
+  .case-card,
+  .docs-card,
+  .plan,
+  .channel__body,
+  .answers,
+  .guarantee,
+  .proof,
+  .summary__card,
+  .shop-aa__card,
+  .stat-tile,
+  .stat-card,
+  .licence-card,
+  .upsell,
+  .notice,
+  .profile__body,
+  .download-row,
+  .panel-card__head,
+  .order-detail__head,
+  .order-detail__table,
+  .order-keys,
+  .order-foot,
+  .order__head,
+  .order__item,
+  .order__totals,
+  .licence,
+  .modal__body { padding-inline: 16px; }
+
+  .card,
+  .buybox,
+  .step,
+  .aa-card,
+  .why-card,
+  .tstm-card,
+  .case-card,
+  .plan,
+  .shop-aa__card { padding-block: 20px; }
+
+  .blog-card__body { padding: 16px 16px 18px; }
 
   .h-hero { font-size: 31px; }
   .h-section { font-size: 23px; }
@@ -643,6 +701,49 @@
   /* Account -------------------------------------------------------------- */
   .licence-card__grid { grid-template-columns: 1fr; }
   .order-meta { grid-template-columns: 1fr; }
+
+  /* An order's line items are three columns on a desktop table. Here each
+     item is a block: product on top, files and price on the row beneath —
+     the purchase list keeps its scroll, this table has too few columns to
+     need one. */
+  .order-detail__table .table { min-width: 0; }
+  .order-detail__table thead { display: none; }
+
+  .order-detail__table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-3);
+  }
+
+  .order-detail__table tbody tr:last-child { border-bottom: none; }
+
+  .order-detail__table tbody td {
+    display: block;
+    padding: 0;
+    border: none;
+  }
+
+  .order-detail__table tbody td:first-child { flex: 1 0 100%; }
+  .order-detail__table tbody td:last-child { margin-left: auto; }
+
+  /* The invoice button squeezed beside the title fits by four pixels and
+     forces the date onto two lines; it reads better on its own row. */
+  .order-detail__title { flex: 1 0 100%; }
+
+  /* Licence key rows: the name gets a line, then the key takes the full
+     width so it never breaks mid-string, with Manage beside it. */
+  .order-keys__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .order-keys__row > span:last-child { justify-content: space-between; }
+  .order-keys code { flex: 1; text-align: center; letter-spacing: .02em; }
 
   /* The order table becomes a stack of rows: an id and a status on top, the
      plugin and the amount below. */
