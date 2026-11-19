@@ -638,9 +638,13 @@
   font-family: var(--font);
 }
 
+/* The signup column's two-line blurb has 4px to spare at the design width.
+   The minimum is that column's own width there (1.4 of the 5.4 shares of
+   1200px less four gaps), so it changes nothing from 1280px up and keeps the
+   blurb on two lines in a 1280px window that loses 15px to a scrollbar. */
 .site-footer__cols {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 1.4fr;
+  grid-template-columns: repeat(4, 1fr) minmax(calc(1040px * 1.4 / 5.4), 1.4fr);
   gap: 40px;
   padding-bottom: 48px;
 }

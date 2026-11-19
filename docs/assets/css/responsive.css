@@ -83,8 +83,14 @@
 
 /* Narrower than it was drawn, but not yet the small version: the result
    card would cover the start of the toast, so the toast keeps only its
-   second half, and the last label drops clear of the text. */
-@container hero-visual (max-width: 537px) {
+   second half, and the last label drops clear of the text.
+
+   The drawing's own column is 538.6px. The step starts a little below that,
+   not right at it: a 1280px window with a scrollbar that takes up width
+   (Windows, or a Mac with a mouse) lays the page out 15 to 17px narrower
+   while still counting as 1280px wide, and must show the drawing as
+   designed. At 527px the card is still 14px clear of the toast. */
+@container hero-visual (max-width: 527px) {
   .mock__toast-lead { display: none; }
   .mock__tag--boost { bottom: 20px; }
 

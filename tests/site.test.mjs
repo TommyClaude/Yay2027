@@ -698,6 +698,44 @@ await check('the same sweep with scrollbars that take up width, as on Windows', 
   expect(problems.length === 0, problems.join(' ; '));
 });
 
+await check('a 1280px window that loses width to a scrollbar still shows the hero drawing and the footer as designed', async () => {
+  // Windows at 150% scaling, or a Mac with a mouse: the window counts as 1280px
+  // for media queries while the page is laid out 15 to 17px narrower.
+  const measure = (page) => page.evaluate(() => {
+    const lead = document.querySelector('.mock__toast-lead');
+    const blurb = document.querySelector('.site-footer__blurb');
+    const range = document.createRange(); range.selectNodeContents(blurb);
+    const stat = document.querySelector('.mock__stat').getBoundingClientRect();
+    const tick = document.querySelector('.mock__toast .tick').getBoundingClientRect();
+    return {
+      layout: document.documentElement.clientWidth,
+      lead: getComputedStyle(lead).display !== 'none',
+      boost: getComputedStyle(document.querySelector('.mock__tag--boost')).bottom,
+      tracks: getComputedStyle(document.querySelector('.mock__table-row')).gridTemplateColumns.split(' ').map((v) => Math.round(parseFloat(v))).join(' '),
+      blurbLines: new Set([...range.getClientRects()].map((q) => Math.round(q.top))).size,
+      cardToTick: tick.left - stat.right,
+    };
+  });
+  const plain = await open(browser, 'index', { width: 1280 });
+  const designed = await measure(plain.page);
+  await close(plain);
+  const windows = await launch({ classicScrollbars: true });
+  for (const bar of [15, 17]) {
+    const h = await open(windows, 'index', { width: 1280 });
+    if (bar !== 15) { await h.page.addStyleTag({ content: `::-webkit-scrollbar { width: ${bar}px; }` }); await h.page.waitForTimeout(150); }
+    const r = await measure(h.page);
+    await close(h);
+    expect(r.layout < 1280, `${bar}px scrollbar: the page is laid out ${r.layout}px wide, so the scrollbar is not taking width`);
+    expect(r.lead, `${bar}px scrollbar: the toast lost its first half`);
+    expect(r.boost === designed.boost, `${bar}px scrollbar: the last label sits ${r.boost} from the bottom, ${designed.boost} as designed`);
+    const even = r.tracks.split(' ').map(Number);
+    expect(Math.max(...even) - Math.min(...even) <= 1, `${bar}px scrollbar: the discount table's columns are ${r.tracks}, not equal as designed`);
+    expect(r.cardToTick > 8, `${bar}px scrollbar: the result card is ${Math.round(r.cardToTick)}px from the toast's tick`);
+    expect(r.blurbLines === designed.blurbLines, `${bar}px scrollbar: the footer blurb is on ${r.blurbLines} lines, ${designed.blurbLines} as designed`);
+  }
+  await windows.close();
+});
+
 await check('tablet: no card is left alone beside an empty slot', async () => {
   const h = await open(browser, 'index', { width: 768, height: 1024 });
   const r = await h.page.evaluate(() => ['.case-grid', '.tstm-grid', '.blog-grid'].filter((sel) => {
