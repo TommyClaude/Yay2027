@@ -138,15 +138,17 @@ loaded after the page sheets, which keeps the desktop rendering identical to
 what was checked against the design and puts the whole adaptation in one
 readable file.
 
-Four steps, each named for what actually breaks at that width: **1180px** (the
-1200px column stops clearing its gutters, the header search goes), **1024px**
-(the horizontal nav runs out of room and becomes a drawer), **860px**
-(side-by-side layouts stack), **620px** (phone: one column, smaller type).
+Steps by screen width, each named for what actually breaks there: **1200px**
+(the header cannot hold its search field), **1180px** (the 1200px column stops
+clearing its gutters), **1024px** (the horizontal nav runs out of room and
+becomes a drawer), **860px** (side-by-side layouts stack), **620px** (phone:
+one column, smaller type, thumb-sized controls) and **340px** (the smallest
+phones still in use).
 
-Two parts of the Home hero answer to their own width instead of the screen's,
-with container queries, because the screen does not say how much room they
-have: the same column is 540px wide beside the copy on a laptop and 330px wide
-under it on a phone.
+Three pieces of Home answer to their own width instead of the screen's, with
+container queries, because the screen does not say how much room they have:
+the same column is 540px wide beside the copy on a laptop and 330px wide under
+it on a phone.
 
 - **The proof badge** drops "Trusted by" when its column can no longer hold
   the sentence on one line.
@@ -154,16 +156,31 @@ under it on a phone.
   from the design. Below that it is the same composition made smaller: photo
   beside details, each plugin label hanging off the right edge next to the
   thing it does, the result card off the bottom left.
+- **A testimonial card** narrower than 400px moves its "Verified customer"
+  badge up opposite the stars, so the name and place never wrap.
 
-On phones the promo bar is a single line that keeps the offer and the
-countdown, and the whole bar is the link. Plugin cards become list rows. A
-group of three cards that would leave one alone on a tablet row gives that
-card the full row.
+On phones:
+
+- the promo bar is a single line that keeps the offer and the countdown, and
+  the whole bar is the link;
+- plugin cards and blog posts become list rows (icon or thumbnail on the left),
+  and a "View all 10 plugins" button follows the list;
+- headings are balanced, so where they break does not depend on a few pixels
+  of difference between one phone's font and another's;
+- section paddings are half the desktop values throughout;
+- in the drawer the one action, "Get All Access", stays pinned to the foot of
+  the sheet while the list scrolls behind it;
+- text links, footer rows and the header buttons have thumb-sized hit areas,
+  and footer fields use 16px text so Safari does not zoom the page on focus.
+
+On tablets a group of three cards that would leave one alone on its row gives
+that card the full row, and category cards go two-up wherever the nav is a
+drawer.
 
 **Home is the page this has been worked through in full.** The other nine are
-responsive (no sideways scrolling from 1920px down to 320px, drawer, stacking)
-but have not yet had the same pass; rules written for Home are scoped to it so
-those pages were not changed by it.
+responsive (no sideways scrolling, checked every 10px from 1300px down to
+320px; drawer; stacking) but have not yet had the same pass; rules written for Home
+are scoped to it so those pages were not changed by it.
 
 ## Images
 
@@ -186,9 +203,9 @@ node tests/visual.mjs diff before after
 
 Both need Playwright (`npm install` picks it up from `package.json`). They
 drive the built `docs/` and never touch the network. `site.test.mjs` covers
-every page for sideways scroll at twelve widths, the header menus by mouse,
-keyboard and touch, the drawer, the countdown, the coupon link, and the Home
-layout rules above. `visual.mjs` is for changes to shared CSS: a page you did
+every page for sideways scroll on either side of every breakpoint (and Home
+every 10px), the header menus by mouse, keyboard and touch, the drawer, the
+countdown, the coupon link, and the Home layout rules above. `visual.mjs` is for changes to shared CSS: a page you did
 not mean to touch should come back identical.
 
 ## Known limits

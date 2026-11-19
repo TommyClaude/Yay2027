@@ -33,7 +33,9 @@ for (const name of PAGES) {
   });
 }
 
-const WIDTHS = [320, 360, 393, 430, 620, 768, 860, 1024, 1180, 1280, 1440, 1920];
+// Phones, tablets and desktops, plus the width on either side of every step
+// in responsive.css: layouts tend to break just past a breakpoint.
+const WIDTHS = [320, 340, 341, 360, 393, 430, 620, 621, 645, 768, 860, 861, 875, 1024, 1025, 1180, 1181, 1190, 1200, 1201, 1280, 1440, 1920];
 for (const name of PAGES) {
   await check(`${name}: no sideways scroll at ${WIDTHS.length} widths (${WIDTHS[0]}–${WIDTHS[WIDTHS.length - 1]}px)`, async () => {
     const bad = [];
@@ -46,6 +48,17 @@ for (const name of PAGES) {
     expect(bad.length === 0, bad.join(' ; '));
   });
 }
+
+await check('index: no sideways scroll at every 10px from 320 to 1300', async () => {
+  const bad = [];
+  for (let width = 320; width <= 1300; width += 10) {
+    const h = await open(browser, 'index', { width });
+    const who = await overflowOffenders(h.page);
+    await close(h);
+    if (who.length) bad.push(`${width}px: ${who[0]}`);
+  }
+  expect(bad.length === 0, bad.slice(0, 6).join(' ; '));
+});
 
 // ---------------------------------------------------------------------------
 group('Header at desktop width');
@@ -174,6 +187,24 @@ await check('phone: closes from its ✕, the scrim and Escape, and returns focus
   expect(await offscreen(), 'Escape did not close it');
   expect((await h.page.getAttribute('.nav-toggle', 'aria-expanded')) === 'false', 'aria-expanded not reset');
   await close(h);
+});
+
+await check('phone: the drawer\'s main button stays on screen while a long plugin list scrolls behind it', async () => {
+  for (const [width, height] of [[393, 659], [320, 568]]) {
+    const h = await open(browser, 'index', { width, height });
+    await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
+    await h.page.tap('.has-mega > .nav-link'); await h.page.waitForTimeout(250);
+    const r = await h.page.evaluate(() => {
+      const panel = document.getElementById('site-drawer');
+      const btn = panel.querySelector('.site-header__actions > .btn').getBoundingClientRect();
+      const close = panel.querySelector('.drawer-close').getBoundingClientRect();
+      return { scrolls: panel.scrollHeight > panel.clientHeight + 40, top: btn.top, bottom: btn.bottom, vh: window.innerHeight, closeH: close.height };
+    });
+    await close(h);
+    expect(r.scrolls, `${width}x${height}: the list is not long enough to test`);
+    expect(r.top > 0 && r.bottom <= r.vh, `${width}x${height}: the button is at ${Math.round(r.top)}-${Math.round(r.bottom)} of ${r.vh}`);
+    expect(r.closeH >= 39, `${width}x${height}: the close button is squeezed to ${Math.round(r.closeH)}px`);
+  }
 });
 
 await check('phone: keyboard focus stays inside the open drawer', async () => {
