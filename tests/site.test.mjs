@@ -257,6 +257,39 @@ await check('phone: scrolled to its end, a long plugin list leaves its last row 
   }
 });
 
+await check('phone: a drawer row reached with Tab is never under the pinned button or the close button', async () => {
+  for (const [width, height] of [[393, 659], [320, 568]]) {
+    const h = await open(browser, 'index', { width, height });
+    await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
+    await h.page.tap('.has-mega > .nav-link'); await h.page.waitForTimeout(250);
+    await h.page.focus('.drawer-close');
+    const hidden = [];
+    for (const key of ['Tab', 'Shift+Tab']) {
+      for (let i = 0; i < 26; i++) {
+        await h.page.keyboard.press(key);
+        await h.page.waitForTimeout(40);
+        const r = await h.page.evaluate(() => {
+          const panel = document.getElementById('site-drawer');
+          const el = document.activeElement;
+          const btn = panel.querySelector('.site-header__actions > .btn');
+          const x = panel.querySelector('.drawer-close');
+          if (!panel.contains(el) || el === btn || el === x) return null;
+          const q = el.getBoundingClientRect();
+          const b = btn.getBoundingClientRect();
+          let stripTop = b.top;
+          for (const m of getComputedStyle(btn).boxShadow.matchAll(/(-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px/g)) stripTop = Math.min(stripTop, b.top + Number(m[2]) - Number(m[4]));
+          const c = x.getBoundingClientRect();
+          const under = q.bottom > stripTop + 1 ? 'the pinned button' : q.top < c.bottom - 1 && q.right > c.left + 1 ? 'the close button' : q.top < -1 || q.bottom > innerHeight + 1 ? 'the edge of the screen' : '';
+          return under ? `"${el.textContent.trim().slice(0, 24)}" under ${under}` : '';
+        });
+        if (r) hidden.push(r);
+      }
+    }
+    await close(h);
+    expect(hidden.length === 0, `${width}x${height}: ${[...new Set(hidden)].slice(0, 4).join('; ')}`);
+  }
+});
+
 await check('phone: keyboard focus stays inside the open drawer', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);

@@ -515,6 +515,9 @@
     padding: 18px 20px 20px;
     overflow-y: auto;
     overscroll-behavior: contain;
+    /* A row brought into view by the keyboard stops below the close button
+       that is pinned over the top of the list, not underneath it. */
+    scroll-padding-top: 62px;
     background: var(--surface);
     /* Closed, it is parked off-screen and hidden outright: off-screen alone
        would leave its links in the tab order and its shadow lying along the
@@ -713,9 +716,11 @@
      rule across the sheet shows where the list goes under. (The rule is a
      line of its own: drawn as a third shadow it would follow the button's
      rounded corners.) The last row keeps clear of that strip, so the end of
-     the list is not left half under it. Not on a phone held sideways, where
-     the pinned strip would take a third of the screen. */
+     the list is not left half under it, and so does a row the keyboard
+     brings into view. Not on a phone held sideways, where the pinned strip
+     would take a third of the screen. */
   @media (min-height: 501px) {
+    .site-header__panel:has(.has-mega.is-open) { scroll-padding-bottom: 96px; }
     .site-header__panel:has(.has-mega.is-open) .has-account { margin-bottom: 30px; }
 
     .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn {
