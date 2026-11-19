@@ -709,14 +709,29 @@
 
   /* With the plugin list open the sheet is several screens long, so the
      action is pinned to its foot and the list scrolls behind it. The flat
-     shadows are its backing: the sheet's own colour above and below, with a
-     hairline on top that shows where the list goes under. Not on a phone
-     held sideways, where the pinned strip would take a third of the screen. */
+     shadows are its backing, in the sheet's own colour above and below; the
+     rule across the sheet shows where the list goes under. (The rule is a
+     line of its own: drawn as a third shadow it would follow the button's
+     rounded corners.) The last row keeps clear of that strip, so the end of
+     the list is not left half under it. Not on a phone held sideways, where
+     the pinned strip would take a third of the screen. */
   @media (min-height: 501px) {
+    .site-header__panel:has(.has-mega.is-open) .has-account { margin-bottom: 30px; }
+
     .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn {
       position: sticky;
       bottom: 0;
-      box-shadow: 0 -14px 0 14px var(--surface), 0 -15px 0 14px var(--line), 0 28px 0 14px var(--surface);
+      box-shadow: 0 -10px 0 10px var(--surface), 0 28px 0 14px var(--surface);
+    }
+
+    .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn::before {
+      content: "";
+      position: absolute;
+      right: -20px;
+      bottom: calc(100% + 20px);
+      left: -20px;
+      height: 1px;
+      background: var(--line);
     }
 
     .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn:focus-visible {

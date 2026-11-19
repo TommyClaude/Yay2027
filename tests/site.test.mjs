@@ -230,6 +230,33 @@ await check('phone: the drawer\'s main button and close button stay on screen wh
   }
 });
 
+await check('phone: scrolled to its end, a long plugin list leaves its last row clear of the pinned button and the strip behind it', async () => {
+  for (const [width, height] of [[393, 659], [320, 568], [768, 1024]]) {
+    const h = await open(browser, 'index', { width, height });
+    await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
+    await h.page.tap('.has-mega > .nav-link'); await h.page.waitForTimeout(250);
+    await h.page.evaluate(() => { const panel = document.getElementById('site-drawer'); panel.scrollTop = panel.scrollHeight; });
+    await h.page.waitForTimeout(100);
+    const r = await h.page.evaluate(() => {
+      const panel = document.getElementById('site-drawer');
+      const btn = panel.querySelector('.site-header__actions > .btn');
+      const b = btn.getBoundingClientRect();
+      // The strip behind the pinned button is drawn with flat shadows and a
+      // rule above them; it starts at whichever of those reaches highest.
+      let stripTop = b.top;
+      for (const m of getComputedStyle(btn).boxShadow.matchAll(/(-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px/g)) stripTop = Math.min(stripTop, b.top + Number(m[2]) - Number(m[4]));
+      const rule = getComputedStyle(btn, '::before');
+      if (rule.content !== 'none') stripTop = Math.min(stripTop, b.bottom - parseFloat(rule.bottom) - parseFloat(rule.height));
+      const last = [...panel.querySelectorAll('.account-menu .menu-item')].pop();
+      return { pinned: getComputedStyle(btn).position === 'sticky', stripTop, lastBottom: last.getBoundingClientRect().bottom, label: last.textContent.trim(), spill: panel.scrollWidth - panel.clientWidth };
+    });
+    await close(h);
+    expect(r.pinned, `${width}x${height}: the button is not pinned with the plugin list open`);
+    expect(r.lastBottom <= r.stripTop + 0.5, `${width}x${height}: "${r.label}" ends at ${Math.round(r.lastBottom)}, under the strip that starts at ${Math.round(r.stripTop)}`);
+    expect(r.spill <= 0, `${width}x${height}: the drawer scrolls sideways by ${r.spill}px`);
+  }
+});
+
 await check('phone: keyboard focus stays inside the open drawer', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
