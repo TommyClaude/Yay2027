@@ -1,6 +1,6 @@
 # YayCommerce website
 
-Marketing and account site for the YayCommerce WooCommerce plugin suite —
+Marketing and account site for the YayCommerce WooCommerce plugin suite:
 ten pages, built as plain static HTML, CSS and JavaScript.
 
 **Live:** https://tommyclaude.github.io/Yay2027/
@@ -19,23 +19,25 @@ ten pages, built as plain static HTML, CSS and JavaScript.
 ## Working on it
 
 ```bash
-node build.mjs      # rebuild docs/ from src/ — Node 18+, no dependencies
+node build.mjs      # rebuild docs/ from src/ (Node 18+, no dependencies)
 ```
 
-Edit `src/`, never `docs/` — the latter is generated, and GitHub Pages serves it
+Edit `src/`, never `docs/`: the latter is generated, and GitHub Pages serves it
 straight from `main`, so pushing a rebuild publishes the site.
 
 ```
 src/pages/        one file per page: front matter + the <main> content
-src/partials/     shared chrome — head, promo bar, header, footer
+src/partials/     shared chrome: head, promo bar, header, footer
 src/assets/       css, js, images
 build.mjs         stamps the chrome around each page
 docs/             generated output (published)
+tests/            browser checks and a visual regression script
 ```
 
 Layout is desktop-first: the page sheets describe the 1280px design, and
-`src/assets/css/responsive.css` — loaded last — adapts it down to 320px in four
-steps: 1180, 1024 (where the nav becomes a drawer), 860 and 620.
+`src/assets/css/responsive.css`, loaded last, adapts it down to 320px in four
+steps: 1180, 1024 (where the nav becomes a drawer), 860 and 620. The Home hero
+additionally adapts to the width of its own column.
 
 To preview locally, serve the folder rather than opening the files directly:
 
@@ -43,8 +45,24 @@ To preview locally, serve the folder rather than opening the files directly:
 npx http-server docs -p 8080
 ```
 
+## Checking a change
+
+```bash
+npm install         # once: Playwright, the only dev dependency
+npm test            # rebuilds, then runs tests/site.test.mjs in headless Chromium
+```
+
+For a change to shared CSS, capture every page before and after and compare:
+
+```bash
+node tests/visual.mjs snap /tmp/before
+# ...edit, node build.mjs...
+node tests/visual.mjs snap /tmp/after
+node tests/visual.mjs diff /tmp/before /tmp/after
+```
+
 ## Notes
 
 `IMPLEMENTATION.md` covers what was built and why: the design decisions carried
-over from the design session, where this departs from the prototypes, and the
-known limits (desktop-only widths, remote image hosts, placeholder sample data).
+over from the design session, where this departs from the prototypes, how the
+layout behaves below the design width, and the known limits.

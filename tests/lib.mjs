@@ -12,12 +12,12 @@ export const SITE = process.env.SITE_DIR || path.join(ROOT, 'docs');
 
 export const PAGES = ['index', 'shop', 'yaypricing', 'all-access', 'checkout', 'thank-you', 'account', 'docs', 'support', 'contact'];
 
-// Playwright is resolved from the project if installed there, otherwise from
-// PLAYWRIGHT_PATH (a global install's index.js).
+// Playwright comes from the project (npm install), or from an install
+// elsewhere named by PLAYWRIGHT_PATH (the path of its index.js).
 async function loadPlaywright() {
-  try { return await import('playwright'); } catch { /* fall through */ }
-  const fallback = process.env.PLAYWRIGHT_PATH || '/opt/node22/lib/node_modules/playwright/index.js';
-  return import(fallback);
+  try { return await import('playwright'); } catch { /* not installed here */ }
+  if (process.env.PLAYWRIGHT_PATH) return import(process.env.PLAYWRIGHT_PATH);
+  throw new Error('Playwright is not installed. Run "npm install", or set PLAYWRIGHT_PATH to an existing install.');
 }
 const pw = await loadPlaywright();
 const chromium = pw.chromium || pw.default.chromium;
