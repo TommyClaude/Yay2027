@@ -1310,11 +1310,10 @@
   .site-footer { padding-top: 48px; }
 
   /* Footer bottom: the language picker and the social icons take a row of
-     their own, picker on the left gutter, icons on the right. */
-  .site-footer__end {
-    flex: 1 0 100%;
-    flex-wrap: wrap;
-  }
+     their own, picker on the left gutter, icons on the right. The row never
+     wraps: when it is short of room the icons give up width instead. */
+  .site-footer__end { flex: 1 0 100%; }
+  .f-lang { flex-shrink: 0; }
 
   .site-footer__legal { text-wrap: pretty; }
   /* Four link groups two-up halve the footer's height; the signup block
@@ -1345,14 +1344,21 @@
     margin-block: -3px;
   }
 
-  /* Social icons: 40px targets inside the row's existing height. */
+  /* Social icons: 40px targets inside the row's existing height. They may
+     narrow to 30px (still 40px tall) rather than push the row onto two
+     lines, which only the smallest phones need. */
   .f-social {
-    width: 40px;
+    flex: 0 1 40px;
+    width: auto;
+    min-width: 30px;
     height: 40px;
   }
 
   .site-footer__social {
+    flex: 1 1 auto;
+    justify-content: flex-end;
     gap: 0;
+    min-width: 0;
     margin-block: -5px;
     margin-right: -11px;
   }
@@ -1781,8 +1787,8 @@
     margin-left: -8px;
   }
 
-  /* Footer: without its globe the language picker shares a row with the
-     social icons down to 352px. */
+  /* Footer: without its globe the language picker leaves the social icons
+     their full 40px each down to 352px. */
   .f-lang > svg { display: none; }
 }
 
@@ -1798,14 +1804,10 @@
 }
 
 @media (max-width: 351px) {
-  /* Footer: the icons no longer fit beside the picker; on their own row
-     they start at the left gutter like everything above them. */
-  .site-footer__end { justify-content: flex-start; }
-
-  .site-footer__social {
-    margin-left: -11px;
-    margin-right: 0;
-  }
+  /* Footer: here the icons are narrower than 40px (39px at 351px down to
+     33px at 320px). The right margin is the mean of what those widths need
+     to keep the last glyph on the gutter line. */
+  .site-footer__social { margin-right: -9.5px; }
 }
 
 @media (max-width: 340px) {

@@ -675,18 +675,32 @@ await check('phone: nothing in the storefront illustration covers anything else'
   }
 });
 
-await check('footer: the language picker and the social icons share a row from 352px up, and nothing in the bottom block wraps inside itself', async () => {
-  for (const width of [352, 360, 375, 393, 430, 600, 667, 768, 1024]) {
+await check('footer: the language picker and the social icons share a row at every width, the icons stay big enough to tap, and nothing in the bottom block wraps inside itself', async () => {
+  for (const width of [320, 330, 340, 344, 351, 352, 360, 375, 393, 430, 600, 667, 768, 1024]) {
     const h = await open(browser, 'index', { width, height: 852 });
     const r = await h.page.evaluate(() => {
       const lang = document.querySelector('.f-lang').getBoundingClientRect();
       const social = document.querySelector('.site-footer__social').getBoundingClientRect();
       const spans = [...document.querySelectorAll('.site-footer__bottom > span')].map((el) => el.getBoundingClientRect().height);
-      return { sameRow: Math.abs((lang.top + lang.height / 2) - (social.top + social.height / 2)) < 12, tallest: Math.max(...spans) };
+      const targets = [...document.querySelectorAll('.f-social')].map((el) => el.getBoundingClientRect());
+      const glyph = document.querySelector('.f-social:last-child').firstElementChild.getBoundingClientRect();
+      return {
+        sameRow: Math.abs((lang.top + lang.height / 2) - (social.top + social.height / 2)) < 12,
+        tallest: Math.max(...spans),
+        narrowest: Math.min(...targets.map((t) => t.width)),
+        shortest: Math.min(...targets.map((t) => t.height)),
+        apart: targets[0].left - lang.right,
+        edge: document.documentElement.clientWidth - glyph.right,
+      };
     });
     await close(h);
     expect(r.sameRow, `${width}px: the language picker and the social icons are on different rows`);
     expect(r.tallest < 26, `${width}px: a line of the bottom block wraps (${Math.round(r.tallest)}px tall)`);
+    expect(r.apart >= 12, `${width}px: the icons are ${Math.round(r.apart)}px from the picker`);
+    if (width <= 620) {
+      expect(r.narrowest >= 30 && r.shortest >= 39.5, `${width}px: a social icon's target is ${Math.round(r.narrowest)}x${Math.round(r.shortest)}px`);
+      expect(Math.abs(r.edge - 16.5) <= 2.5, `${width}px: the last icon ends ${r.edge.toFixed(1)}px from the screen edge, not on the 16px gutter`);
+    }
   }
 });
 

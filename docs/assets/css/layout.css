@@ -278,8 +278,16 @@
 }
 
 .has-mega:not(.is-open) .mega { display: none; }
-.has-mega.is-open .nav-link { background: var(--surface-hover); }
 .has-mega.is-open .nav-link__chevron { transform: rotate(180deg); }
+
+/* In the design a trigger is lit by the pointer resting on it and goes plain
+   once the pointer moves down into its panel. An open menu lights its own
+   trigger only where no pointer hovers (touch) and in the drawer, where it
+   marks the expanded row. */
+@media (hover: none), (max-width: 1024px) {
+  .has-mega.is-open .nav-link,
+  .has-account.is-open .account-chip { background: var(--surface-hover); }
+}
 
 .mega__grid {
   display: grid;
@@ -408,7 +416,6 @@
 
 .account-chip:hover { background: var(--surface-hover); }
 
-.has-account.is-open .account-chip { background: var(--surface-hover); }
 .has-account.is-open .account-chip svg { transform: rotate(180deg); }
 
 .account-chip svg { transition: transform .12s ease; }

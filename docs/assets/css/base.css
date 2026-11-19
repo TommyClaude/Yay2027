@@ -180,10 +180,11 @@ a {
   text-decoration: none;
 }
 
+/* The underline sits where the browser puts it, as in the design: an offset
+   of its own drew it a pixel lower. */
 a:hover {
   color: var(--accent-hover);
   text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 a.is-plain:hover,

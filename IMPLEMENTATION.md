@@ -159,6 +159,11 @@ rather than styling:
 9. **Focus rings on dark and yellow.** The design system's blue ring is 2.8:1
    on the dark promo bar; there it is white, and the skip link carries a white
    edge inside its ring.
+10. **Blog thumbnails and portraits are `<img>` elements**, loaded as they
+    are scrolled to and with their space reserved, where the prototype paints
+    them as backgrounds. A background is snapped to whole pixels and an image
+    is not, so a thumbnail can sit half a pixel from the design's. Nothing
+    shows at normal size; text and boxes are identical.
 
 ## Below the design width
 
