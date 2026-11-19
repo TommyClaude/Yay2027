@@ -138,26 +138,33 @@ loaded after the page sheets, which keeps the desktop rendering identical to
 what was checked against the design and puts the whole adaptation in one
 readable file.
 
-Steps by screen width, each named for what actually breaks there: **1200px**
-(the header cannot hold its search field), **1180px** (the 1200px column stops
+Steps by screen width, each named for what actually breaks there: **1279px**
+(just under the drawn width: Home's gutter eases in instead of jumping, and
+rows that only just fitted get slack), **1180px** (the 1200px column stops
 clearing its gutters), **1024px** (the horizontal nav runs out of room and
 becomes a drawer), **860px** (side-by-side layouts stack), **620px** (phone:
 one column, smaller type, thumb-sized controls) and **380px** (small phones,
-where two tight single lines take a safer form).
+where two tight single lines take a safer form). One guard holds at every
+width: when the header bar is short of room its search field narrows (and
+goes at 1200px); a nav label never breaks onto two lines.
 
-Three pieces of Home answer to their own width instead of the screen's, with
+Four pieces of Home answer to their own width instead of the screen's, with
 container queries, because the screen does not say how much room they have:
 the same column is 540px wide beside the copy on a laptop and 330px wide under
 it on a phone.
 
-- **The proof badge** drops "Trusted by" when its column can no longer hold
-  the sentence on one line.
+- **The hero copy** drops "Trusted by" from the proof badge when its column
+  can no longer hold the sentence on one line, and shows two guarantees
+  instead of three when three would leave one alone on a second row.
 - **The storefront illustration** has two drawings. Above 480px it is the one
   from the design. Below that it is the same composition made smaller: photo
   beside details, each plugin label hanging off the right edge next to the
-  thing it does, the result card off the bottom left.
-- **A testimonial card** narrower than 400px moves its "Verified customer"
-  badge up opposite the stars, so the name and place never wrap.
+  thing it does, the result card off the bottom left. A browser without
+  container queries hides it where only the small drawing would fit.
+- **A testimonial card** too narrow for its name row moves its "Verified
+  customer" badge up opposite the stars, so the name and place never wrap.
+- **A case-study card** too narrow for name and link side by side puts the
+  link under the name.
 
 On phones:
 
@@ -168,14 +175,21 @@ On phones:
 - headings are balanced, so where they break does not depend on a few pixels
   of difference between one phone's font and another's;
 - section paddings are half the desktop values throughout;
-- in the drawer the one action, "Get All Access", stays pinned to the foot of
-  the sheet while the list scrolls behind it;
-- text links, footer rows and the header buttons have thumb-sized hit areas,
-  and footer fields use 16px text so Safari does not zoom the page on focus.
+- in the drawer the close button stays pinned to the top, and with the plugin
+  list open (several screens long) "Get All Access" is pinned to the foot
+  while the list scrolls behind it;
+- text links, footer rows and the header buttons have thumb-sized hit areas
+  (on touch tablets too), and footer fields use 16px text so Safari does not
+  zoom the page on focus.
 
 On tablets a group of three cards that would leave one alone on its row gives
-that card the full row, and category cards go two-up wherever the nav is a
-drawer.
+that card the full row, category cards go two-up until four fit with their
+names on one line, and the footer puts its four link groups on one row with
+the signup across the row beneath.
+
+In running copy the hyphen that stands in for a dash is tied to the word
+before it with a no-break space, so it can end a line but never start one,
+where it would read as a list bullet.
 
 **Home is the page this has been worked through in full.** The other nine are
 responsive (no sideways scrolling, checked every 10px from 1300px down to
@@ -205,7 +219,10 @@ Both need Playwright (`npm install` picks it up from `package.json`). They
 drive the built `docs/` and never touch the network. `site.test.mjs` covers
 every page for sideways scroll on either side of every breakpoint (and Home
 every 10px), the header menus by mouse, keyboard and touch, the drawer, the
-countdown, the coupon link, and the Home layout rules above. `visual.mjs` is for changes to shared CSS: a page you did
+countdown, the coupon link, and the Home layout rules above, including a
+sweep of Home every 5px from 621px to 1300px that looks for wrapped labels,
+covered text and orphaned headings, run once more with scrollbars that take
+up width as on Windows. `visual.mjs` is for changes to shared CSS: a page you did
 not mean to touch should come back identical.
 
 ## Known limits

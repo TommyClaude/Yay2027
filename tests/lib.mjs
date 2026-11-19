@@ -22,8 +22,15 @@ async function loadPlaywright() {
 const pw = await loadPlaywright();
 const chromium = pw.chromium || pw.default.chromium;
 
-export async function launch() {
-  return chromium.launch({ args: ['--font-render-hinting=none', '--disable-lcd-text'] });
+/**
+ * Start the browser. `classicScrollbars` keeps scrollbars that take up layout
+ * width (as on Windows), so a 1280px window lays out about 15px narrower.
+ */
+export async function launch({ classicScrollbars = false } = {}) {
+  return chromium.launch({
+    args: ['--font-render-hinting=none', '--disable-lcd-text'],
+    ...(classicScrollbars ? { ignoreDefaultArgs: ['--hide-scrollbars'] } : {}),
+  });
 }
 
 const PLACEHOLDER = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200"><rect width="100%" height="100%" fill="#e9eaec"/></svg>');

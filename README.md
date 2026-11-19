@@ -35,9 +35,10 @@ tests/            browser checks and a visual regression script
 ```
 
 Layout is desktop-first: the page sheets describe the 1280px design, and
-`src/assets/css/responsive.css`, loaded last, adapts it down to 320px in four
-steps: 1180, 1024 (where the nav becomes a drawer), 860 and 620. The Home hero
-additionally adapts to the width of its own column.
+`src/assets/css/responsive.css`, loaded last, adapts it down to 320px in steps
+at 1180, 1024 (where the nav becomes a drawer), 860 and 620, with smaller
+adjustments just under the design width and on small phones. A few Home
+components additionally adapt to the width of their own column.
 
 To preview locally, serve the folder rather than opening the files directly:
 

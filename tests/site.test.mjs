@@ -189,21 +189,44 @@ await check('phone: closes from its ✕, the scrim and Escape, and returns focus
   await close(h);
 });
 
-await check('phone: the drawer\'s main button stays on screen while a long plugin list scrolls behind it', async () => {
+await check('phone: with the plugin list closed, every drawer row is on screen or reachable by scrolling, none behind the button', async () => {
+  for (const [width, height] of [[393, 659], [375, 629], [360, 640], [393, 852]]) {
+    const h = await open(browser, 'index', { width, height });
+    await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
+    const r = await h.page.evaluate(() => {
+      const panel = document.getElementById('site-drawer');
+      const btn = panel.querySelector('.site-header__actions > .btn');
+      const b = btn.getBoundingClientRect();
+      const rows = [...panel.querySelectorAll('.site-nav > .nav-link, .has-mega > .nav-link, .account-menu .menu-item')];
+      // a row is "behind the button" if the button is painted over the row's own box
+      const covered = rows.filter((el) => { const q = el.getBoundingClientRect(); return q.bottom > b.top + 1 && q.top < b.bottom - 1; }).map((el) => el.textContent.trim());
+      return { covered, pinned: getComputedStyle(btn).position === 'sticky' };
+    });
+    await close(h);
+    expect(!r.pinned, `${width}x${height}: the button is pinned although the list is short`);
+    expect(r.covered.length === 0, `${width}x${height}: hidden behind the button: ${r.covered.join(', ')}`);
+  }
+});
+
+await check('phone: the drawer\'s main button and close button stay on screen while a long plugin list scrolls behind them', async () => {
   for (const [width, height] of [[393, 659], [320, 568]]) {
     const h = await open(browser, 'index', { width, height });
     await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
     await h.page.tap('.has-mega > .nav-link'); await h.page.waitForTimeout(250);
+    await h.page.evaluate(() => { document.getElementById('site-drawer').scrollTop = 300; });
+    await h.page.waitForTimeout(100);
     const r = await h.page.evaluate(() => {
       const panel = document.getElementById('site-drawer');
       const btn = panel.querySelector('.site-header__actions > .btn').getBoundingClientRect();
       const close = panel.querySelector('.drawer-close').getBoundingClientRect();
-      return { scrolls: panel.scrollHeight > panel.clientHeight + 40, top: btn.top, bottom: btn.bottom, vh: window.innerHeight, closeH: close.height };
+      const hit = document.elementFromPoint(close.left + close.width / 2, close.top + close.height / 2);
+      return { scrolls: panel.scrollHeight > panel.clientHeight + 40, top: btn.top, bottom: btn.bottom, vh: window.innerHeight, closeH: close.height, closeTop: close.top, closeHit: !!(hit && hit.closest('.drawer-close')) };
     });
     await close(h);
     expect(r.scrolls, `${width}x${height}: the list is not long enough to test`);
     expect(r.top > 0 && r.bottom <= r.vh, `${width}x${height}: the button is at ${Math.round(r.top)}-${Math.round(r.bottom)} of ${r.vh}`);
     expect(r.closeH >= 39, `${width}x${height}: the close button is squeezed to ${Math.round(r.closeH)}px`);
+    expect(r.closeTop >= 0 && r.closeHit, `${width}x${height}: after scrolling, the close button is at y=${Math.round(r.closeTop)} and ${r.closeHit ? 'reachable' : 'not reachable'}`);
   }
 });
 
@@ -314,7 +337,7 @@ await check('the promo link carries its coupon, and every page on the way passes
 });
 
 await check('phone: the promo bar is one line with the countdown, and all of it is the link', async () => {
-  for (const width of [320, 360, 393, 430]) {
+  for (const width of [320, 344, 352, 360, 375, 393, 430, 620]) {
     const h = await open(browser, 'index', { width, height: 852 });
     const r = await h.page.evaluate(() => {
       const bar = document.querySelector('.promo').getBoundingClientRect();
@@ -373,6 +396,31 @@ await check('copy uses plain hyphens, never em dashes (the design rule)', async 
   });
   await close(h);
   expect(hits.length === 0, `${hits.length} found: ${hits.slice(0, 4).join(' | ')}`);
+});
+
+await check('a hyphen that stands in for a dash never starts a line', async () => {
+  const bad = [];
+  for (const width of [320, 327, 360, 393, 430, 462, 540, 768, 880, 1040, 1120, 1185, 1280, 1440]) {
+    const h = await open(browser, 'index', { width, height: 900 });
+    const hits = await h.page.evaluate(() => {
+      const out = [];
+      const walker = document.createTreeWalker(document.querySelector('main'), NodeFilter.SHOW_TEXT);
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+        const text = n.textContent;
+        for (let i = text.indexOf('- '); i !== -1; i = text.indexOf('- ', i + 1)) {
+          if (i === 0 || !/\s/.test(text[i - 1])) continue;          // only a free-standing hyphen
+          const hyphen = document.createRange(); hyphen.setStart(n, i); hyphen.setEnd(n, i + 1);
+          const before = document.createRange(); before.setStart(n, Math.max(0, i - 2)); before.setEnd(n, i - 1);
+          const a = hyphen.getBoundingClientRect(), b = before.getBoundingClientRect();
+          if (a.width && b.width && a.top > b.top + 4) out.push(text.slice(Math.max(0, i - 14), i + 14).trim());
+        }
+      }
+      return out;
+    });
+    await close(h);
+    if (hits.length) bad.push(`${width}px: "${hits[0]}"`);
+  }
+  expect(bad.length === 0, bad.join(' ; '));
 });
 
 await check('every image on the page is served by the site itself', async () => {
@@ -441,6 +489,21 @@ await check('phone: nothing in the storefront illustration covers anything else'
   }
 });
 
+await check('footer: the language picker and the social icons share a row from 352px up, and nothing in the bottom block wraps inside itself', async () => {
+  for (const width of [352, 360, 375, 393, 430, 600, 667, 768, 1024]) {
+    const h = await open(browser, 'index', { width, height: 852 });
+    const r = await h.page.evaluate(() => {
+      const lang = document.querySelector('.f-lang').getBoundingClientRect();
+      const social = document.querySelector('.site-footer__social').getBoundingClientRect();
+      const spans = [...document.querySelectorAll('.site-footer__bottom > span')].map((el) => el.getBoundingClientRect().height);
+      return { sameRow: Math.abs((lang.top + lang.height / 2) - (social.top + social.height / 2)) < 12, tallest: Math.max(...spans) };
+    });
+    await close(h);
+    expect(r.sameRow, `${width}px: the language picker and the social icons are on different rows`);
+    expect(r.tallest < 26, `${width}px: a line of the bottom block wraps (${Math.round(r.tallest)}px tall)`);
+  }
+});
+
 await check('phone: footer link groups sit two-up and the signup spans the row', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   const r = await h.page.evaluate(() => {
@@ -506,6 +569,64 @@ await check('between phone and desktop the hero rows wrap as whole items, never 
   expect(bad.length === 0, bad.join(' ; '));
 });
 
+// One page resized through every 5px between the phone step and the design
+// width, with the same questions asked at each: this is where layouts that
+// "just fit" at the usual test widths come apart.
+const wrapSweep = () => {
+  const out = [];
+  const tall = (el, limit) => el && el.getBoundingClientRect().height > limit;
+  const lines = (el) => { const r = document.createRange(); r.selectNodeContents(el); return new Set([...r.getClientRects()].map((q) => Math.round(q.top / 4))).size; };
+  for (const el of document.querySelectorAll('.site-nav > .nav-link, .has-mega > .nav-link')) if (el.getBoundingClientRect().width && tall(el, 50)) out.push(`nav "${el.textContent.trim()}" wraps`);
+  for (const card of document.querySelectorAll('.tstm-card')) {
+    const badge = card.querySelector('.badge'), star = card.querySelector('.stars svg:last-child');
+    if (tall(badge, 26)) out.push('testimonial badge wraps');
+    if (tall(card.querySelector('.tstm-card__role'), 24)) out.push('testimonial place wraps');
+    const b = badge.getBoundingClientRect(), s = star.getBoundingClientRect();
+    if (Math.min(b.right, s.right) - Math.max(b.left, s.left) > 0 && Math.min(b.bottom, s.bottom) - Math.max(b.top, s.top) > 0) out.push('testimonial badge covers a star');
+  }
+  for (const foot of document.querySelectorAll('.case-card__foot')) for (const el of foot.children) if (lines(el) > 1) out.push(`case-study "${el.textContent.trim().slice(0, 16)}" wraps`);
+  for (const el of document.querySelectorAll('.site-footer__bottom > span')) if (tall(el, 26)) out.push(`footer "${el.textContent.trim().slice(0, 14)}" wraps`);
+  const btns = [...document.querySelectorAll('.hero__actions .btn')].map((el) => el.getBoundingClientRect());
+  if (window.innerWidth > 620 && Math.abs(btns[0].top - btns[1].top) > 2) out.push('hero buttons on two rows');
+  const items = [...document.querySelectorAll('.trust-row .trust-item')].filter((el) => el.getBoundingClientRect().width);
+  if (window.innerWidth > 620 && new Set(items.map((el) => Math.round(el.getBoundingClientRect().top))).size > 1) out.push('hero guarantees on two rows');
+  const trust = [...document.querySelector('.cta-band__trust').children].filter((el) => el.getBoundingClientRect().width);
+  for (const el of trust) {
+    if (!el.classList.contains('cta-band__sep')) continue;
+    const q = el.getBoundingClientRect();
+    const row = trust.filter((o) => Math.abs(o.getBoundingClientRect().top - q.top) < 6);
+    if (row[0] === el || row[row.length - 1] === el) out.push('closing-band separator at a row edge');
+  }
+  const h1 = document.querySelector('.h-hero'); const range = document.createRange(); range.selectNodeContents(h1);
+  const rects = [...range.getClientRects()]; const lastTop = Math.max(...rects.map((q) => q.top));
+  const lastWidth = rects.filter((q) => Math.abs(q.top - lastTop) < 4).reduce((w, q) => w + q.width, 0);
+  if (rects.some((q) => Math.abs(q.top - lastTop) > 4) && lastWidth < 0.3 * h1.getBoundingClientRect().width) out.push('headline ends on a short last line');
+  return [...new Set(out)];
+};
+
+async function sweepHome(browserForSweep, from, to, step) {
+  const h = await open(browserForSweep, 'index', { width: from, height: 900, touch: false });
+  const found = {};
+  for (let width = from; width <= to; width += step) {
+    await h.page.setViewportSize({ width, height: 900 });
+    for (const problem of await h.page.evaluate(wrapSweep)) (found[problem] ||= []).push(width);
+  }
+  await h.context.close();
+  return Object.entries(found).map(([problem, widths]) => `${problem} at ${widths[0]}${widths.length > 1 ? `-${widths[widths.length - 1]}` : ''}px`);
+}
+
+await check('between phone and desktop, every 5px: no nav label, badge, name, footer line or button row wraps, and no heading is orphaned', async () => {
+  const problems = await sweepHome(browser, 621, 1300, 5);
+  expect(problems.length === 0, problems.join(' ; '));
+});
+
+await check('the same sweep with scrollbars that take up width, as on Windows', async () => {
+  const windows = await launch({ classicScrollbars: true });
+  const problems = await sweepHome(windows, 621, 1300, 5);
+  await windows.close();
+  expect(problems.length === 0, problems.join(' ; '));
+});
+
 await check('tablet: no card is left alone beside an empty slot', async () => {
   const h = await open(browser, 'index', { width: 768, height: 1024 });
   const r = await h.page.evaluate(() => ['.case-grid', '.tstm-grid', '.blog-grid'].filter((sel) => {
@@ -519,25 +640,27 @@ await check('tablet: no card is left alone beside an empty slot', async () => {
   expect(r.length === 0, `a row is not filled in ${r.join(', ')}`);
 });
 
-await check('phone: the closing band keeps its icons between the gutters and its proof lines whole', async () => {
-  for (const width of [320, 360, 375, 393, 430]) {
+await check('the closing band keeps its icons between the gutters and never ends a proof line on a separator', async () => {
+  for (const width of [320, 344, 352, 359, 360, 375, 393, 430, 621, 640, 685, 760]) {
     const h = await open(browser, 'index', { width, height: 852 });
     const r = await h.page.evaluate(() => {
       const vw = document.documentElement.clientWidth;
       const tiles = [...document.querySelectorAll('.cta-band__icons .ptile')].map((t) => t.getBoundingClientRect());
       const trust = document.querySelector('.cta-band__trust');
       const items = [...trust.children].filter((el) => el.getBoundingClientRect().width > 0);
+      const endsRow = (el) => { const q = el.getBoundingClientRect(); return !items.some((o) => o !== el && Math.abs(o.getBoundingClientRect().top - q.top) < 6 && o.getBoundingClientRect().left > q.left); };
       return {
         cut: tiles.filter((b) => b.left < 8 || b.right > vw - 8).length,
-        trustH: trust.getBoundingClientRect().height,
-        dots: items.filter((el) => el.classList.contains('cta-band__sep')).length,
+        size: getComputedStyle(trust).fontSize,
+        strandedDots: items.filter((el) => el.classList.contains('cta-band__sep') && endsRow(el)).length,
         wrapped: items.filter((el) => el.getBoundingClientRect().height > 26).length,
       };
     });
     await close(h);
     expect(r.cut === 0, `${width}px: ${r.cut} icons run into the screen edge`);
-    if (width >= 380) expect(r.trustH < 26, `${width}px: the proof line is ${Math.round(r.trustH)}px tall, so it wrapped`);
-    else expect(r.dots === 0 && r.wrapped === 0, `${width}px: stacked proof lines still show ${r.dots} separators, and ${r.wrapped} of them wrap`);
+    expect(r.size === '13px', `${width}px: the proof line is set at ${r.size}, not the 13px it was drawn at`);
+    expect(r.strandedDots === 0, `${width}px: a separator dot is left at the end of a row`);
+    expect(r.wrapped === 0, `${width}px: ${r.wrapped} of the proof items wrap inside themselves`);
   }
 });
 

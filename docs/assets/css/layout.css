@@ -674,8 +674,16 @@
   filter: invert(.35);
 }
 
-.f-lang {
+/* The language picker and the social icons are one group at the end of the
+   row, so that when the row has to wrap they move together. */
+.site-footer__end {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   margin-left: auto;
+}
+
+.f-lang {
   display: flex;
   align-items: center;
   gap: 8px;

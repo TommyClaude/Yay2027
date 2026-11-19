@@ -9,7 +9,8 @@
 
    Steps by screen width, each named for what actually breaks there:
 
-     1200px  the header cannot hold its search field
+     1279px  just under the drawn width: the frame eases in instead of
+             jumping, and a few rows that only just fitted get slack
      1180px  the 1200px column no longer fits its gutters
      1024px  the horizontal nav runs out of room; it becomes a drawer
       860px  side-by-side page layouts stop working; they stack
@@ -18,18 +19,27 @@
 
    Within each step the rules follow the page order of the build.
 
-   Three pieces answer to their own width instead of the screen's, because
+   Four pieces answer to their own width instead of the screen's, because
    the screen does not say how much room they have: the hero copy, the hero
-   illustration and the testimonial card. Their rules come first.
+   illustration, the testimonial card and the case-study card. Their rules
+   come first, then one guard for the header bar that holds at every width.
    ======================================================================== */
 
 /* =========================================================================
    Hero copy - by the width of its column
    ====================================================================== */
 
-/* The proof badge stays on one line. When the full sentence no longer fits,
-   "Trusted by" goes and both numbers stay. */
-@container hero-copy (max-width: 409px) {
+/* Three guarantees need 457px on one row. In a narrower column the row
+   keeps two (the refund and the support promise) rather than leave the third
+   alone on a second line. Phones go further and keep one, see the 620 step. */
+@container hero-copy (max-width: 490px) {
+  .trust-row .trust-item:nth-child(2) { display: none; }
+}
+
+/* The proof badge stays on one line. The full sentence is 392px wide, so
+   "Trusted by" goes while the column still has a little room to spare, and
+   both numbers stay. */
+@container hero-copy (max-width: 430px) {
   .hero__badge {
     padding: 5px 12px 5px 8px;
     white-space: nowrap;
@@ -37,6 +47,13 @@
 
   .hero__badge-text { font-size: 12.5px; }
   .hero__badge-more { display: none; }
+}
+
+/* Side by side the two buttons are 367px; a column that narrow leaves them
+   no margin, so they give up some of their side padding. (Stacked on a
+   phone they are full width and this changes nothing.) */
+@container hero-copy (max-width: 409px) {
+  .hero__actions .btn--lg { padding-inline: 16px; }
 }
 
 /* On the few 320px screens left it is set a size smaller to stay on its
@@ -67,13 +84,31 @@
 @container hero-visual (max-width: 537px) {
   .mock__toast-lead { display: none; }
   .mock__tag--boost { bottom: 20px; }
+
+  /* "Discount" is wider than a third of a narrow table, and each row is its
+     own grid: both rows take the same uneven tracks so the columns line up. */
+  .mock__table-head,
+  .mock__table-row { grid-template-columns: 1.5fr 1fr 1fr; }
+}
+
+/* Below the widths the design was drawn at there is no drawing to match, so
+   the last label always sits clear of the toast's text, and the toast keeps
+   its first half only where the result card leaves it comfortable room. */
+@media (max-width: 1180px) {
+  .mock__tag--boost { bottom: 20px; }
+
+  @container hero-visual (max-width: 560px) {
+    .mock__toast-lead { display: none; }
+  }
 }
 
 @container hero-visual (max-width: 479px) {
   .mock { padding: 0 14px 28px 0; }
 
-  /* The address bar gives way to the first label. */
+  /* The address bar gives way to the first label, and shows a shorter
+     address rather than a cut-off one. */
   .mock__chrome { padding-right: 86px; }
+  .mock__url-path { display: none; }
 
   .mock__url {
     min-width: 0;
@@ -94,6 +129,9 @@
   }
 
   .mock__sale { top: 8px; left: 8px; }
+
+  .mock__sale,
+  .mock__currency { white-space: nowrap; }
 
   /* Space under the button for the YayPricing label, as on the desktop
      drawing where the taller photo leaves it. */
@@ -121,9 +159,6 @@
   }
 
   .mock__table { margin-bottom: 10px; }
-
-  .mock__table-head,
-  .mock__table-row { grid-template-columns: 1.5fr 1fr 1fr; }
 
   .mock__table span,
   .mock__table strong {
@@ -197,13 +232,13 @@
 /* =========================================================================
    Testimonial card - by its own width
 
-   Avatar, name, place and the "Verified customer" badge need about 370px
+   Avatar, name, place and the "Verified customer" badge need about 310px
    in a row. In a narrower card the badge moves up opposite the stars, so
    nothing in the row has to wrap or push the card wider than its column.
-   Applied only below the design widths, where the cards were never drawn.
+   Applied only below the design width, where the cards were never drawn.
    ====================================================================== */
 
-@media (max-width: 1180px) {
+@media (max-width: 1279px) {
   .tstm-card {
     position: relative;
     container: tstm-card / inline-size;
@@ -222,15 +257,98 @@
   }
 }
 
+/* Three across at their narrowest, the cards cannot even hold five stars
+   and the badge on one line. There the badge takes a line of its own above
+   the name. */
+@media (min-width: 861px) and (max-width: 1279px) {
+  @container tstm-card (max-width: 225px) {
+    .tstm-card__who {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 10px 12px;
+      align-items: center;
+    }
+
+    .tstm-card .badge {
+      position: static;
+      grid-column: 1 / -1;
+      justify-self: start;
+      order: -1;
+      margin: 0;
+    }
+  }
+}
+
 /* =========================================================================
-   1200 - the header search is the first thing the bar cannot hold
+   Case-study card - by its own width
+
+   Name and "Read story" need about 250px side by side. In a narrower card
+   the link goes under the name, and since cards in a row are the same
+   width, a whole row changes together.
    ====================================================================== */
 
-/* With the search field the bar needs 1188px. It is the widest thing in it
-   and the one the drawer can't usefully hold; the shop and docs pages both
-   have their own. */
+@media (max-width: 1279px) {
+  .case-card { container: case-card / inline-size; }
+  .case-card__foot a { white-space: nowrap; }
+
+  @container case-card (max-width: 268px) {
+    .case-card__foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+}
+
+/* =========================================================================
+   Header bar - what gives when it is short of room
+
+   With its search field the bar needs 1247px. When it has less, the field
+   is the part that narrows; a nav label never breaks onto two lines. At the
+   drawn widths the bar has room and nothing here changes it.
+   ====================================================================== */
+
+@media (min-width: 1025px) {
+  .nav-link { white-space: nowrap; }
+  .site-nav { flex-shrink: 0; }
+  .site-header__actions { min-width: 0; }
+  .site-header__actions > * { flex-shrink: 0; }
+
+  .site-header__actions > .site-header__search {
+    flex-shrink: 1;
+    min-width: 140px;
+  }
+}
+
+/* Below 1200px even the narrowed field has no room. It is the one thing in
+   the bar the drawer can't usefully hold; the shop and docs pages both have
+   their own. */
 @media (max-width: 1200px) {
   .site-header__search { display: none; }
+}
+
+/* =========================================================================
+   1279 - just under the drawn width
+   ====================================================================== */
+
+@media (min-width: 1181px) and (max-width: 1279px) {
+  /* Home: the body gutter eases from the header's 40px to the design's 64px
+     instead of jumping there at 1181, which made the column 63px narrower
+     than one pixel earlier. */
+  .page-home { --gutter: clamp(var(--gutter-edge), calc((100vw - 1152px) / 2), 64px); }
+
+  /* Category cards: a little less padding keeps the names on one line (all
+     but the longest, which wraps in the design too). */
+  .cat-card {
+    gap: 12px;
+    padding-inline: 16px;
+  }
+}
+
+/* Footer: the signup column never drops under 250px, so its field always
+   shows its placeholder. */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .site-footer__cols { grid-template-columns: repeat(4, 1fr) minmax(250px, 1.4fr); }
 }
 
 /* =========================================================================
@@ -252,6 +370,23 @@
 
   .mega { width: min(800px, calc(100vw - 2 * var(--gutter-edge))); }
 
+  /* Home: four category cards across need 250px each to keep their names on
+     one line. Under 1150px they go two-up. */
+  @media (max-width: 1150px) {
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Home, the bento: a stat never touches its icon, a label that has to
+     wrap does it in even lines, and the copy is anchored to the top so the
+     titles of two cards in a row share a line however their text wraps. */
+  .why-card__top {
+    gap: 14px;
+    margin-bottom: 0;
+  }
+
+  .why-card__stat { min-width: 0; }
+  .why-card__stat span { text-wrap: balance; }
+
   /* Grid and flex children default to min-width: auto, so a wide child (a
      thumbnail strip, a two-column mock) stops its track from shrinking and
      pushes the page sideways. Every multi-column layout that survives past
@@ -272,6 +407,17 @@
      and the rows under it wrap as whole items rather than mid-phrase. */
   .h-hero { font-size: clamp(38px, 4.4vw, 50px); }
 
+  /* A hyphenated word in running copy stays on one line here. (On the
+     drawn desktop widths it breaks where the design breaks it.) */
+  .keep-together { white-space: nowrap; }
+
+  /* Where the page was never drawn, headings that wrap do it in even lines:
+     which word ends a line should not hang on a few pixels of width or on
+     one device's font. */
+  .h-hero,
+  .h-section,
+  .h-band { text-wrap: balance; }
+
   .hero__actions { flex-wrap: wrap; }
 
   .trust-row {
@@ -284,6 +430,39 @@
   /* Search fields drawn at a fixed width on the desktop comps. */
   .docs-hero .search,
   .shop-controls .search { width: 100%; max-width: 560px; }
+}
+
+/* Between the drawer step and here the open Plugins menu hangs from the
+   header rather than from its nav item, so it can end on the header's right
+   edge instead of running past it. It starts where it always did (gutter,
+   logo, gap, less its 16px overhang) and no longer depends on 100vw, which
+   counts a scrollbar. */
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .has-mega { position: static; }
+
+  .mega {
+    left: calc(var(--gutter-edge) + 186px);
+    right: var(--gutter-edge);
+    width: auto;
+    max-width: 800px;
+  }
+}
+
+/* Home, 861-980: the bento's cards are at their narrowest beside the photo. */
+@media (min-width: 861px) and (max-width: 980px) {
+  .why-card { padding: 22px; }
+}
+
+/* Home, 861-960: the All Access band still has two columns, but its copy
+   column is narrow: heading at the tablet size, checklist in one column. */
+@media (min-width: 861px) and (max-width: 960px) {
+  .aa-band { gap: 40px; }
+  .aa-band .h-band { font-size: 28px; }
+
+  .aa-band__checks {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 /* =========================================================================
@@ -311,6 +490,13 @@
 
   .cart-link--inline { display: none; }
 
+  /* The count sits on the cart's corner, and the cart is now 2px further in
+     from each edge of its button. */
+  .cart-link--bar .cart-link__count {
+    top: 5px;
+    right: 3px;
+  }
+
   /* The header is its own stacking context. Raised above the page while the
      drawer is open, it carries the scrim and the panel with it. */
   .is-drawer-open .site-header { z-index: 90; }
@@ -326,7 +512,7 @@
     flex-direction: column;
     gap: 0;
     width: min(360px, 88vw);
-    padding: 18px 20px 28px;
+    padding: 18px 20px 20px;
     overflow-y: auto;
     overscroll-behavior: contain;
     background: var(--surface);
@@ -353,17 +539,24 @@
   /* The bar's own toggle ends up underneath the sheet, so the way out has to
      live inside it. */
   .drawer-close {
+    /* Pinned to the top of the sheet: a long list must not carry the way
+       out off screen. The ring of sheet colour keeps rows from showing
+       against its edge as they pass behind. */
+    position: sticky;
+    top: -6px;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: flex-end;
     width: 40px;
     height: 40px;
-    margin: -6px -8px 6px 0;
+    margin: -6px -4px 6px 0;
     padding: 0;
-    background: none;
+    background: var(--surface);
     border: none;
     border-radius: var(--r-control);
+    box-shadow: 0 0 0 6px var(--surface);
     color: var(--ink-2);
     cursor: pointer;
   }
@@ -439,10 +632,17 @@
   .mega__group-title { margin-bottom: 2px; }
   .mega__bundle { display: none; }
 
+  /* "View all plugins" is a row like the ones above it, not an 18px line. */
   .mega__foot {
     margin-top: 10px;
-    padding: 10px 0 0 10px;
+    padding: 0;
     border-top: 1px solid var(--line-3);
+  }
+
+  .mega__foot-link {
+    display: block;
+    flex: 1;
+    padding: 13px 10px;
   }
 
   .mega__foot-note { display: none; }
@@ -455,13 +655,13 @@
 
   .has-account {
     flex-shrink: 0;
-    margin-top: 14px;
-    padding-top: 14px;
+    margin-top: 10px;
+    padding-top: 10px;
     border-top: 1px solid var(--line-3);
   }
 
   .account-chip {
-    padding: 8px 12px;
+    padding: 6px 12px;
     pointer-events: none;
   }
 
@@ -484,34 +684,46 @@
 
   .account-menu__head { display: none; }
 
-  /* Account rows line up with the nav labels and the avatar above them, and
-     are tall enough to tap. */
+  /* Account rows are tall enough to tap, their icons sit under the avatar
+     and their labels start where the name does. */
   .account-menu .menu-item {
-    padding: 11px 12px;
+    gap: 8px;
+    padding: 10px 12px;
     font-size: 14px;
   }
 
-  /* The one action in the drawer is always within reach. The two flat
-     shadows are its backing: a strip of the sheet's own colour above and
-     below, so rows passing behind do not show around it. */
+  .account-menu .menu-item svg { margin-inline: 5px; }
+
+  /* The drawer's one action closes the list, at the foot of the sheet when
+     the sheet is taller than the list. */
   .site-header__actions > .btn {
-    position: sticky;
-    bottom: 0;
     flex-shrink: 0;
     justify-content: center;
     width: 100%;
     height: 48px;
     margin-top: auto;
     font-size: 15px;
-    box-shadow: 0 -14px 0 14px var(--surface), 0 28px 0 14px var(--surface);
   }
 
-  .site-header__actions > .btn:focus-visible {
-    box-shadow: 0 -14px 0 14px var(--surface), 0 28px 0 14px var(--surface), 0 0 0 1.5px #fff, 0 0 0 3px var(--accent);
-  }
+  .has-account { margin-bottom: 10px; }
 
-  /* Keeps a little of the sheet under the button when the list is short. */
-  .has-account { margin-bottom: 16px; }
+  /* With the plugin list open the sheet is several screens long, so the
+     action is pinned to its foot and the list scrolls behind it. The flat
+     shadows are its backing: the sheet's own colour above and below, with a
+     hairline on top that shows where the list goes under. Not on a phone
+     held sideways, where the pinned strip would take a third of the screen. */
+  @media (min-height: 501px) {
+    .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn {
+      position: sticky;
+      bottom: 0;
+      box-shadow: 0 -14px 0 14px var(--surface), 0 -15px 0 14px var(--line), 0 28px 0 14px var(--surface);
+    }
+
+    .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
 
   /* Slim headers have no drawer; their actions stay a row in the bar. */
   .site-header--slim .site-header__actions {
@@ -521,14 +733,76 @@
 
   .site-header--slim .account-chip { pointer-events: auto; }
 
-  /* Home: four category cards across need about 230px each to keep their
-     names on one line; from here down they go two-up. */
-  .cat-grid { grid-template-columns: repeat(2, 1fr); }
-
-  /* Footer --------------------------------------------------------------- */
+  /* Footer ---------------------------------------------------------------
+     The signup takes the full row under the link groups. From 700px the
+     four groups share one row above it and the signup lays its words on
+     the left and its field on the right; narrower, the groups go two-up. */
   .site-footer__cols {
     grid-template-columns: repeat(2, 1fr);
     gap: 36px 32px;
+  }
+
+  .site-footer__cols > :last-child { grid-column: 1 / -1; }
+
+  @media (min-width: 700px) {
+    .site-footer__cols {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px 24px;
+    }
+
+    .site-footer__cols > :last-child {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 24px;
+      align-items: end;
+      padding-top: 28px;
+      border-top: 1px solid var(--line-2);
+    }
+
+    .site-footer__cols > :last-child .site-footer__head { grid-column: 1 / -1; }
+    .site-footer__cols > :last-child .site-footer__blurb { margin-bottom: 0; }
+  }
+}
+
+/* Thumb-sized hit areas follow the pointer, not a width: a tablet is a thumb
+   too. (The 620 step sets the same for every phone.) Nothing moves; the
+   links' boxes grow into the space around them. */
+@media (pointer: coarse) and (min-width: 621px) {
+  .section-head__link,
+  .case-card__foot a {
+    padding-block: 13px;
+    margin-block: -13px;
+  }
+
+  .aa-card__alt { padding: 0; }
+
+  .aa-card__alt .link-quiet {
+    display: block;
+    padding: 13px 0;
+    margin-block: -5px;
+  }
+
+  .site-footer__links {
+    gap: 0;
+    margin-block: -7px;
+  }
+
+  .f-link { padding-block: 7px; }
+
+  .f-social {
+    width: 40px;
+    height: 40px;
+  }
+
+  .site-footer__social {
+    gap: 0;
+    margin-block: -5px;
+    margin-right: -11px;
+  }
+
+  .promo__link {
+    padding-block: 9px;
+    margin-block: -9px;
   }
 }
 
@@ -576,8 +850,10 @@
   }
 
   /* Under the copy the illustration keeps its drawn size rather than
-     stretching to the column. */
+     stretching to the column, and its result card hangs 8px into the
+     gutter, not 20: the gutter is 24px or less from here down. */
   .hero__visual { max-width: 590px; }
+  .mock__stat { left: -8px; }
 
   .band-categories { padding-block: 64px 0; }
   .band-featured { padding-block: 56px 64px; }
@@ -619,6 +895,15 @@
       border-bottom: none;
       border-right: 1px solid var(--line-3);
     }
+
+    /* The wide testimonial puts its badge where its two neighbours do. */
+    .tstm-grid > .tstm-card:last-child:nth-child(odd) .badge {
+      position: absolute;
+      top: 23px;
+      right: 26px;
+      margin: 0;
+      white-space: nowrap;
+    }
   }
 
   .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -628,6 +913,21 @@
     grid-column: 1 / -1;
     min-height: 0;
     aspect-ratio: 16 / 9;
+  }
+
+  /* Footer bottom: copyright and "Built for" on one line, the language
+     picker and the social icons together on the next, until all four fit. */
+  .site-footer__bottom {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .site-footer__bottom > span { white-space: nowrap; }
+
+  .site-footer__end {
+    flex: 1 0 auto;
+    justify-content: space-between;
+    gap: 12px 16px;
   }
 
   /* Closing band: its heading steps down with the others, and the proof
@@ -642,6 +942,11 @@
   }
 
   .page-home .cta-band__trust > span { white-space: nowrap; }
+
+  /* The short wording of the second fact until the long one fits the row. */
+  @media (max-width: 760px) {
+    .cta-band__more { display: none; }
+  }
 
   /* Product -------------------------------------------------------------- */
   .product-hero {
@@ -771,8 +1076,8 @@
   /* Space budget ---------------------------------------------------------
      A 390px screen minus two gutters is 358px. A card that then pads 26px a
      side leaves 306px for content - 78% of the screen - and a card inside
-     a card leaves less. Cards drop to 16px a side here; the vertical
-     rhythm stays where it was, since height is not what a phone lacks. */
+     a card leaves less. Cards drop to 16px a side here, and section
+     paddings to half their desktop values. */
 
   /* Three pages carried their own 40px gutter instead of the token. */
   .account,
@@ -831,13 +1136,8 @@
   .h-band { font-size: 24px; }
   .lede { font-size: 15.5px; }
 
-  /* Headings wrap on a phone, and where they break should not depend on a
-     few pixels of difference between one phone's font and another's.
-     Balancing gives two even lines; tighter leading keeps them together. */
-  .h-hero,
-  .h-section,
-  .h-band { text-wrap: balance; }
-
+  /* Section headings wrap on a phone; tighter leading keeps their two lines
+     together. */
   .h-section,
   .h-band { line-height: 1.2; }
 
@@ -900,18 +1200,17 @@
 
   .site-footer { padding-top: 48px; }
 
-  /* Footer bottom: three groups that no longer fit on one line. */
-  .site-footer__bottom {
+  /* Footer bottom: the language picker and the social icons take a row of
+     their own, picker on the left gutter, icons on the right. */
+  .site-footer__end {
+    flex: 1 0 100%;
     flex-wrap: wrap;
-    gap: 12px 16px;
   }
 
-  .f-lang { margin-left: 0; }
-  .site-footer__social { margin-left: auto; }
+  .site-footer__legal { text-wrap: pretty; }
   /* Four link groups two-up halve the footer's height; the signup block
-     needs the full width for its field and button, so it spans both. */
+     below them spans both. */
   .site-footer__cols { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
-  .site-footer__cols > :last-child { grid-column: 1 / -1; }
 
   /* 19px of text is a fiddly thing to hit with a thumb. The rows keep their
      spacing, but the space now belongs to the links, so each one is a 33px
@@ -927,9 +1226,15 @@
   .site-footer__signup .input { flex: 1 1 180px; }
 
   /* Safari on an iPhone zooms the page when a field with text under 16px
-     takes focus, and leaves it zoomed. */
+     takes focus, and leaves it zoomed. The picker grows to hold the larger
+     text without making its row any taller. */
   .site-footer__signup .input,
   .f-lang-sel { font-size: 16px; }
+
+  .f-lang-sel {
+    height: 36px;
+    margin-block: -3px;
+  }
 
   /* Social icons: 40px targets inside the row's existing height. */
   .f-social {
@@ -1042,8 +1347,6 @@
     padding-block: 40px 48px;
   }
 
-  /* The result card hangs into the gutter, and the gutter is 16px here. */
-  .mock__stat { left: -8px; }
 
   .band-categories { padding-block: 48px 4px; }
   .band-featured { padding-block: 40px 48px; }
@@ -1134,9 +1437,14 @@
     border-radius: 23%;
   }
 
-  .page-home .cta-band p.cta-band__trust { gap: 6px 10px; margin-bottom: 0; }
+  /* The proof line keeps the size it was drawn at; the rule above is for
+     the paragraph. */
+  .page-home .cta-band p.cta-band__trust {
+    gap: 6px 10px;
+    margin-bottom: 0;
+    font-size: 13px;
+  }
 
-  .cta-band__more,
   .page-home .cta-band__trust > .cta-band__refund { display: none; }
 
   /* Four rows in a list need less air between them than four tiles, and
@@ -1343,17 +1651,23 @@
 /* =========================================================================
    380 - small phones
 
-   Two single lines that fit a 390px screen with room to spare fit a 360px
-   one only just, and not at all in a slightly wider font. Here they take a
-   form that cannot wrap badly.
+   Lines that fit a 390px screen with room to spare fit a 360px one only
+   just, and not at all in a slightly wider font. Here they take a form that
+   cannot wrap badly.
    ====================================================================== */
 
-@media (max-width: 379px) {
+@media (max-width: 380px) {
   /* Promo bar: the whole bar is still the link; the arrow is what there is
      no room for. */
   .promo__inner { font-size: 11px; }
   .promo__arrow { display: none; }
 
+  /* Footer: without its globe the language picker shares a row with the
+     social icons down to 352px. */
+  .f-lang > svg { display: none; }
+}
+
+@media (max-width: 359px) {
   /* Closing band: the two facts get a line each, so nothing needs
      separating. */
   .page-home .cta-band p.cta-band__trust {
@@ -1362,6 +1676,17 @@
   }
 
   .page-home .cta-band__trust > .cta-band__sep { display: none; }
+}
+
+@media (max-width: 351px) {
+  /* Footer: the icons no longer fit beside the picker; on their own row
+     they start at the left gutter like everything above them. */
+  .site-footer__end { justify-content: flex-start; }
+
+  .site-footer__social {
+    margin-left: -11px;
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 340px) {
