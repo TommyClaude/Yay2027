@@ -1,5 +1,5 @@
 /* ===========================================================================
-   YayCommerce — layout chrome
+   YayCommerce - layout chrome
 
    Promo bar, site header (nav + mega menu + account menu), the closing CTA
    band and the light footer. Shared by every page.
@@ -66,7 +66,7 @@
   gap: 32px;
   height: 72px;
   background: var(--surface);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--surface-2);
   box-shadow: var(--sh-header);
 }
 
@@ -158,7 +158,7 @@
 .site-header__search { position: relative; width: 230px; }
 .site-header__search .input { height: 36px; }
 
-/* Slim variant used on checkout — no nav, no exits ---------------------- */
+/* Slim variant used on checkout - no nav, no exits ---------------------- */
 .site-header--slim { gap: 20px; }
 
 .site-header--slim .site-header__actions { gap: 16px; font-size: 13.5px; }
@@ -355,7 +355,7 @@
   justify-content: space-between;
   margin-top: 14px;
   padding: 12px 0 8px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--surface-2);
 }
 
 .mega__foot-link { font-size: 13px; font-weight: 500; }
@@ -421,8 +421,9 @@
   padding: 4px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  box-shadow: var(--sh-card);
+  /* A menu, not a card: it keeps the design system's popover shape. */
+  border-radius: var(--r-inline);
+  box-shadow: var(--sh-popover);
   font-weight: 400;
 }
 
@@ -431,7 +432,7 @@
 .account-menu__head {
   padding: 10px 10px 12px;
   margin-bottom: 4px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--surface-2);
 }
 
 .account-menu__head strong {
@@ -442,6 +443,7 @@
 }
 
 .account-menu__head span {
+  display: block;
   font-size: 12px;
   color: var(--ink-2);
 }
@@ -459,6 +461,11 @@
 
 .menu-item:hover { background: var(--surface-hover); color: var(--ink); }
 
+.menu-item svg { flex-shrink: 0; }
+
+/* In the header dropdown the icons take the row's text colour. */
+.account-menu .menu-item svg { fill: currentColor; }
+
 .menu-sep {
   height: 1px;
   margin: 4px 0;
@@ -466,7 +473,7 @@
 }
 
 /* =========================================================================
-   Closing CTA band — brand yellow
+   Closing CTA band - brand yellow
    ====================================================================== */
 
 .cta-band {
@@ -507,10 +514,32 @@
   margin-bottom: 36px;
 }
 
+/* Seven tiles that grow towards the middle one and lean away from it.
+   --n is a tile's size as a bare number, so a narrow screen can reuse it as
+   the tile's share of the row. */
 .cta-band__icons .ptile {
+  --n: 44;
+  width: calc(var(--n) * 1px);
+  height: calc(var(--n) * 1px);
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 10px 24px -6px rgba(0, 0, 0, .35);
 }
+
+.cta-band__icons .ptile:nth-child(2),
+.cta-band__icons .ptile:nth-child(6) { --n: 52; border-radius: 12px; }
+
+.cta-band__icons .ptile:nth-child(3),
+.cta-band__icons .ptile:nth-child(5) { --n: 60; border-radius: 14px; }
+
+.cta-band__icons .ptile:nth-child(4) { --n: 68; border-radius: 15px; }
+
+.cta-band__icons .ptile:nth-child(1) { transform: rotate(-8deg); }
+.cta-band__icons .ptile:nth-child(2) { transform: rotate(5deg); }
+.cta-band__icons .ptile:nth-child(3) { transform: rotate(-4deg); }
+.cta-band__icons .ptile:nth-child(5) { transform: rotate(4deg); }
+.cta-band__icons .ptile:nth-child(6) { transform: rotate(-5deg); }
+.cta-band__icons .ptile:nth-child(7) { transform: rotate(8deg); }
 
 .cta-band__actions {
   position: relative;
@@ -559,10 +588,14 @@
   color: rgba(30, 30, 30, .78);
 }
 
-.cta-band__trust span { display: inline-flex; align-items: center; gap: 6px; }
+.cta-band__trust > span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* A sentence with words that can be dropped on small screens: it has to stay
+   ordinary running text, not a row of spaced-out pieces. */
+.cta-band__trust > .cta-band__reach { display: block; }
 
 /* =========================================================================
-   Footer — light
+   Footer - light
    ====================================================================== */
 
 .site-footer {
@@ -614,10 +647,11 @@
 
 .site-footer__signup { display: flex; gap: 8px; }
 
-.site-footer__signup .input {
-  flex: 1;
-  border-color: var(--ink-3);
-}
+.site-footer__signup .input { flex: 1; }
+
+/* A softer resting border on the grey footer. Scoped to the resting state so
+   the field's own focus colour is never overruled. */
+.site-footer__signup .input:not(:focus) { border-color: var(--ink-3); }
 
 .site-footer__bottom {
   display: flex;

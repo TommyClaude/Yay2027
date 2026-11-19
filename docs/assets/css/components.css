@@ -1,5 +1,5 @@
 /* ===========================================================================
-   YayCommerce — components
+   YayCommerce - components
 
    Buttons, badges, cards, form controls and the small repeated atoms
    (rating stars, green check bullets, plugin icon tiles).
@@ -8,7 +8,7 @@
 /* =========================================================================
    Buttons
 
-   Yellow is the primary action on every screen — one per screen, always the
+   Yellow is the primary action on every screen - one per screen, always the
    best next step. Blue stays on links, focus rings and selection.
    ====================================================================== */
 
@@ -55,7 +55,7 @@
 .btn--secondary:hover {
   background: rgba(56, 88, 233, .04);
   box-shadow: inset 0 0 0 1.5px var(--accent);
-  color: var(--accent);
+  color: var(--accent-hover);
 }
 
 .btn--tertiary { color: var(--accent); }
@@ -130,7 +130,7 @@
 .badge--error { background: #f7ebeb; color: #8a0303; }
 .badge--accent { background: var(--accent-soft); color: var(--accent); }
 
-/* Brand chip — the yellow "Sale" / rating pill -------------------------- */
+/* Brand chip - the yellow "Sale" / rating pill -------------------------- */
 .chip-brand {
   display: inline-flex;
   align-items: center;
@@ -189,7 +189,7 @@
    Cards
 
    Elevated style: white surface, hairline border, 10px radius, soft shadow.
-   Only interactive cards (links) change on hover — static content cards stay
+   Only interactive cards (links) change on hover - static content cards stay
    put, which is what the design brief settled on.
    ====================================================================== */
 
@@ -271,10 +271,12 @@ a.panel:hover {
   align-items: center;
   gap: 5px;
   padding-top: 13px;
-  border-top: 1px solid var(--line-3);
+  border-top: 1px solid var(--surface-2);
   font-size: 13px;
 }
 
+.plugin-card__meta strong { font-weight: 600; }
+.plugin-card__count { color: var(--ink-3); }
 .plugin-card__price { margin-left: auto; font-weight: 600; }
 .plugin-card__price span { font-weight: 400; color: var(--ink-2); }
 
@@ -305,7 +307,8 @@ a.panel:hover {
   width: 40px;
   height: 40px;
   border-radius: var(--r-card);
-  background: var(--surface-2);
+  background: var(--surface);
+  box-shadow: var(--sh-soft);
 }
 
 .cat-card__body { flex: 1; }
@@ -330,7 +333,10 @@ a.panel:hover {
 }
 
 .blog-card__img {
+  width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
+  object-fit: cover;
   background: var(--surface-3) center / cover no-repeat;
   border-bottom: 1px solid var(--line-3);
 }
@@ -466,7 +472,7 @@ a.panel:hover {
 .stars svg { fill: var(--warning); }
 
 /* =========================================================================
-   Green check bullet — circle + thick rounded tick
+   Green check bullet - circle + thick rounded tick
    ====================================================================== */
 
 .tick {
@@ -527,6 +533,24 @@ a.panel:hover {
 .ptile--32 { width: 32px; height: 32px; border-radius: 7px; }
 .ptile--44 { width: 44px; height: 44px; border-radius: 12px; }
 
+/* Which plugin a tile shows. The icons are served by the site itself, so a
+   page never waits on another host or tells it who is visiting. */
+.ptile--yaymail { background-image: url("../img/plugins/yaymail.gif"); }
+.ptile--yaypricing { background-image: url("../img/plugins/yaypricing.png"); }
+.ptile--yaysmtp { background-image: url("../img/plugins/yaysmtp.png"); }
+.ptile--yaycurrency { background-image: url("../img/plugins/yaycurrency.png"); }
+.ptile--yayswatches { background-image: url("../img/plugins/yayswatches.png"); }
+.ptile--yayextra { background-image: url("../img/plugins/yayextra.png"); }
+.ptile--yayreviews { background-image: url("../img/plugins/yayreviews.png"); }
+.ptile--yayboost { background-image: url("../img/plugins/yayboost.png"); }
+.ptile--yay-wholesale-b2b { background-image: url("../img/plugins/yay-wholesale-b2b.png"); }
+
+/* YayMail's icon is an animation. Anyone who asks their device for less
+   motion gets its resting frame instead. */
+@media (prefers-reduced-motion: reduce) {
+  .ptile--yaymail { background-image: url("../img/plugins/yaymail-still.png"); }
+}
+
 .ptile[data-name]:hover::after {
   content: attr(data-name);
   position: absolute;
@@ -535,7 +559,7 @@ a.panel:hover {
   transform: translateX(-50%);
   z-index: 5;
   padding: 4px 8px;
-  border-radius: var(--r-badge);
+  border-radius: var(--r-hair);
   background: var(--ink);
   color: #fff;
   font-size: 11px;
@@ -556,7 +580,7 @@ a.panel:hover {
 }
 
 /* =========================================================================
-   Notice — the wp-admin style left-rule callout
+   Notice - the wp-admin style left-rule callout
    ====================================================================== */
 
 .notice {
@@ -577,7 +601,7 @@ a.panel:hover {
 .notice--update { border-left-color: #d63638; }
 
 /* =========================================================================
-   Code chip — license keys, coupon codes, versions
+   Code chip - license keys, coupon codes, versions
    ====================================================================== */
 
 .code {
@@ -590,7 +614,7 @@ a.panel:hover {
 }
 
 /* =========================================================================
-   FAQ accordion — shared by the product and All Access pages
+   FAQ accordion - shared by the product and All Access pages
    ====================================================================== */
 .faq {
   display: flex;

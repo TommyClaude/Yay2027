@@ -14,23 +14,24 @@
 <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body class="is-checkout">
+<a href="#main" class="skip-link">Skip to content</a>
 <!-- ====================================================================
-     Promo bar — no offer link on checkout: every pixel here serves the order
+     Promo bar - no offer link on checkout: every pixel here serves the order
      ================================================================= -->
 <div class="promo wrap--edge">
   <div class="promo__inner">
     <span class="chip-brand chip-brand--square">Sale</span>
-    <span>Summer sale: 30% off All Access with code <span class="promo__code">SUNNY30</span></span>
-    <span class="promo__timer">Ends in <span data-countdown>2d 00:00:00</span></span>
+    <span class="promo__offer"><span class="promo__lead">Summer sale: </span>30% off All Access with code <span class="promo__code">SUNNY30</span></span>
+    <span class="promo__timer"><span class="promo__timer-label">Ends in </span><span data-countdown>2d 00:00:00</span></span>
   </div>
 </div>
 
 <!-- ====================================================================
-     Slim checkout header — no nav, no search, nothing that leads away
+     Slim checkout header - no nav, no search, nothing that leads away
      ================================================================= -->
 <header class="site-header site-header--slim wrap--edge">
   <a href="index.html" class="site-header__logo is-plain">
-    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce">
+    <img src="assets/img/yaycommerce-logo.png" alt="YayCommerce" width="566" height="110">
   </a>
 
   <div class="secure-mark">
@@ -47,7 +48,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <div class="checkout">
   <h1>Checkout</h1>
 
@@ -295,7 +296,7 @@
 </div>
 </main>
 <!-- ====================================================================
-     Slim checkout footer — policy links only
+     Slim checkout footer - policy links only
      ================================================================= -->
 <footer class="checkout-footer wrap--edge">
   <span>© 2026 YayCommerce, Inc.</span>

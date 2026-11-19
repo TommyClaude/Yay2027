@@ -1,10 +1,10 @@
 /* ===========================================================================
-   YayCommerce — responsive layer
+   YayCommerce - responsive layer
 
    The prototypes were only ever drawn at 1280px and up, so everything below
    that is new work. It lives in one sheet, loaded after the page styles, for
    two reasons: the desktop rendering stays byte-for-byte what was signed off
-   against the design, and the whole adaptation can be read — or removed — in
+   against the design, and the whole adaptation can be read, or removed, in
    one place.
 
    Four steps, each named for what actually breaks at that width:
@@ -15,10 +15,163 @@
        620px  phone: one column, tighter type, thumb-sized controls
 
    Within each step the rules follow the page order of the build.
+
+   Two pieces answer to their own width instead of the screen's, because the
+   screen does not say how much room they have: the hero copy and the hero
+   illustration. Their rules come first.
    ======================================================================== */
 
 /* =========================================================================
-   1180 — tighten the frame
+   Hero copy - by the width of its column
+   ====================================================================== */
+
+/* The proof badge stays on one line. When the full sentence no longer fits,
+   "Trusted by" goes and both numbers stay. */
+@container hero-copy (max-width: 409px) {
+  .hero__badge {
+    padding: 5px 12px 5px 8px;
+    white-space: nowrap;
+  }
+
+  .hero__badge-text { font-size: 12.5px; }
+  .hero__badge-more { display: none; }
+}
+
+/* On the few 320px screens left, wrapping beats running off the edge. */
+@container hero-copy (max-width: 310px) {
+  .hero__badge { white-space: normal; }
+}
+
+/* =========================================================================
+   Hero illustration - by the width of its column
+
+   Above 480px it is the drawing from the design. Below that it is the same
+   drawing made smaller: photo beside details, each plugin label hanging off
+   the right edge next to what it does, the result card off the bottom left.
+   Row heights are fixed here so the labels can be placed against them.
+   ====================================================================== */
+
+/* Narrower than it was drawn, but not yet the small version: the result
+   card would cover the start of the toast, so the toast keeps only its
+   second half, and the last label drops clear of the text. */
+@container hero-visual (max-width: 537px) {
+  .mock__toast-lead { display: none; }
+  .mock__tag--boost { bottom: 20px; }
+}
+
+@container hero-visual (max-width: 479px) {
+  .mock { padding: 0 14px 28px 0; }
+
+  /* The address bar gives way to the first label. */
+  .mock__chrome { padding-right: 86px; }
+
+  .mock__url {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mock__body {
+    grid-template-columns: clamp(88px, 29cqw, 150px) 1fr;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .mock__photo {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .mock__sale { top: 8px; left: 8px; }
+
+  /* Space under the button for the YayPricing label, as on the desktop
+     drawing where the taller photo leaves it. */
+  .mock__details { padding-bottom: 20px; }
+
+  .mock__title {
+    overflow: hidden;
+    font-size: 15px;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mock__price {
+    gap: 6px;
+    height: 24px;
+    margin: 4px 0 10px;
+  }
+
+  .mock__price-now { font-size: 16px; }
+
+  .mock__swatches {
+    height: 22px;
+    margin-bottom: 10px;
+  }
+
+  .mock__table { margin-bottom: 10px; }
+
+  .mock__table-head,
+  .mock__table-row { grid-template-columns: 1.5fr 1fr 1fr; }
+
+  .mock__table span,
+  .mock__table strong {
+    padding: 5px 8px;
+    line-height: 17px;
+  }
+
+  .mock__cart { height: 36px; }
+
+  /* One line, at a fixed height the labels can be measured from. */
+  .mock__toast {
+    padding: 9px 14px;
+    line-height: 18px;
+  }
+
+  /* Labels. Measured from the top of the window: 35px of chrome, 14px of
+     padding, then title 20, gap 4, price 24, gap 10, swatches 22. */
+  .mock__tag {
+    right: 0;
+    line-height: 15px;
+  }
+
+  .mock__tag--currency { top: 23px; }
+  .mock__tag--swatches { top: 107px; }
+  .mock__tag--pricing { bottom: 71px; }
+  .mock__tag--boost { bottom: 14px; }
+
+  .mock__stat {
+    left: -8px;
+    padding: 8px 12px;
+  }
+
+  .mock__stat-value { font-size: 17px; }
+  .mock__stat-label { max-width: 96px; font-size: 11.5px; line-height: 15px; }
+}
+
+/* The swatch name is the first thing its label would cover. */
+@container hero-visual (max-width: 344px) {
+  .mock__swatch-label { display: none; }
+}
+
+/* 320px screens: no room for the result card beside the nudge, or for the
+   old price beside the new one. */
+@container hero-visual (max-width: 307px) {
+  .mock { padding-bottom: 16px; }
+  .mock__stat,
+  .mock__price-was { display: none; }
+  .mock__title { font-size: 14px; }
+
+  .mock__table span,
+  .mock__table strong { padding-inline: 6px; }
+
+  .mock__tag--pricing { bottom: 59px; }
+  .mock__tag--boost { bottom: 2px; }
+}
+
+/* =========================================================================
+   1180 - tighten the frame
    ====================================================================== */
 
 @media (max-width: 1180px) {
@@ -26,6 +179,10 @@
     --gutter: 40px;
     --gutter-edge: 32px;
   }
+
+  /* Home: below the widths the design was drawn at, the body takes the
+     header's edge so the logo, the headline and the footer line up. */
+  .page-home { --gutter: var(--gutter-edge); }
 
   /* The search field is the widest thing in the bar and the one the drawer
      can't usefully hold; the shop and docs pages both have their own. */
@@ -36,11 +193,10 @@
 
   .mega { width: min(800px, calc(100vw - 2 * var(--gutter-edge))); }
 
-  /* Grid and flex children default to min-width: auto, so a wide child —
-     a thumbnail strip, a two-column mock — stops its track from shrinking
-     and pushes the page sideways. Every multi-column layout that survives
-     past this width opts out. */
-  .hero > *,
+  /* Grid and flex children default to min-width: auto, so a wide child (a
+     thumbnail strip, a two-column mock) stops its track from shrinking and
+     pushes the page sideways. Every multi-column layout that survives past
+     this width opts out. */
   .product-hero > *,
   .aa-band > *,
   .shop-aa > *,
@@ -53,13 +209,24 @@
   .feature > *,
   .mock__body > * { min-width: 0; }
 
-  /* Floating labels have to come inside the frame once the column narrows. */
-  .mock { padding-right: 0; }
-  .mock__window { max-width: 100%; }
-  .mock__tag--currency,
-  .mock__tag--swatches,
-  .mock__tag--pricing,
-  .mock__tag--boost { right: 4px; }
+  /* Home hero: the headline eases down with the column instead of jumping,
+     and the rows under it wrap as whole items rather than mid-phrase. */
+  .h-hero { font-size: clamp(38px, 4.4vw, 50px); }
+
+  .hero__actions { flex-wrap: wrap; }
+
+  .trust-row {
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .trust-item { white-space: nowrap; }
+
+  /* A badge is one phrase; when the row is short the place name wraps. */
+  .tstm-card .badge {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
 
   /* Search fields drawn at a fixed width on the desktop comps. */
   .docs-hero .search,
@@ -67,7 +234,7 @@
 }
 
 /* =========================================================================
-   1024 — the nav becomes a drawer
+   1024 - the nav becomes a drawer
    ====================================================================== */
 
 @media (max-width: 1024px) {
@@ -101,12 +268,25 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     background: var(--surface);
-    box-shadow: -8px 0 32px -12px rgba(0, 0, 0, .28);
+    /* Closed, it is parked off-screen and hidden outright: off-screen alone
+       would leave its links in the tab order and its shadow lying along the
+       edge of the page. The delay lets it finish sliding out first. */
+    visibility: hidden;
     transform: translateX(100%);
+    transition: transform .22s ease, visibility 0s linear .22s;
+  }
+
+  .is-drawer-open .site-header__panel {
+    visibility: visible;
+    box-shadow: -8px 0 32px -12px rgba(0, 0, 0, .28);
+    transform: translateX(0);
     transition: transform .22s ease;
   }
 
-  .is-drawer-open .site-header__panel { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header__panel,
+    .is-drawer-open .site-header__panel { transition: none; }
+  }
 
   /* The bar's own toggle ends up underneath the sheet, so the way out has to
      live inside it. */
@@ -154,7 +334,7 @@
 
   /* In the bar these are 72px-tall flex cells holding a trigger, with the
      panel floated out of them. In the drawer the panel is part of the list,
-     so each wrapper has to be a plain block that grows with its contents —
+     so each wrapper has to be a plain block that grows with its contents -
      left as a flex row it would sit the menu beside its trigger and spill
      it over whatever follows. */
   .has-mega,
@@ -217,8 +397,9 @@
 
   .account-chip > svg { display: none; }
 
-  /* No dropdown in a drawer — the account links are simply part of the list.
-     The selector carries :not(.is-open) to outrank the rule that hides it. */
+  /* No dropdown in a drawer: the account links are simply part of the list.
+     The selector carries :not(.is-open) to outrank the rule that hides it.
+     Visibility is left alone so the links stay hidden with a closed panel. */
   .has-account:not(.is-open) .account-menu,
   .account-menu {
     position: static;
@@ -229,9 +410,6 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
   }
 
   .account-menu__head { display: none; }
@@ -263,7 +441,7 @@
 }
 
 /* =========================================================================
-   860 — side-by-side layouts stack
+   860 - side-by-side layouts stack
    ====================================================================== */
 
 @media (max-width: 860px) {
@@ -283,15 +461,19 @@
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
 
-  /* Promo bar: the countdown is the first thing to go, then the strapline. */
-  .promo__timer { display: none; }
-  .promo__inner { gap: 10px; }
+  /* Promo bar: it sheds words as it narrows, never the offer, the clock or
+     the way in. The campaign name goes first, then the Sale chip. */
+  .promo__lead { display: none; }
 
-  /* Section heads stop being a baseline row once the title wraps. */
+  @media (max-width: 720px) {
+    .promo .chip-brand { display: none; }
+  }
+
+  /* Section heads keep their link beside the title while both fit, and
+     drop it underneath when they do not. */
   .section-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 6px 20px;
   }
 
   /* Home ----------------------------------------------------------------- */
@@ -301,8 +483,12 @@
     padding-block: 56px 64px;
   }
 
-  .mock { padding: 0; }
-  .mock__window { max-width: 560px; }
+  /* Under the copy the illustration keeps its drawn size rather than
+     stretching to the column. */
+  .hero__visual { max-width: 590px; }
+
+  .band-categories { padding-block: 64px 0; }
+  .band-featured { padding-block: 56px 64px; }
 
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .plugin-grid { grid-template-columns: repeat(2, 1fr); }
@@ -322,8 +508,43 @@
   .tstm-grid,
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
 
+  /* Three cards in two columns would leave the last one alone beside a
+     hole, so it takes the whole row. A blog card that wide turns on its
+     side: picture left, words right. */
+  .case-grid > :last-child:nth-child(odd),
+  .tstm-grid > :last-child:nth-child(odd),
+  .blog-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+  .blog-grid > .blog-card:last-child:nth-child(odd) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .blog-grid > .blog-card:last-child:nth-child(odd) .blog-card__img {
+    height: 100%;
+    border-bottom: none;
+    border-right: 1px solid var(--line-3);
+  }
+
   .why-grid { grid-template-columns: repeat(2, 1fr); }
-  .why-photo { grid-column: 1 / -1; }
+
+  /* Across the full row the photo is a banner, not a tall panel. */
+  .why-photo {
+    grid-column: 1 / -1;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Closing band: the proof line breaks between items, never inside one. */
+  .page-home .cta-band { padding-block: 72px 64px; }
+
+  .page-home .cta-band p.cta-band__trust {
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .page-home .cta-band__trust > span { white-space: nowrap; }
 
   /* Product -------------------------------------------------------------- */
   .product-hero {
@@ -441,7 +662,7 @@
 }
 
 /* =========================================================================
-   620 — phone
+   620 - phone
    ====================================================================== */
 
 @media (max-width: 620px) {
@@ -452,7 +673,7 @@
 
   /* Space budget ---------------------------------------------------------
      A 390px screen minus two gutters is 358px. A card that then pads 26px a
-     side leaves 306px for content — 78% of the screen — and a card inside
+     side leaves 306px for content - 78% of the screen - and a card inside
      a card leaves less. Cards drop to 16px a side here; the vertical
      rhythm stays where it was, since height is not what a phone lacks. */
 
@@ -520,9 +741,47 @@
   .grid-3,
   .grid-2 { grid-template-columns: 1fr; }
 
-  /* One offer, one line. The code is the part that has to survive. */
-  .promo__inner { justify-content: center; font-size: 11.5px; }
-  .promo__link { display: none; }
+  /* Promo bar: one line that is the offer, the clock and, as a whole, the
+     link. It may wrap in a wide font rather than run off the screen. */
+  .promo {
+    position: relative;
+    height: auto;
+    min-height: 38px;
+    padding-block: 6px;
+  }
+
+  .promo__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 8px;
+    font-size: 11.5px;
+  }
+
+  .promo .chip-brand,
+  .promo__timer-label { display: none; }
+
+  .promo__timer {
+    padding: 1px 6px;
+    font-size: 11px;
+  }
+
+  .promo__link { padding: 0 2px; }
+  .promo__link:hover { background: none; color: var(--brand); }
+
+  .promo__link-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .promo__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
 
   .site-header { height: 62px; }
   .site-header__logo img { height: 28px; }
@@ -565,20 +824,6 @@
   .cta-band__actions .cta-solid,
   .cta-band__actions .cta-ghost { justify-content: center; width: 100%; }
 
-  /* The proof badge has to stay one line under the headline. Dropping
-     "Trusted by" keeps both numbers and fits the pill beside them. */
-  .hero__badge {
-    padding: 5px 12px 5px 8px;
-    white-space: nowrap;
-  }
-
-  .hero__badge-text { font-size: 12.5px; }
-  .hero__badge-more { display: none; }
-
-  /* The one line is 303px; on the few 320px screens left it may wrap
-     rather than run off the edge. */
-  @media (max-width: 340px) { .hero__badge { white-space: normal; } }
-
   /* Under full-width buttons, three guarantees are noise; the refund promise
      is the one that moves a purchase, so it stands alone and centred. */
   .trust-row,
@@ -595,13 +840,90 @@
   .blog-grid,
   .why-grid { grid-template-columns: 1fr; }
 
+  /* Plugin cards become list rows: icon beside the name and its line, rating
+     and price underneath. Each is a third shorter, and six of them stack. */
+  .plugin-grid { gap: 12px; }
+
+  .plugin-grid .plugin-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 14px;
+    padding: 16px;
+  }
+
+  .plugin-grid .plugin-card__top { display: contents; }
+  .plugin-grid .plugin-card .ptile { grid-row: 1 / span 2; }
+
+  .plugin-grid .plugin-card .chip-card {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .plugin-grid .plugin-card__name { margin-bottom: 3px; }
+  .plugin-grid .plugin-card__tag { margin-bottom: 14px; }
+  .plugin-grid .plugin-card__meta { grid-column: 1 / -1; }
+
+  /* One column: the last blog card is a card like the others again. */
+  .blog-grid > .blog-card:last-child:nth-child(odd) { display: block; }
+
+  .blog-grid > .blog-card:last-child:nth-child(odd) .blog-card__img {
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line-3);
+  }
+
+  .hero {
+    gap: 36px;
+    padding-block: 40px 48px;
+  }
+
+  /* The result card hangs into the gutter, and the gutter is 16px here. */
+  .mock__stat { left: -8px; }
+
+  .band-categories { padding-block: 48px 0; }
+  .band-featured { padding-block: 40px 48px; }
+
+  /* The warm glow sits behind the price card on a wide screen; here only
+     its edge would show, as a stain in the corner. */
+  .aa-band { padding-block: 48px; }
+  .aa-band__glow { display: none; }
   .aa-band__checks { grid-template-columns: 1fr; }
   .aa-card { max-width: none; }
 
-  .mock__body { grid-template-columns: 1fr; }
+  .why-photo { aspect-ratio: 3 / 2; }
 
-  /* The floating stat card has nowhere to float to at this width. */
-  .mock__stat { display: none; }
+  /* Closing band: the arc of icons fits between the gutters, and the proof
+     line keeps the two facts the paragraph above does not already give (it
+     has just promised the refund). */
+  .page-home .cta-band { padding-block: 56px 48px; }
+  .page-home .cta-band h2 { font-size: 28px; }
+  .page-home .cta-band p { margin-bottom: 26px; font-size: 15px; }
+
+  .page-home .cta-band__icons {
+    gap: 10px;
+    max-width: 348px;
+    margin: 0 auto 28px;
+  }
+
+  /* Each tile takes its drawn size as a share of the row, so the arc keeps
+     its shape at whatever width the screen leaves it. */
+  .page-home .cta-band__icons .ptile {
+    flex: var(--n) 1 0;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 23%;
+  }
+
+  .page-home .cta-band p.cta-band__trust { gap: 6px 10px; margin-bottom: 0; }
+
+  .cta-band__more,
+  .page-home .cta-band__trust > .cta-band__refund { display: none; }
+
+  /* Four rows in a list need less air between them than four tiles. */
+  .cat-grid { gap: 10px; }
 
   /* Product -------------------------------------------------------------- */
   .casestudy__stats { grid-template-columns: 1fr; }
@@ -703,7 +1025,7 @@
   .order-meta { grid-template-columns: 1fr; }
 
   /* An order's line items are three columns on a desktop table. Here each
-     item is a block: product on top, files and price on the row beneath —
+     item is a block: product on top, files and price on the row beneath -
      the purchase list keeps its scroll, this table has too few columns to
      need one. */
   .order-detail__table .table { min-width: 0; }
@@ -799,3 +1121,17 @@
   .statement h2 { font-size: 26px; }
 }
 
+/* =========================================================================
+   340 - the smallest phones still in use
+   ====================================================================== */
+
+@media (max-width: 340px) {
+  /* The whole bar is still the link; the arrow is what there is no room for. */
+  .promo__inner { font-size: 11px; }
+  .promo__arrow { display: none; }
+
+  .page-home .cta-band__icons { gap: 8px; }
+
+  /* The two facts no longer share a line, so nothing needs separating. */
+  .page-home .cta-band__trust > .cta-band__sep { display: none; }
+}

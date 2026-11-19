@@ -1,5 +1,5 @@
 /* ===========================================================================
-   YayCommerce — Home
+   YayCommerce - Home
    ======================================================================== */
 
 /* =========================================================================
@@ -13,6 +13,15 @@
   align-items: center;
   padding-block: 112px 96px;
 }
+
+/* Both halves are containers: what they show depends on the room they are
+   given, not on the screen, because the same column is 540px wide beside the
+   copy on a laptop and 330px wide under it on a phone. */
+.hero__copy,
+.hero__visual { min-width: 0; }
+
+.hero__copy { container: hero-copy / inline-size; }
+.hero__visual { container: hero-visual / inline-size; }
 
 .hero__badge {
   display: inline-flex;
@@ -58,17 +67,20 @@
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
-  box-shadow: var(--sh-float);
+  box-shadow: var(--sh-card);
 }
 
+/* Inside a lifted surface the elevated style drops every fill one step
+   (white to #f6f7f7, #f6f7f7 to #f0f0f1) and fades every divider to #f6f7f7,
+   so the window reads as one object rather than a stack of outlined boxes. */
 .mock__chrome {
   display: flex;
   align-items: center;
   gap: 8px;
   height: 34px;
   padding: 0 14px;
-  background: var(--surface-2);
-  border-bottom: 1px solid var(--line);
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--surface-2);
 }
 
 .mock__dot {
@@ -81,7 +93,7 @@
 .mock__url {
   margin-left: 10px;
   padding: 3px 12px;
-  background: var(--surface);
+  background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: var(--r-pill);
   font-size: 11px;
@@ -103,7 +115,7 @@
   justify-content: center;
   width: 100%;
   aspect-ratio: 3 / 3.6;
-  background: var(--surface-3);
+  background: var(--surface-2);
   border-radius: var(--r-tile);
 }
 
@@ -138,7 +150,8 @@
 .mock__currency {
   margin-left: auto;
   padding: 2px 8px;
-  border: 1px solid var(--line-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: var(--r-badge);
   font-size: 12px;
   color: var(--ink);
@@ -159,6 +172,10 @@
   box-shadow: 0 0 0 1px var(--line-2);
 }
 
+.mock__swatch--natural { background: #e8e0d2; }
+.mock__swatch--charcoal { background: #39414b; }
+.mock__swatch--slate { background: #7a92a8; }
+
 .mock__swatch.is-selected {
   border-color: var(--accent);
   box-shadow: none;
@@ -173,6 +190,7 @@
 .mock__table {
   overflow: hidden;
   margin-bottom: 12px;
+  background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
 }
@@ -184,13 +202,13 @@
 }
 
 .mock__table-head {
-  background: var(--surface-2);
+  background: var(--surface-3);
   color: var(--ink-2);
   font-size: 11.5px;
 }
 
 .mock__table-row {
-  border-top: 1px solid var(--line-3);
+  border-top: 1px solid var(--surface-2);
   font-size: 12px;
 }
 
@@ -200,11 +218,13 @@
 .mock__table strong { color: var(--success-deep); }
 .mock__table-row span { color: var(--ink-2); }
 
+/* Part of a drawing, not a button: it must not answer the pointer. */
 .mock__cart {
   width: 100%;
   height: 38px;
   font-size: 13px;
   font-weight: 600;
+  pointer-events: none;
 }
 
 .mock__toast {
@@ -214,7 +234,7 @@
   gap: 8px;
   padding: 10px 20px 10px 150px;
   background: var(--surface);
-  border-top: 1px solid var(--line-3);
+  border-top: 1px solid var(--surface-2);
   font-size: 12px;
   color: var(--ink-2);
 }
@@ -246,7 +266,7 @@
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-control);
-  box-shadow: var(--sh-lift);
+  box-shadow: var(--sh-card);
 }
 
 .mock__stat-value {
@@ -262,7 +282,7 @@
    ====================================================================== */
 
 .band-categories {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--surface-2);
   padding-block: 96px 8px;
 }
 
@@ -337,11 +357,11 @@
   pointer-events: none;
 }
 
-.aa-band__wallpaper div {
+.aa-band__wallpaper .ptile {
   width: 72px;
   height: 72px;
   border-radius: 16px;
-  background: #fff center / cover no-repeat;
+  background-color: #fff;
 }
 
 .aa-band__copy { position: relative; }
@@ -381,7 +401,7 @@
   padding: 28px;
   background: var(--surface);
   border-radius: var(--r-card);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, .4);
+  box-shadow: var(--sh-soft);
   color: var(--ink);
 }
 
@@ -430,7 +450,7 @@
   width: 26px;
   height: 26px;
   border-radius: var(--r-badge);
-  background: var(--surface-3);
+  background: var(--surface-2);
   font-size: 11px;
   font-weight: 600;
   color: var(--ink-2);
@@ -449,7 +469,7 @@
   gap: 8px;
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--surface-2);
 }
 
 .aa-card__list li {
@@ -474,6 +494,7 @@
   display: flex;
   flex-direction: column;
   padding: 26px;
+  box-shadow: var(--sh-soft);
 }
 
 .case-card__head {
@@ -516,13 +537,15 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 13px;
-  border-top: 1px solid var(--line-3);
+  border-top: 1px solid var(--surface-2);
   font-size: 12.5px;
   color: var(--ink-2);
 }
 
+.case-card__foot a { font-size: 13px; font-weight: 500; }
+
 /* =========================================================================
-   Why stores stay — bento
+   Why stores stay - bento
    ====================================================================== */
 
 .why-grid {
@@ -559,7 +582,7 @@
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-control);
-  box-shadow: var(--sh-lift);
+  box-shadow: var(--sh-card);
   pointer-events: none;
 }
 
@@ -570,7 +593,9 @@
   line-height: 1.2;
 }
 
-.why-photo__stat span { font-size: 11.5px; color: var(--ink-2); }
+/* Block, so the line takes its own 11.5px line-height instead of the taller
+   strut of the 13px parent - two pixels of height on a 55px chip. */
+.why-photo__stat span { display: block; font-size: 11.5px; color: var(--ink-2); }
 
 .why-card {
   display: flex;
@@ -595,7 +620,8 @@
   width: 40px;
   height: 40px;
   border-radius: var(--r-inline);
-  background: var(--surface-2);
+  background: var(--surface);
+  box-shadow: 0 0.7px 1px rgba(0, 0, 0, .08);
 }
 
 .why-card__stat {
@@ -646,6 +672,7 @@
   display: flex;
   flex-direction: column;
   padding: 26px;
+  box-shadow: var(--sh-soft);
 }
 
 .tstm-card .stars { margin-bottom: 14px; }
@@ -669,7 +696,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--surface-3) center / cover no-repeat;
+  object-fit: cover;
+  background: var(--surface-3);
 }
 
 .tstm-card__name { font-size: 14px; font-weight: 600; }

@@ -4,7 +4,7 @@
 
    Stamps the shared chrome (head, promo bar, header, footer) around each page
    body in src/pages and writes plain static HTML to docs/. No framework, no
-   runtime — the output is ordinary files you can drop on any host.
+   runtime - the output is ordinary files you can drop on any host.
 
    docs/ is the folder GitHub Pages is configured to serve, so a push to main
    publishes the site.
@@ -131,7 +131,7 @@ async function build() {
   await writeFile(path.join(OUT, ".nojekyll"), "");
 
   if (!existsSync(path.join(OUT, "index.html"))) {
-    throw new Error("No index.html was produced — check src/pages.");
+    throw new Error("No index.html was produced - check src/pages.");
   }
 }
 

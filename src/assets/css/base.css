@@ -1,5 +1,5 @@
 /* ===========================================================================
-   YayCommerce — base: design tokens, reset, typography, layout utilities
+   YayCommerce - base: design tokens, reset, typography, layout utilities
 
    Tokens are the WordPress design system (Gutenberg / @wordpress/components)
    values, with the YayCommerce brand yellow layered on top as the action
@@ -55,7 +55,7 @@
 
   /* --- Shape (elevated style) -------------------------------------------
      Elevated only rounds the surfaces it lifts. Chrome that never leaves
-     the flat plane — hover fills, code chips, meters, card-brand logos —
+     the flat plane (hover fills, code chips, meters, card-brand logos)
      keeps the underlying WordPress radii, so those two steps are here too. */
   --r-card: 10px;
   --r-control: 8px;
@@ -126,6 +126,28 @@ svg { display: block; }
   outline-offset: 2px;
 }
 
+/* The first stop for a keyboard: jumps past the header. Off-screen until it
+   has focus. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 14px;
+  border-radius: var(--r-control);
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  color: #fff;
+  text-decoration: none;
+}
+
 h1, h2, h3, h4, h5, h6, p, figure, blockquote { margin: 0; }
 
 ul, ol { margin: 0; padding: 0; list-style: none; }
@@ -139,7 +161,7 @@ textarea { font: inherit; color: inherit; }
    Links
 
    Text links are blue and gain an underline on hover. Anything that already
-   signals itself another way — buttons, nav pills, cards, menu rows — opts
+   signals itself another way (buttons, nav pills, cards, menu rows) opts
    out via .is-plain or by being a card/button class.
    ====================================================================== */
 
@@ -250,6 +272,13 @@ a:has(> span):hover { text-decoration: none; }
   justify-content: space-between;
   margin-bottom: 28px;
 }
+
+.section-head__link { font-size: 14px; font-weight: 500; }
+
+/* A section that opens with just its eyebrow and heading. */
+.section-intro { margin-bottom: 28px; }
+.section-intro--roomy { margin-bottom: 32px; }
+.section-intro .eyebrow { margin-bottom: 10px; }
 
 .section--surface { background: var(--surface-2); }
 
