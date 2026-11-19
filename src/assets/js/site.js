@@ -96,7 +96,7 @@
 
     el.addEventListener("focusin", function () {
       clearTimeout(leaving);
-      if (hovers() && !dismissed) menu.set(true);
+      if (hovers() && !dismissed) { closeMenus(menu); menu.set(true); }
     });
 
     /* Focus leaving for another element closes the menu. Focus that simply
@@ -288,6 +288,15 @@
     setDrawer(false, false);
     closeMenus();
     syncChip();
+  });
+
+  /* A page brought back with the Back button is shown exactly as it was
+     left. A menu that was open then was held open by a pointer that has
+     since gone elsewhere, and nothing would close it. */
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    setDrawer(false, false);
+    closeMenus();
   });
 
   /* -----------------------------------------------------------------------

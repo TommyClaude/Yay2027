@@ -778,14 +778,16 @@
      Nothing can open a drawer (script is off, or site.js did not arrive), so
      there is no drawer: the pages and the account links are two rows of
      plain links under the bar. The menu button, the plugin list and the
-     button that duplicates "All Access" are left out. */
-  .no-js .site-header {
+     button that duplicates "All Access" are left out. The slim headers of
+     checkout and thank-you have no drawer and are not touched: their
+     account link is the only way to the account from there. */
+  .no-js .site-header:not(.site-header--slim) {
     flex-wrap: wrap;
     row-gap: 0;
     height: auto;
   }
 
-  .no-js .site-header__logo { height: 72px; }
+  .no-js .site-header:not(.site-header--slim) .site-header__logo { height: 72px; }
 
   .no-js .site-header__panel {
     position: static;
@@ -802,7 +804,7 @@
   .no-js .nav-toggle,
   .no-js .drawer-close,
   .no-js .nav-link__chevron,
-  .no-js .account-chip,
+  .no-js .has-account .account-chip,
   .no-js .account-menu .menu-item svg,
   .no-js .account-menu .menu-sep,
   .no-js .site-header__actions > .btn { display: none; }
@@ -1299,7 +1301,7 @@
 
   .site-header { height: 62px; }
   .site-header__logo img { height: 28px; }
-  .no-js .site-header__logo { height: 62px; }
+  .no-js .site-header:not(.site-header--slim) .site-header__logo { height: 62px; }
 
   /* Slim headers: the support offer is the line that has to give. */
   .site-header--slim .site-header__actions > .muted,

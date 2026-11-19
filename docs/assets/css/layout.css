@@ -613,6 +613,13 @@
 
 .cta-ghost:hover { background: rgba(30, 30, 30, .08); color: var(--brand-ink); }
 
+/* A forced-colours mode removes the fill of one and the inset ring of the
+   other, which is all that makes them buttons. */
+@media (forced-colors: active) {
+  .cta-solid,
+  .cta-ghost { border: 1px solid; }
+}
+
 /* Selector carries the element too: .cta-band p caps the lede at 520px and
    would otherwise outrank a bare class and wrap this row onto two lines. */
 .cta-band p.cta-band__trust {

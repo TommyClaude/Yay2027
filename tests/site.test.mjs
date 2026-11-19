@@ -116,6 +116,46 @@ await check('the Plugins menu is reachable from the keyboard, and Escape closes 
   await close(h);
 });
 
+await check('only one header menu is open at a time, whether it was opened by the pointer or by focus', async () => {
+  const h = await open(browser, 'index');
+  const mega = h.page.locator('.mega');
+  const account = h.page.locator('.account-menu');
+  await h.page.hover('.has-mega > .nav-link'); await h.page.waitForTimeout(150);
+  expect(await mega.isVisible(), 'the Plugins menu did not open on hover');
+  await h.page.hover('.account-chip'); await h.page.waitForTimeout(80);
+  expect((await account.isVisible()) && !(await mega.isVisible()), 'hovering the account button left the Plugins menu open beside it');
+  await h.page.hover('.has-mega > .nav-link'); await h.page.waitForTimeout(150);
+  await h.page.focus('.account-chip'); await h.page.waitForTimeout(80);
+  expect((await account.isVisible()) && !(await mega.isVisible()), 'focusing the account button left the hovered Plugins menu open beside it');
+  await close(h);
+});
+
+await check('a menu closes when focus moves on, stays open for a click on an empty part of it, and never keeps focus inside once it has closed', async () => {
+  const h = await open(browser, 'index');
+  const mega = h.page.locator('.mega');
+  // focus moves on
+  await h.page.focus('.has-mega > .nav-link'); await h.page.waitForTimeout(100);
+  expect(await mega.isVisible(), 'focus did not open the Plugins menu');
+  await h.page.keyboard.press('Shift+Tab'); await h.page.waitForTimeout(100);
+  expect(!(await mega.isVisible()), 'the Plugins menu stayed open after focus left it');
+  // a click on something in the menu that is not a link
+  await h.page.hover('.account-chip'); await h.page.waitForTimeout(150);
+  await h.page.click('.account-menu__head'); await h.page.waitForTimeout(350);
+  expect(await h.page.locator('.account-menu').isVisible(), 'a click on the name at the top of the account menu closed it under the pointer');
+  await h.page.mouse.move(600, 700); await h.page.waitForTimeout(350);
+  expect(!(await h.page.locator('.account-menu').isVisible()), 'the account menu was still open 350ms after the pointer left');
+  // keyboard focus on a link inside, then the pointer crosses the menu and leaves
+  await h.page.focus('.has-mega > .nav-link'); await h.page.waitForTimeout(100);
+  await h.page.keyboard.press('Tab');
+  expect(await h.page.evaluate(() => !!document.activeElement.closest('.mega')), 'Tab did not move into the menu');
+  await h.page.hover('.mega__foot'); await h.page.waitForTimeout(100);
+  await h.page.mouse.move(700, 800); await h.page.waitForTimeout(400);
+  const after = await h.page.evaluate(() => ({ open: !!document.querySelector('.has-mega.is-open'), onTrigger: document.activeElement === document.querySelector('.has-mega > .nav-link'), inHidden: !!document.activeElement.closest('.mega') }));
+  expect(!after.open, 'the menu stayed open after the pointer left it');
+  expect(after.onTrigger && !after.inHidden, 'keyboard focus was left inside the closed menu instead of going back to "Plugins"');
+  await close(h);
+});
+
 await check('the account menu opens on hover and holds its six rows', async () => {
   const h = await open(browser, 'index');
   await h.page.hover('.account-chip');
