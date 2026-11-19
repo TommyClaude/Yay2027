@@ -82,7 +82,16 @@
       dismissed = false;
       if (!hovers()) return;
       clearTimeout(leaving);
-      leaving = setTimeout(function () { menu.set(false); }, 200);
+      leaving = setTimeout(function () {
+        /* Keyboard focus on a link inside the panel would be left in
+           something hidden: it goes back to the trigger, without that
+           focus opening the menu again. */
+        if (el.contains(document.activeElement) && document.activeElement !== trigger) {
+          dismissed = true;
+          trigger.focus();
+        }
+        menu.set(false);
+      }, 200);
     });
 
     el.addEventListener("focusin", function () {
@@ -151,8 +160,10 @@
   document.querySelectorAll(".has-mega, .has-account").forEach(bindMenu);
 
   /* A tap outside an open menu closes it. Only touch needs this: with a
-     mouse, leaving the menu already has. */
-  document.addEventListener("click", function (e) {
+     mouse, leaving the menu already has. It listens for the press rather
+     than the click because Safari on iPad sends no click to the document
+     for a tap on plain page content. */
+  document.addEventListener("pointerdown", function (e) {
     if (narrow.matches || !coarse.matches) return;
     menus.forEach(function (menu) {
       if (menu.isOpen() && !menu.el.contains(e.target)) menu.set(false);

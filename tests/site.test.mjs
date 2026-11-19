@@ -78,7 +78,26 @@ await check('the Plugins menu opens on hover, lists ten plugins, and closes on l
   await close(h);
 });
 
-await check('the Plugins menu is reachable from the keyboard and Escape closes it', async () => {
+await check('the pointer can cross from "Plugins" straight to the far side of its panel, and Escape closes a menu that hover opened', async () => {
+  const h = await open(browser, 'index');
+  const mega = h.page.locator('.mega');
+  await h.page.hover('.has-mega > .nav-link');
+  await h.page.waitForTimeout(150);
+  const from = await h.page.locator('.has-mega > .nav-link').boundingBox();
+  const to = await h.page.locator('.mega__bundle-cta').boundingBox();
+  // A straight line leaves the trigger's cell before it reaches the panel.
+  await h.page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+  await h.page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, { steps: 12 });
+  await h.page.waitForTimeout(350);
+  expect(await mega.isVisible(), 'the menu closed while the pointer was on its way to the far column');
+  expect(await h.page.evaluate(() => !document.activeElement.closest('.has-mega')), 'focus is inside the menu, so this would not test a hover-only menu');
+  await h.page.keyboard.press('Escape');
+  await h.page.waitForTimeout(100);
+  expect(!(await mega.isVisible()), 'Escape did not close a menu that hover opened');
+  await close(h);
+});
+
+await check('the Plugins menu is reachable from the keyboard, and Escape closes it and returns focus to its link', async () => {
   const h = await open(browser, 'index');
   await h.page.focus('.has-mega > .nav-link');
   await h.page.waitForTimeout(150);
@@ -91,10 +110,13 @@ await check('the Plugins menu is reachable from the keyboard and Escape closes i
   await h.page.waitForTimeout(150);
   expect(!(await h.page.locator('.mega').isVisible()), 'Escape did not close the menu');
   expect((await h.page.getAttribute('.has-mega > .nav-link', 'aria-expanded')) === 'false', 'aria-expanded not false after closing');
+  expect(await h.page.evaluate(() => document.activeElement === document.querySelector('.has-mega > .nav-link')), 'Escape did not return focus to the Plugins link');
+  await h.page.waitForTimeout(150);
+  expect(!(await h.page.locator('.mega').isVisible()), 'the returned focus opened the menu again');
   await close(h);
 });
 
-await check('the account menu opens on hover and holds the five account links', async () => {
+await check('the account menu opens on hover and holds its six rows', async () => {
   const h = await open(browser, 'index');
   await h.page.hover('.account-chip');
   await h.page.waitForTimeout(150);
@@ -104,10 +126,30 @@ await check('the account menu opens on hover and holds the five account links', 
   await close(h);
 });
 
+await check('the account button works from the keyboard (Enter, Space, Escape) and from a click that no pointer made', async () => {
+  const h = await open(browser, 'index');
+  const expanded = () => h.page.getAttribute('.account-chip', 'aria-expanded');
+  const onChip = () => h.page.evaluate(() => document.activeElement.classList.contains('account-chip'));
+  await h.page.focus('.account-chip'); await h.page.waitForTimeout(100);
+  expect((await expanded()) === 'true', 'focus did not open the account menu');
+  await h.page.keyboard.press('Enter'); await h.page.waitForTimeout(100);
+  expect((await expanded()) === 'false', 'Enter did not close it');
+  await h.page.keyboard.press('Space'); await h.page.waitForTimeout(100);
+  expect((await expanded()) === 'true', 'Space did not open it');
+  expect((await h.page.evaluate(() => window.scrollY)) === 0, 'Space scrolled the page');
+  await h.page.keyboard.press('Escape'); await h.page.waitForTimeout(100);
+  expect((await expanded()) === 'false' && (await onChip()), 'Escape did not close it and leave focus on the button');
+  // How a screen reader or a switch activates a button: a click with no hover, focus or key before it.
+  await h.page.evaluate(() => document.querySelector('.account-chip').click()); await h.page.waitForTimeout(100);
+  expect((await expanded()) === 'true', 'a click from assistive tech did not open it');
+  await close(h);
+});
+
 // ---------------------------------------------------------------------------
 group('Drawer (the nav below 1025px)');
 await check('phone: the bar keeps logo, cart and menu button; the nav is parked off-screen', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
+  expect(await h.page.locator('.site-header__logo img').isVisible(), 'logo missing from the bar');
   expect(await h.page.locator('.nav-toggle').isVisible(), 'no menu button');
   expect(await h.page.locator('.cart-link--bar').isVisible(), 'cart missing from the bar');
   const x = (await h.page.locator('#site-drawer').boundingBox()).x;
@@ -134,13 +176,22 @@ await check('phone: a closed drawer cannot be reached with the keyboard or a scr
   await close(h);
 });
 
-await check('phone: opens from the button, exposes its state, and holds nav, account links and the CTA', async () => {
+await check('phone: opens from the button as a dialog that takes focus, makes the page behind it inert, and holds nav, account links and the CTA', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   await h.page.tap('.nav-toggle');
   await h.page.waitForTimeout(400);
   const box = await h.page.locator('#site-drawer').boundingBox();
   expect(box.x + box.width <= 394 && box.x >= 0, 'drawer did not slide fully into view');
   expect((await h.page.getAttribute('.nav-toggle', 'aria-expanded')) === 'true', 'aria-expanded not true');
+  const state = await h.page.evaluate(() => {
+    const panel = document.getElementById('site-drawer');
+    const chip = panel.querySelector('.account-chip');
+    return { role: panel.getAttribute('role'), modal: panel.getAttribute('aria-modal'), focusInside: panel.contains(document.activeElement), chipRole: chip.getAttribute('role'), chipTab: chip.getAttribute('tabindex'), behind: document.querySelector('main').inert === true && document.querySelector('.site-footer').inert === true };
+  });
+  expect(state.role === 'dialog' && state.modal === 'true', `the open drawer has role ${state.role}, aria-modal ${state.modal}`);
+  expect(state.focusInside, 'focus did not move into the drawer');
+  expect(state.chipRole === null && state.chipTab === null, 'the account name still poses as a button inside the drawer');
+  expect(state.behind, 'the page behind the open drawer is not inert');
   expect(await h.page.locator('.drawer-scrim').isVisible(), 'no scrim behind the drawer');
   for (const t of ['All Access', 'Docs', 'Blog', 'Support']) {
     expect(await h.page.locator('.site-nav > .nav-link', { hasText: t }).first().isVisible(), `nav link "${t}" missing`);
@@ -175,17 +226,21 @@ await check('phone: Plugins expands in place and nothing inside the drawer spill
 await check('phone: closes from its ✕, the scrim and Escape, and returns focus to the menu button', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   const offscreen = async () => (await h.page.locator('#site-drawer').boundingBox()).x >= 392;
+  const onToggle = () => h.page.evaluate(() => document.activeElement.classList.contains('nav-toggle'));
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
   await h.page.tap('.drawer-close'); await h.page.waitForTimeout(400);
   expect(await offscreen(), '✕ did not close it');
-  expect(await h.page.evaluate(() => document.activeElement.classList.contains('nav-toggle')), 'focus did not return to the menu button');
+  expect(await onToggle(), 'after ✕, focus did not return to the menu button');
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
   await h.page.touchscreen.tap(14, 500); await h.page.waitForTimeout(400);
   expect(await offscreen(), 'tapping the scrim did not close it');
+  expect(await onToggle(), 'after the scrim, focus did not return to the menu button');
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
   await h.page.keyboard.press('Escape'); await h.page.waitForTimeout(400);
   expect(await offscreen(), 'Escape did not close it');
+  expect(await onToggle(), 'after Escape, focus did not return to the menu button');
   expect((await h.page.getAttribute('.nav-toggle', 'aria-expanded')) === 'false', 'aria-expanded not reset');
+  expect(await h.page.evaluate(() => document.querySelector('main').inert === false), 'the page stayed inert after the drawer closed');
   await close(h);
 });
 
@@ -290,20 +345,28 @@ await check('phone: a drawer row reached with Tab is never under the pinned butt
   }
 });
 
-await check('phone: keyboard focus stays inside the open drawer', async () => {
+await check('phone: Tab and Shift+Tab reach every control of the open drawer and never leave it', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
-  let outside = 0;
-  for (let i = 0; i < 40; i++) {
-    await h.page.keyboard.press('Tab');
-    const inside = await h.page.evaluate(() => !!document.activeElement.closest('#site-drawer'));
-    if (!inside) outside++;
+  for (const key of ['Tab', 'Shift+Tab']) {
+    const seen = new Set();
+    let outside = 0;
+    for (let i = 0; i < 30; i++) {
+      await h.page.keyboard.press(key);
+      const r = await h.page.evaluate(() => {
+        const el = document.activeElement;
+        return { inside: !!el.closest('#site-drawer'), id: `${(el.textContent || '').trim().slice(0, 30)}|${el.getAttribute('aria-label') || ''}|${el.className}` };
+      });
+      if (r.inside) seen.add(r.id); else outside++;
+    }
+    expect(outside === 0, `${key}: focus left the drawer on ${outside} of 30 presses`);
+    // close button, five pages, six account rows, the main button
+    expect(seen.size === 13, `${key}: reached ${seen.size} of the drawer's 13 controls`);
   }
   await close(h);
-  expect(outside === 0, `focus left the drawer on ${outside} of 40 Tab presses`);
 });
 
-await check('phone: following a drawer link navigates and the next page starts closed', async () => {
+await check('phone: a link in the drawer goes to its page, which opens with the drawer closed', async () => {
   const h = await open(browser, 'index', { width: 393, height: 852 });
   await h.page.tap('.nav-toggle'); await h.page.waitForTimeout(400);
   await h.page.tap('.site-nav > .nav-link:has-text("Docs")');
@@ -354,33 +417,61 @@ await check('FAQ: one answer open at a time, state exposed to assistive tech', a
   await close(h);
 });
 
-await check('with JavaScript off, every page still shows its content and every nav link is a real link', async () => {
+await check('with JavaScript off, Home shows its content, every nav link but Blog has a destination, and phones get the nav as plain links', async () => {
   const h = await open(browser, 'index', { js: false });
   const info = await h.page.evaluate(() => ({
     h1: (document.querySelector('h1') || {}).offsetHeight || 0,
     cards: document.querySelectorAll('.plugin-card').length,
     navLinks: [...document.querySelectorAll('.site-nav > .nav-link, .has-mega > .nav-link')].map((a) => a.getAttribute('href')),
   }));
+  await h.page.focus('.account-chip');
+  const accountOpens = await h.page.locator('.account-menu').isVisible();
   await close(h);
   expect(info.h1 > 0 && info.cards === 6, 'content missing without JavaScript');
-  expect(info.navLinks.every((href) => href && href !== '#' || true), 'nav link without a destination');
+  const dead = info.navLinks.filter((href) => !href || href === '#');
+  expect(info.navLinks.length === 5 && dead.length <= 1, `${dead.length} of ${info.navLinks.length} nav links go nowhere`);   // Blog has no page yet
+  expect(accountOpens, 'desktop: the account menu cannot be opened without JavaScript');
+  for (const width of [393, 768]) {
+    const p = await open(browser, 'index', { js: false, width, height: 852 });
+    const r = await p.page.evaluate(() => {
+      const shown = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return cs.visibility === 'visible' && cs.display !== 'none' && b.width > 0 && b.height > 0 && b.left >= 0 && b.right <= innerWidth + 0.5; };
+      const links = [...document.querySelectorAll('.site-nav > .nav-link, .has-mega > .nav-link, .account-menu .menu-item')];
+      return { shown: links.filter(shown).length, total: links.length, button: shown(document.querySelector('.nav-toggle')), spill: document.documentElement.scrollWidth - innerWidth };
+    });
+    await close(p);
+    expect(r.shown === r.total && r.total === 11, `${width}px: ${r.shown} of ${r.total} nav and account links can be seen`);
+    expect(!r.button, `${width}px: the menu button shows although nothing can open a menu`);
+    expect(r.spill <= 0, `${width}px: the page scrolls sideways by ${r.spill}px`);
+  }
 });
 
-await check('keyboard: the first Tab stop is a skip link that jumps to the content', async () => {
-  const h = await open(browser, 'index');
-  await h.page.keyboard.press('Tab');
-  const first = await h.page.evaluate(() => {
-    const a = document.activeElement;
-    const r = a.getBoundingClientRect();
-    return { text: a.textContent.trim(), href: a.getAttribute('href'), onScreen: r.top >= 0 && r.left >= 0 && r.width > 0 };
-  });
-  expect(first.text === 'Skip to content' && first.href === '#main', `first stop is "${first.text}"`);
-  expect(first.onScreen, 'the skip link is not visible while it has focus');
-  expect(await h.page.evaluate(() => !!document.getElementById('main')), 'no #main to jump to');
-  await close(h);
+await check('keyboard: the first Tab stop is a skip link; using it puts the next Tab inside the content and leaves the address alone', async () => {
+  // My account reads the address to choose its view, so it is the page a careless skip link breaks.
+  for (const [name, hash] of [['index', ''], ['account', '#licenses']]) {
+    const h = await open(browser, name, { hash });
+    await h.page.keyboard.press('Tab');
+    const first = await h.page.evaluate(() => {
+      const a = document.activeElement;
+      const r = a.getBoundingClientRect();
+      return { text: a.textContent.trim(), href: a.getAttribute('href'), onScreen: r.top >= 0 && r.left >= 0 && r.width > 0 };
+    });
+    expect(first.text === 'Skip to content' && first.href === '#main', `${name}: first stop is "${first.text}"`);
+    expect(first.onScreen, `${name}: the skip link is not visible while it has focus`);
+    await h.page.keyboard.press('Enter'); await h.page.waitForTimeout(150);
+    await h.page.keyboard.press('Tab');
+    const after = await h.page.evaluate(() => ({
+      inContent: !!document.activeElement.closest('main'),
+      hash: location.hash,
+      view: (document.querySelector('[data-view-link].is-active') || { dataset: {} }).dataset.viewLink || '',
+    }));
+    await close(h);
+    expect(after.inContent, `${name}: the Tab after the skip link landed outside the content`);
+    expect(after.hash === hash, `${name}: the address went from "${hash}" to "${after.hash}"`);
+    if (name === 'account') expect(after.view === 'licenses', `account: the skip link changed the view to "${after.view}"`);
+  }
 });
 
-await check('the promo link carries its coupon, and every page on the way passes it on to checkout', async () => {
+await check('the promo link carries its coupon; All Access passes it on, a detour through another plugin keeps it, a malformed code is dropped', async () => {
   const h = await open(browser, 'index');
   const href = await h.page.getAttribute('.promo__link', 'href');
   await close(h);
@@ -394,22 +485,38 @@ await check('the promo link carries its coupon, and every page on the way passes
   const untouched = await plain.page.evaluate(() => [...document.querySelectorAll('a[href*="checkout.html"]')].every((a) => !/coupon=/.test(a.getAttribute('href'))));
   await close(plain);
   expect(untouched, 'checkout links gained a coupon nobody asked for');
+  // The same tab goes on to look at a plugin before buying.
+  const tab = await open(browser, 'all-access', { hash: '?coupon=SUNNY30' });
+  await tab.page.goto(tab.page.url().replace(/all-access\.html.*$/, 'yaypricing.html'));
+  await tab.page.waitForTimeout(200);
+  const later = await tab.page.evaluate(() => [...document.querySelectorAll('a[href*="checkout.html"]')].map((a) => a.getAttribute('href')));
+  await close(tab);
+  expect(later.length > 0 && later.every((l) => /coupon=SUNNY30/.test(l)), `after a detour to the product page: ${later.filter((l) => !/coupon=SUNNY30/.test(l)).length} of ${later.length} checkout links lost the code`);
+  for (const code of ['%3Cscript%3Ealert(1)%3C%2Fscript%3E', 'A%20B', 'x'.repeat(40)]) {
+    const bad = await open(browser, 'all-access', { hash: `?coupon=${code}` });
+    const dropped = await bad.page.evaluate(() => [...document.querySelectorAll('a[href*="checkout.html"]')].every((a) => !/coupon=/.test(a.getAttribute('href'))));
+    await close(bad);
+    expect(dropped, `a malformed code (${code.slice(0, 16)}) was passed on to checkout`);
+  }
 });
 
-await check('phone: the promo bar is one line with the countdown, and all of it is the link', async () => {
-  for (const width of [320, 344, 352, 360, 375, 393, 430, 620]) {
-    const h = await open(browser, 'index', { width, height: 852 });
+await check('phone: at every width from 320 to 620px the promo bar is one line with the countdown, and all of it is the link', async () => {
+  const h = await open(browser, 'index', { width: 320, height: 852 });
+  const bad = [];
+  for (let width = 320; width <= 620; width += width < 440 ? 1 : 10) {
+    await h.page.setViewportSize({ width, height: 852 });
     const r = await h.page.evaluate(() => {
       const bar = document.querySelector('.promo').getBoundingClientRect();
       const timer = document.querySelector('.promo [data-countdown]').getBoundingClientRect();
       const hit = document.elementFromPoint(40, bar.top + bar.height / 2);
       return { h: bar.height, timer: timer.width, hit: hit && hit.closest('a') ? hit.closest('a').className : (hit ? hit.className : '') };
     });
-    await close(h);
-    expect(r.h <= 40, `${width}px: the bar is ${Math.round(r.h)}px tall, so it wrapped`);
-    expect(r.timer > 0, `${width}px: the countdown is hidden`);
-    expect(/promo__link/.test(r.hit), `${width}px: tapping the offer text does not follow the link (hit ${r.hit || 'nothing'})`);
+    if (r.h > 40) bad.push(`${width}px: the bar is ${Math.round(r.h)}px tall, so it wrapped`);
+    if (!(r.timer > 0)) bad.push(`${width}px: the countdown is hidden`);
+    if (!/promo__link/.test(r.hit)) bad.push(`${width}px: tapping the offer text does not follow the link (hit ${r.hit || 'nothing'})`);
   }
+  await close(h);
+  expect(bad.length === 0, bad.slice(0, 5).join(' ; '));
 });
 
 await check('touch tablet: tapping the account chip opens its menu, tapping elsewhere closes it', async () => {
@@ -439,6 +546,23 @@ await check('the footer signup field shows the same focus colour as every other 
 
 // ---------------------------------------------------------------------------
 group('Home');
+await check('text links with an arrow still underline on hover, as every text link does', async () => {
+  // A link that holds a child element is treated as a card and loses its
+  // underline, so these have to stay plain text with their arrow.
+  const h = await open(browser, 'index');
+  const plain = [];
+  for (const sel of ['.band-featured .section-head__link', '.case-card__foot a', '.section-head__link[aria-label="Visit the blog"]']) {
+    const link = h.page.locator(sel).first();
+    await link.scrollIntoViewIfNeeded();
+    await link.hover();
+    await h.page.waitForTimeout(150);
+    const line = await link.evaluate((a) => getComputedStyle(a).textDecorationLine);
+    if (line !== 'underline') plain.push(`${sel} is "${line}"`);
+  }
+  await close(h);
+  expect(plain.length === 0, plain.join(' ; '));
+});
+
 await check('copy uses plain hyphens, never em dashes (the design rule)', async () => {
   const h = await open(browser, 'index');
   const hits = await h.page.evaluate(() => {
@@ -534,9 +658,11 @@ await check('phone: nothing in the storefront illustration covers anything else'
       const out = [];
       const overlap = (a, b) => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
       for (const t of tags) for (const c of content) {
-        // measure the text itself, not the full-width box that holds it
+        // Measure the text itself, not the full-width box that holds it, except
+        // where the box clips its text (the address pill): there the box is what shows.
         const range = document.createRange(); range.selectNodeContents(c);
-        const rects = c.childNodes.length && c.textContent.trim() ? [...range.getClientRects()] : [c.getBoundingClientRect()];
+        const clips = getComputedStyle(c).overflowX !== 'visible';
+        const rects = !clips && c.childNodes.length && c.textContent.trim() ? [...range.getClientRects()] : [c.getBoundingClientRect()];
         if (rects.some((r) => overlap(t.getBoundingClientRect(), r))) out.push(`${t.textContent.trim().slice(0, 12)} over ${c.className.split(' ')[0] || c.tagName}`);
       }
       for (let i = 0; i < tags.length; i++) for (let j = i + 1; j < tags.length; j++) if (overlap(tags[i].getBoundingClientRect(), tags[j].getBoundingClientRect())) out.push(`${tags[i].textContent.trim().slice(0, 12)} over ${tags[j].textContent.trim().slice(0, 12)}`);
@@ -579,11 +705,18 @@ await check('the hero illustration reads as one described image, not as loose wo
   const h = await open(browser, 'index');
   const r = await h.page.evaluate(() => {
     const m = document.querySelector('.mock');
-    return { role: m.getAttribute('role'), label: m.getAttribute('aria-label') || '' };
+    return {
+      role: m.getAttribute('role'),
+      label: m.getAttribute('aria-label') || '',
+      loose: [...m.children].filter((c) => c.getAttribute('aria-hidden') !== 'true').map((c) => c.className),
+      focusable: m.querySelectorAll('a[href], button, input, select, textarea, [tabindex]').length,
+    };
   });
   await close(h);
   expect(r.role === 'img', `role is ${r.role}`);
   expect(['YayCurrency', 'YaySwatches', 'YayPricing', 'YayBoost'].every((n) => r.label.includes(n)), 'the description does not name all four plugins');
+  expect(r.loose.length === 0, `inside the image and not hidden from assistive tech: ${r.loose.join(', ')}`);
+  expect(r.focusable === 0, `${r.focusable} focusable elements inside the drawing`);
 });
 
 await check('between phone and desktop the storefront illustration never clips or wraps its contents', async () => {
@@ -615,7 +748,6 @@ await check('between phone and desktop the hero rows wrap as whole items, never 
   for (const width of [861, 900, 960, 1024, 1100]) {
     const h = await open(browser, 'index', { width, height: 900 });
     const r = await h.page.evaluate(() => {
-      const oneLine = (el) => el.getBoundingClientRect().height < 1.9 * parseFloat(getComputedStyle(el).lineHeight || 18);
       const out = [];
       if (document.querySelector('.hero__badge').getBoundingClientRect().height > 40) out.push('badge wraps');
       for (const el of document.querySelectorAll('.trust-row .trust-item')) if (el.getBoundingClientRect().height > 24) out.push(`"${el.textContent.trim()}" breaks`);

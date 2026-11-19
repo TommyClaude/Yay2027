@@ -5,6 +5,7 @@
 // locally, so a run is deterministic and works offline.
 
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -76,7 +77,8 @@ export async function open(browser, name, { width = 1440, height = 900, touch = 
   page.on('console', (m) => {
     if (m.type() === 'error' && !/net::ERR|Failed to load resource/.test(m.text())) errors.push(m.text());
   });
-  await page.goto('file://' + path.join(SITE, `${name}.html`) + hash, { waitUntil: 'load' });
+  // pathToFileURL, not 'file://' + path: the latter is not a valid address on Windows.
+  await page.goto(pathToFileURL(path.join(SITE, `${name}.html`)).href + hash, { waitUntil: 'load' });
   await page.waitForTimeout(150);
   return { page, context, errors };
 }

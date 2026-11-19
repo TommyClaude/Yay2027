@@ -19,7 +19,7 @@ ten pages, built as plain static HTML, CSS and JavaScript.
 ## Working on it
 
 ```bash
-node build.mjs      # rebuild docs/ from src/ (Node 18+, no dependencies)
+node build.mjs      # rebuild docs/ from src/ (Node 18+, no dependencies; the checks need Node 20+)
 ```
 
 Edit `src/`, never `docs/`: the latter is generated, and GitHub Pages serves it
@@ -49,8 +49,9 @@ npx http-server docs -p 8080
 ## Checking a change
 
 ```bash
-npm install         # once: Playwright, the only dev dependency
-npm test            # rebuilds, then runs tests/site.test.mjs in headless Chromium
+npm install                        # once: Playwright, the only dev dependency
+npx playwright install chromium    # once: the browser it drives
+npm test                           # rebuilds, then runs tests/site.test.mjs in headless Chromium
 ```
 
 For a change to shared CSS, capture every page before and after and compare:

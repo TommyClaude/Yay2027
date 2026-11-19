@@ -23,6 +23,11 @@ import { launch, open, settle, PAGES } from './lib.mjs';
 const WIDTHS = [1440, 768, 390];
 const [cmd, a, b] = process.argv.slice(2);
 
+if ((cmd === 'snap' && !a) || (cmd === 'diff' && (!a || !b)) || !['snap', 'diff'].includes(cmd)) {
+  console.error('usage: node tests/visual.mjs snap <folder>\n       node tests/visual.mjs diff <before> <after>');
+  process.exit(2);
+}
+
 if (cmd === 'snap') {
   mkdirSync(a, { recursive: true });
   const browser = await launch();

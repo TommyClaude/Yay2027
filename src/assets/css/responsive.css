@@ -17,12 +17,16 @@
       620px  phone: one column, tighter type, thumb-sized controls
       380px  small phones: two tight single lines take a safer form
 
-   Within each step the rules follow the page order of the build.
+   Within each step the shared chrome comes first, then Home, then the other
+   pages; a comment heads each group.
 
    Four pieces answer to their own width instead of the screen's, because
    the screen does not say how much room they have: the hero copy, the hero
    illustration, the testimonial card and the case-study card. Their rules
    come first, then one guard for the header bar that holds at every width.
+
+   Two modes are provided for alongside the steps: a page where script does
+   not run (.no-js, in the 1024 step) and forced colours.
    ======================================================================== */
 
 /* =========================================================================
@@ -236,6 +240,18 @@
   @media (min-width: 861px) and (max-width: 1097px) {
     .hero { grid-template-columns: 1fr; }
   }
+
+  /* The proof badge picks its short form by its column as well. Such a
+     browser gets it on phones, by screen width. */
+  @media (max-width: 620px) {
+    .hero__badge {
+      padding: 5px 12px 5px 8px;
+      border-radius: 17px;
+    }
+
+    .hero__badge-text { font-size: 12.5px; }
+    .hero__badge-more { display: none; }
+  }
 }
 
 /* =========================================================================
@@ -344,7 +360,7 @@
   /* Home: the body gutter eases from the header's 40px to the design's 64px
      instead of jumping there at 1181, which made the column 63px narrower
      than one pixel earlier. */
-  .page-home { --gutter: clamp(var(--gutter-edge), calc((100vw - 1152px) / 2), 64px); }
+  .is-home { --gutter: clamp(var(--gutter-edge), calc((100vw - 1152px) / 2), 64px); }
 
   /* Category cards: a little less padding keeps the names on one line (all
      but the longest, which wraps in the design too). */
@@ -372,12 +388,10 @@
 
   /* Home: below the widths the design was drawn at, the body takes the
      header's edge so the logo, the headline and the footer line up. */
-  .page-home { --gutter: var(--gutter-edge); }
+  .is-home { --gutter: var(--gutter-edge); }
 
   .site-header { gap: 22px; }
   .site-header__actions { gap: 10px; }
-
-  .mega { width: min(800px, calc(100vw - 2 * var(--gutter-edge))); }
 
   /* Home: four category cards across need 250px each to keep their names on
      one line. Under 1150px they go two-up. */
@@ -908,7 +922,6 @@
     --gutter-edge: 24px;
   }
 
-  .h-hero { font-size: 38px; }
   .h-section { font-size: 26px; }
   .h-band { font-size: 28px; }
   .lede { font-size: 16px; }
@@ -1024,16 +1037,16 @@
 
   /* Closing band: its heading steps down with the others, and the proof
      line breaks between items, never inside one. */
-  .page-home .cta-band { padding-block: 72px 64px; }
-  .page-home .cta-band h2 { font-size: 30px; }
-  .page-home .cta-band__trust svg { flex-shrink: 0; }
+  .is-home .cta-band { padding-block: 72px 64px; }
+  .is-home .cta-band h2 { font-size: 30px; }
+  .is-home .cta-band__trust svg { flex-shrink: 0; }
 
-  .page-home .cta-band p.cta-band__trust {
+  .is-home .cta-band p.cta-band__trust {
     flex-wrap: wrap;
     gap: 6px 16px;
   }
 
-  .page-home .cta-band__trust > span { white-space: nowrap; }
+  .is-home .cta-band__trust > span { white-space: nowrap; }
 
   /* The short wording of the second fact until the long one fits the row. */
   @media (max-width: 760px) {
@@ -1221,8 +1234,6 @@
   .plan,
   .shop-aa__card { padding-block: 20px; }
 
-  .blog-card__body { padding: 16px 16px 18px; }
-
   .h-hero { font-size: 31px; }
   .h-section { font-size: 23px; }
   .h-band { font-size: 24px; }
@@ -1354,8 +1365,6 @@
   }
 
   .hero__actions .btn,
-  .hero__actions .cta-solid,
-  .hero__actions .cta-ghost,
   .cta-band__actions .cta-solid,
   .cta-band__actions .cta-ghost { justify-content: center; width: 100%; }
 
@@ -1516,16 +1525,16 @@
   /* Closing band: the arc of icons fits between the gutters, and the proof
      line keeps the two facts the paragraph above does not already give (it
      has just promised the refund). */
-  .page-home .cta-band { padding-block: 56px 48px; }
+  .is-home .cta-band { padding-block: 56px 48px; }
 
-  .page-home .cta-band h2 {
+  .is-home .cta-band h2 {
     font-size: 26px;
     text-wrap: balance;
   }
 
-  .page-home .cta-band p { margin-bottom: 26px; font-size: 15px; }
+  .is-home .cta-band p { margin-bottom: 26px; font-size: 15px; }
 
-  .page-home .cta-band__icons {
+  .is-home .cta-band__icons {
     gap: 10px;
     max-width: 348px;
     margin: 0 auto 28px;
@@ -1533,7 +1542,7 @@
 
   /* Each tile takes its drawn size as a share of the row, so the arc keeps
      its shape at whatever width the screen leaves it. */
-  .page-home .cta-band__icons .ptile {
+  .is-home .cta-band__icons .ptile {
     flex: var(--n) 1 0;
     width: auto;
     height: auto;
@@ -1543,13 +1552,13 @@
 
   /* The proof line keeps the size it was drawn at; the rule above is for
      the paragraph. */
-  .page-home .cta-band p.cta-band__trust {
+  .is-home .cta-band p.cta-band__trust {
     gap: 6px 10px;
     margin-bottom: 0;
     font-size: 13px;
   }
 
-  .page-home .cta-band__trust > .cta-band__refund { display: none; }
+  .is-home .cta-band__trust > .cta-band__refund { display: none; }
 
   /* Four rows in a list need less air between them than four tiles, and
      pad like every other card on a phone. */
@@ -1762,9 +1771,15 @@
 
 @media (max-width: 380px) {
   /* Promo bar: the whole bar is still the link; the arrow is what there is
-     no room for. */
+     no room for. The link, now empty, gives up its place in the row, so the
+     offer and the clock stay centred. */
   .promo__inner { font-size: 11px; }
   .promo__arrow { display: none; }
+
+  .promo__link {
+    padding: 0;
+    margin-left: -8px;
+  }
 
   /* Footer: without its globe the language picker shares a row with the
      social icons down to 352px. */
@@ -1774,12 +1789,12 @@
 @media (max-width: 359px) {
   /* Closing band: the two facts get a line each, so nothing needs
      separating. */
-  .page-home .cta-band p.cta-band__trust {
+  .is-home .cta-band p.cta-band__trust {
     flex-direction: column;
     gap: 4px;
   }
 
-  .page-home .cta-band__trust > .cta-band__sep { display: none; }
+  .is-home .cta-band__trust > .cta-band__sep { display: none; }
 }
 
 @media (max-width: 351px) {
@@ -1794,5 +1809,5 @@
 }
 
 @media (max-width: 340px) {
-  .page-home .cta-band__icons { gap: 8px; }
+  .is-home .cta-band__icons { gap: 8px; }
 }
