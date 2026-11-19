@@ -180,6 +180,20 @@
   .mock__tag--boost { bottom: 2px; }
 }
 
+/* A browser without container queries (Safari before 16, 2022) cannot pick
+   between the two drawings, and the large one does not fit a narrow column.
+   Where its column would be under 480px it goes without the illustration
+   rather than show a broken one; the copy stands on its own. */
+@supports not (container-type: inline-size) {
+  @media (max-width: 511px), (min-width: 861px) and (max-width: 1097px) {
+    .hero__visual { display: none; }
+  }
+
+  @media (min-width: 861px) and (max-width: 1097px) {
+    .hero { grid-template-columns: 1fr; }
+  }
+}
+
 /* =========================================================================
    Testimonial card - by its own width
 
