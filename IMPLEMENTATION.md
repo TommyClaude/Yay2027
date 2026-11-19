@@ -142,8 +142,8 @@ Steps by screen width, each named for what actually breaks there: **1200px**
 (the header cannot hold its search field), **1180px** (the 1200px column stops
 clearing its gutters), **1024px** (the horizontal nav runs out of room and
 becomes a drawer), **860px** (side-by-side layouts stack), **620px** (phone:
-one column, smaller type, thumb-sized controls) and **340px** (the smallest
-phones still in use).
+one column, smaller type, thumb-sized controls) and **380px** (small phones,
+where two tight single lines take a safer form).
 
 Three pieces of Home answer to their own width instead of the screen's, with
 container queries, because the screen does not say how much room they have:

@@ -14,7 +14,7 @@
      1024px  the horizontal nav runs out of room; it becomes a drawer
       860px  side-by-side page layouts stop working; they stack
       620px  phone: one column, tighter type, thumb-sized controls
-      340px  the smallest phones still in use
+      380px  small phones: two tight single lines take a safer form
 
    Within each step the rules follow the page order of the build.
 
@@ -1342,16 +1342,29 @@
 }
 
 /* =========================================================================
-   340 - the smallest phones still in use
+   380 - small phones
+
+   Two single lines that fit a 390px screen with room to spare fit a 360px
+   one only just, and not at all in a slightly wider font. Here they take a
+   form that cannot wrap badly.
    ====================================================================== */
 
-@media (max-width: 340px) {
-  /* The whole bar is still the link; the arrow is what there is no room for. */
+@media (max-width: 379px) {
+  /* Promo bar: the whole bar is still the link; the arrow is what there is
+     no room for. */
   .promo__inner { font-size: 11px; }
   .promo__arrow { display: none; }
 
-  .page-home .cta-band__icons { gap: 8px; }
+  /* Closing band: the two facts get a line each, so nothing needs
+     separating. */
+  .page-home .cta-band p.cta-band__trust {
+    flex-direction: column;
+    gap: 4px;
+  }
 
-  /* The two facts no longer share a line, so nothing needs separating. */
   .page-home .cta-band__trust > .cta-band__sep { display: none; }
+}
+
+@media (max-width: 340px) {
+  .page-home .cta-band__icons { gap: 8px; }
 }

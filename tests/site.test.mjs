@@ -35,7 +35,7 @@ for (const name of PAGES) {
 
 // Phones, tablets and desktops, plus the width on either side of every step
 // in responsive.css: layouts tend to break just past a breakpoint.
-const WIDTHS = [320, 340, 341, 360, 393, 430, 620, 621, 645, 768, 860, 861, 875, 1024, 1025, 1180, 1181, 1190, 1200, 1201, 1280, 1440, 1920];
+const WIDTHS = [320, 340, 341, 360, 379, 380, 393, 430, 620, 621, 645, 768, 860, 861, 875, 1024, 1025, 1180, 1181, 1190, 1200, 1201, 1280, 1440, 1920];
 for (const name of PAGES) {
   await check(`${name}: no sideways scroll at ${WIDTHS.length} widths (${WIDTHS[0]}–${WIDTHS[WIDTHS.length - 1]}px)`, async () => {
     const bad = [];
@@ -519,18 +519,25 @@ await check('tablet: no card is left alone beside an empty slot', async () => {
   expect(r.length === 0, `a row is not filled in ${r.join(', ')}`);
 });
 
-await check('phone: the closing band keeps its icons between the gutters and its proof on one line', async () => {
-  for (const width of [320, 360, 393, 430]) {
+await check('phone: the closing band keeps its icons between the gutters and its proof lines whole', async () => {
+  for (const width of [320, 360, 375, 393, 430]) {
     const h = await open(browser, 'index', { width, height: 852 });
     const r = await h.page.evaluate(() => {
       const vw = document.documentElement.clientWidth;
       const tiles = [...document.querySelectorAll('.cta-band__icons .ptile')].map((t) => t.getBoundingClientRect());
-      const trust = document.querySelector('.cta-band__trust').getBoundingClientRect();
-      return { cut: tiles.filter((b) => b.left < 8 || b.right > vw - 8).length, trustH: trust.height };
+      const trust = document.querySelector('.cta-band__trust');
+      const items = [...trust.children].filter((el) => el.getBoundingClientRect().width > 0);
+      return {
+        cut: tiles.filter((b) => b.left < 8 || b.right > vw - 8).length,
+        trustH: trust.getBoundingClientRect().height,
+        dots: items.filter((el) => el.classList.contains('cta-band__sep')).length,
+        wrapped: items.filter((el) => el.getBoundingClientRect().height > 26).length,
+      };
     });
     await close(h);
     expect(r.cut === 0, `${width}px: ${r.cut} icons run into the screen edge`);
-    if (width >= 360) expect(r.trustH < 26, `${width}px: the proof line is ${Math.round(r.trustH)}px tall, so it wrapped`);
+    if (width >= 380) expect(r.trustH < 26, `${width}px: the proof line is ${Math.round(r.trustH)}px tall, so it wrapped`);
+    else expect(r.dots === 0 && r.wrapped === 0, `${width}px: stacked proof lines still show ${r.dots} separators, and ${r.wrapped} of them wrap`);
   }
 });
 
