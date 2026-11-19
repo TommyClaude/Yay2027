@@ -635,7 +635,18 @@ await check('between phone and desktop the hero rows wrap as whole items, never 
 const wrapSweep = () => {
   const out = [];
   const tall = (el, limit) => el && el.getBoundingClientRect().height > limit;
-  const lines = (el) => { const r = document.createRange(); r.selectNodeContents(el); return new Set([...r.getClientRects()].map((q) => Math.round(q.top / 4))).size; };
+  // Lines of visible text. Words written only for screen readers are clipped
+  // to a 1px box but still report full-size rectangles, so they are skipped.
+  const lines = (el) => {
+    const tops = new Set();
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent.trim() || node.parentElement.closest('.visually-hidden')) continue;
+      const r = document.createRange(); r.selectNodeContents(node);
+      for (const q of r.getClientRects()) if (q.width > 1 && q.height > 1) tops.add(Math.round(q.top / 4));
+    }
+    return tops.size;
+  };
   for (const el of document.querySelectorAll('.site-nav > .nav-link, .has-mega > .nav-link')) if (el.getBoundingClientRect().width && tall(el, 50)) out.push(`nav "${el.textContent.trim()}" wraps`);
   for (const card of document.querySelectorAll('.tstm-card')) {
     const badge = card.querySelector('.badge'), star = card.querySelector('.stars svg:last-child');

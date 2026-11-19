@@ -38,10 +38,11 @@
   </div>
 
   <!-- One storefront, every plugin working on it at once. It is a drawing,
-       not an interface, so assistive tech gets one sentence in its place. -->
+       not an interface, so assistive tech gets one sentence in its place and
+       none of the words drawn inside it. -->
   <div class="hero__visual">
   <div class="mock" role="img" aria-label="A product page with four plugins at work: YayCurrency on the price, YaySwatches on the color options, YayPricing on the quantity discounts and YayBoost on the free shipping reminder. Average order value is up 23% across case studies.">
-    <div class="mock__window">
+    <div class="mock__window" aria-hidden="true">
       <div class="mock__chrome">
         <span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span>
         <span class="mock__url">yaystore.com<span class="mock__url-path">/product</span>/linen-shirt</span>
@@ -85,12 +86,12 @@
       </div>
     </div>
 
-    <span class="mock__tag mock__tag--currency">YayCurrency</span>
-    <span class="mock__tag mock__tag--swatches">YaySwatches</span>
-    <span class="mock__tag mock__tag--pricing">YayPricing</span>
-    <span class="mock__tag mock__tag--boost">YayBoost</span>
+    <span aria-hidden="true" class="mock__tag mock__tag--currency">YayCurrency</span>
+    <span aria-hidden="true" class="mock__tag mock__tag--swatches">YaySwatches</span>
+    <span aria-hidden="true" class="mock__tag mock__tag--pricing">YayPricing</span>
+    <span aria-hidden="true" class="mock__tag mock__tag--boost">YayBoost</span>
 
-    <div class="mock__stat">
+    <div class="mock__stat" aria-hidden="true">
       <div class="mock__stat-value">+23% AOV</div>
       <div class="mock__stat-label">avg. lift across case studies</div>
     </div>
@@ -137,7 +138,7 @@
 <section id="catalog" class="band-featured wrap">
   <div class="section-head">
     <h2 class="h-section">Featured plugins</h2>
-    <a href="shop.html" class="section-head__link">View all plugins →</a>
+    <a href="shop.html" class="section-head__link">View all plugins <span aria-hidden="true">→</span></a>
   </div>
 
   <div class="plugin-grid">
@@ -150,7 +151,7 @@
       <p class="plugin-card__tag">Design pro WooCommerce emails&nbsp;- premade patterns &amp; 80+ integrations.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>4.8</strong><span class="plugin-card__count">(1,842)</span>
+        <strong aria-hidden="true">4.8</strong><span class="plugin-card__count" aria-hidden="true">(1,842)</span><span class="visually-hidden">Rated 4.8 out of 5 from 1,842 reviews.</span>
         <span class="plugin-card__price">From $59<span>/yr</span></span>
       </div>
     </a>
@@ -164,7 +165,7 @@
       <p class="plugin-card__tag">Dynamic pricing, BOGO deals, bulk discounts &amp; scheduled flash sales.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>5.0</strong><span class="plugin-card__count">(2,113)</span>
+        <strong aria-hidden="true">5.0</strong><span class="plugin-card__count" aria-hidden="true">(2,113)</span><span class="visually-hidden">Rated 5.0 out of 5 from 2,113 reviews.</span>
         <span class="plugin-card__price">From $49<span>/yr</span></span>
       </div>
     </a>
@@ -177,7 +178,7 @@
       <p class="plugin-card__tag">WP Mail SMTP with email logs, tracking &amp; reports.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>4.9</strong><span class="plugin-card__count">(1,204)</span>
+        <strong aria-hidden="true">4.9</strong><span class="plugin-card__count" aria-hidden="true">(1,204)</span><span class="visually-hidden">Rated 4.9 out of 5 from 1,204 reviews.</span>
         <span class="plugin-card__price">From $29<span>/yr</span></span>
       </div>
     </a>
@@ -190,7 +191,7 @@
       <p class="plugin-card__tag">Multi-currency switcher&nbsp;- show local prices, win global buyers.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>4.8</strong><span class="plugin-card__count">(976)</span>
+        <strong aria-hidden="true">4.8</strong><span class="plugin-card__count" aria-hidden="true">(976)</span><span class="visually-hidden">Rated 4.8 out of 5 from 976 reviews.</span>
         <span class="plugin-card__price">From $49<span>/yr</span></span>
       </div>
     </a>
@@ -203,7 +204,7 @@
       <p class="plugin-card__tag">Color, image &amp; button swatches for product variations.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>5.0</strong><span class="plugin-card__count">(734)</span>
+        <strong aria-hidden="true">5.0</strong><span class="plugin-card__count" aria-hidden="true">(734)</span><span class="visually-hidden">Rated 5.0 out of 5 from 734 reviews.</span>
         <span class="plugin-card__price">From $39<span>/yr</span></span>
       </div>
     </a>
@@ -217,7 +218,7 @@
       <p class="plugin-card__tag">Collect more reviews, showcase them, reward loyal customers.</p>
       <div class="plugin-card__meta">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" fill="#f0b849" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
-        <strong>5.0</strong><span class="plugin-card__count">(168)</span>
+        <strong aria-hidden="true">5.0</strong><span class="plugin-card__count" aria-hidden="true">(168)</span><span class="visually-hidden">Rated 5.0 out of 5 from 168 reviews.</span>
         <span class="plugin-card__price">From $59<span>/yr</span></span>
       </div>
     </a>
@@ -277,7 +278,7 @@
       <span class="aa-card__per">/year</span>
     </div>
 
-    <div class="aa-card__icons">
+    <div class="aa-card__icons" role="img" aria-label="Includes YayMail, YayPricing, YaySMTP, YayCurrency, YaySwatches, YayExtra, YayReviews, YayBoost, Yay Wholesale B2B and one more plugin">
       <span class="ptile ptile--26 ptile--yaymail" data-name="YayMail"></span>
       <span class="ptile ptile--26 ptile--yaypricing" data-name="YayPricing"></span>
       <span class="ptile ptile--26 ptile--yaysmtp" data-name="YaySMTP"></span>
@@ -287,7 +288,7 @@
       <span class="ptile ptile--26 ptile--yayreviews" data-name="YayReviews"></span>
       <span class="ptile ptile--26 ptile--yayboost" data-name="YayBoost"></span>
       <span class="ptile ptile--26 ptile--yay-wholesale-b2b" data-name="Yay Wholesale B2B"></span>
-      <span class="aa-card__more">+1</span>
+      <span class="aa-card__more" aria-hidden="true">+1</span>
     </div>
 
     <a href="all-access.html" class="btn btn--primary btn--lg btn--block">Get All Access</a>
@@ -323,7 +324,7 @@
       <p class="case-card__quote">“We stopped guessing at discounts. Tiered quantity breaks did the work for us.”</p>
       <div class="case-card__foot">
         <span>Claire Fontaine, Founder</span>
-        <a href="#">Read story →</a>
+        <a href="#">Read story<span class="visually-hidden">: Maison Linen</span> <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
@@ -338,7 +339,7 @@
       <p class="case-card__quote">“The free-shipping goal in the mini-cart moved the needle overnight.”</p>
       <div class="case-card__foot">
         <span>Daniel Reyes, Ecommerce lead</span>
-        <a href="#">Read story →</a>
+        <a href="#">Read story<span class="visually-hidden">: TrailGear</span> <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
@@ -353,7 +354,7 @@
       <p class="case-card__quote">“Branded order emails turned our receipts into a quiet sales channel.”</p>
       <div class="case-card__foot">
         <span>Amara Osei, Owner</span>
-        <a href="#">Read story →</a>
+        <a href="#">Read story<span class="visually-hidden">: Bloom Tea Co.</span> <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -428,7 +429,7 @@
 
   <div class="tstm-grid">
     <div class="card tstm-card">
-      <span class="stars">
+      <span class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
@@ -447,7 +448,7 @@
     </div>
 
     <div class="card tstm-card">
-      <span class="stars">
+      <span class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
@@ -466,7 +467,7 @@
     </div>
 
     <div class="card tstm-card">
-      <span class="stars">
+      <span class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
         <svg width="14" height="14" viewBox="4.4 4.4 15.2 15.2" aria-hidden="true"><path d="M12 5l2.1 4.6 5 .5-3.7 3.4 1 4.9L12 15.8 7.6 18.4l1-4.9L4.9 10.1l5-.5L12 5z"/></svg>
@@ -492,7 +493,7 @@
 <section class="section wrap">
   <div class="section-head">
     <h2 class="h-section">Grow-your-store reading</h2>
-    <a href="#" class="section-head__link">Visit the blog →</a>
+    <a href="#" class="section-head__link">Visit the blog <span aria-hidden="true">→</span></a>
   </div>
 
   <div class="blog-grid">

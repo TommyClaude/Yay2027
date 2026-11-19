@@ -11,6 +11,26 @@
 
   var root = document.documentElement;
 
+  /* The page starts as "no-js" and a line in its head lifts that before the
+     first paint. Lifting it here as well covers a host that forbids inline
+     script: the menus below work, so the no-script layout must not stay. */
+  root.classList.remove("no-js");
+
+  /* Skip link: move focus to the content without touching the address.
+     Pages that read the hash (My account) must not see "#main". Without
+     script the plain anchor still works. */
+  var skip = document.querySelector(".skip-link");
+  var content = document.getElementById("main");
+
+  if (skip && content) {
+    skip.addEventListener("click", function (e) {
+      e.preventDefault();
+      content.setAttribute("tabindex", "-1");
+      content.focus({ preventScroll: true });
+      content.scrollIntoView();
+    });
+  }
+
   /* Two questions decide how the header behaves:
      narrow - is the nav a drawer rather than a bar?
      coarse - is there no pointer that can hover (a phone, a tablet)? */
@@ -22,8 +42,9 @@
 
      The Plugins mega menu and the account dropdown share one behaviour:
 
-       mouse or trackpad   open on hover and on keyboard focus, close on
-                           leave, blur and Escape
+       mouse or trackpad   open on hover and on keyboard focus; close a
+                           moment after the pointer leaves, on blur and on
+                           Escape; only one is open at a time
        touch, wide screen  open and close on tap; a tap elsewhere closes
        drawer              Plugins is an accordion row, toggled by a tap;
                            the account links are simply part of the list
@@ -47,21 +68,40 @@
 
     var hovers = function () { return !narrow.matches && !coarse.matches; };
 
-    el.addEventListener("mouseenter", function () { if (hovers()) menu.set(true); });
+    var leaving = 0;
 
+    el.addEventListener("mouseenter", function () {
+      clearTimeout(leaving);
+      if (hovers()) { closeMenus(menu); menu.set(true); }
+    });
+
+    /* The straight line from the trigger to the far side of its panel leaves
+       this element for a few pixels on the way; a short grace period keeps
+       the menu open across that gap. */
     el.addEventListener("mouseleave", function () {
       dismissed = false;
-      if (hovers()) menu.set(false);
+      if (!hovers()) return;
+      clearTimeout(leaving);
+      leaving = setTimeout(function () { menu.set(false); }, 200);
     });
 
     el.addEventListener("focusin", function () {
+      clearTimeout(leaving);
       if (hovers() && !dismissed) menu.set(true);
     });
 
+    /* Focus leaving for another element closes the menu. Focus that simply
+       drops (a click on an empty part of the open menu) closes it only if
+       the pointer is not on the menu either: it must not vanish from under
+       the pointer. */
     el.addEventListener("focusout", function (e) {
       if (el.contains(e.relatedTarget)) return;
       dismissed = false;
-      if (hovers()) menu.set(false);
+      if (hovers()) {
+        if (e.relatedTarget || !el.matches(":hover")) menu.set(false);
+      } else if (!narrow.matches && e.relatedTarget) {
+        menu.set(false);
+      }
     });
 
     /* Escape closes the menu and hands focus back to what opened it. The
@@ -75,12 +115,17 @@
       } else if (isChip && e.target === trigger && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
         dismissed = false;
-        menu.set(!menu.isOpen());
+        var willOpen = !menu.isOpen();
+        if (willOpen) closeMenus(menu);
+        menu.set(willOpen);
       }
     });
 
     trigger.addEventListener("click", function (e) {
-      if (hovers()) return;
+      /* With a mouse, hover has already opened the menu by the time a click
+         arrives. A click that no pointer made (a screen reader or switch
+         activating the button) has nothing else to open it. */
+      if (hovers() && !(isChip && e.detail === 0)) return;
       /* In the drawer the account links are already on show. */
       if (isChip && narrow.matches) return;
       e.preventDefault();
@@ -92,9 +137,16 @@
     menus.push(menu);
   }
 
-  function closeMenus() {
-    menus.forEach(function (menu) { menu.set(false); });
+  function closeMenus(except) {
+    menus.forEach(function (menu) { if (menu !== except) menu.set(false); });
   }
+
+  /* Escape dismisses a menu that hover opened even when focus is elsewhere
+     (WCAG 1.4.13). With focus inside, the menu's own handler has already run
+     and returned focus to its trigger. */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !narrow.matches) closeMenus();
+  });
 
   document.querySelectorAll(".has-mega, .has-account").forEach(bindMenu);
 
@@ -115,13 +167,12 @@
   function syncChip() {
     if (!chip) return;
     if (narrow.matches) {
-      ["role", "tabindex", "aria-haspopup", "aria-expanded"].forEach(function (name) {
+      ["role", "tabindex", "aria-expanded"].forEach(function (name) {
         chip.removeAttribute(name);
       });
     } else {
       chip.setAttribute("role", "button");
       chip.setAttribute("tabindex", "0");
-      chip.setAttribute("aria-haspopup", "true");
       chip.setAttribute("aria-expanded", "false");
     }
   }
@@ -159,6 +210,13 @@
 
     root.classList.toggle("is-drawer-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+
+    /* Everything outside the sheet is out of reach while it is open, for a
+       screen reader's cursor as much as for the keyboard. The sheet lives
+       inside the header, so the header's other parts are named one by one. */
+    document.querySelectorAll(".skip-link, .promo, main, .site-footer, .site-header__logo, .site-header__tools").forEach(function (el) {
+      el.inert = open;
+    });
 
     if (open) {
       panel.setAttribute("role", "dialog");
@@ -249,8 +307,9 @@
   /* -----------------------------------------------------------------------
      Sale countdown
 
-     The summer sale ends at midnight two days out. Ticks every second so the
-     urgency in the promo bar is real rather than a static string.
+     Sample behaviour carried over from the design: the deadline is midnight
+     two days after whenever the page is opened, so it never arrives. A real
+     campaign needs its real end date here, and the bar taken down after it.
      -------------------------------------------------------------------- */
 
   var timers = document.querySelectorAll("[data-countdown]");
@@ -285,14 +344,27 @@
      Campaign coupon
 
      "Get the deal" promises 30% off, and checkout applies a code it finds
-     in the address (?coupon=SUNNY30). Any page the visitor passes through
-     on the way has to hand that code on, or the promise is lost at the
-     first click.
+     in the address (?coupon=SUNNY30). The code is remembered for as long as
+     the tab is open and added to every checkout link the visitor meets, so
+     looking at another plugin on the way does not lose the offer. It is
+     forgotten once an order is placed.
      -------------------------------------------------------------------- */
 
   var coupon = new URLSearchParams(window.location.search).get("coupon");
+  var isCode = function (code) { return !!code && /^[A-Za-z0-9_-]{1,32}$/.test(code); };
 
-  if (coupon && /^[A-Za-z0-9_-]{1,32}$/.test(coupon)) {
+  try {
+    if (/thank-you\.html$/.test(window.location.pathname)) {
+      sessionStorage.removeItem("yay-coupon");
+      coupon = null;
+    } else if (isCode(coupon)) {
+      sessionStorage.setItem("yay-coupon", coupon);
+    } else {
+      coupon = sessionStorage.getItem("yay-coupon");
+    }
+  } catch (error) { /* storage is blocked: the code still rides the links of the page it arrived on */ }
+
+  if (isCode(coupon)) {
     document.querySelectorAll('a[href^="checkout.html"]').forEach(function (link) {
       var url = new URL(link.href);
       if (!url.searchParams.has("coupon")) {

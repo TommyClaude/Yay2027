@@ -108,8 +108,13 @@ async function build() {
       .map((name) => `<link rel="stylesheet" href="assets/css/${name}.css">`)
       .join("\n");
 
+    // If site.js itself fails to arrive, the page falls back to the same
+    // no-script layout as a browser with script turned off (see page.html).
     const scripts = ["site", ...(meta.js || [])]
-      .map((name) => `<script src="assets/js/${name}.js"></script>`)
+      .map((name) => {
+        const fallback = name === "site" ? ` onerror="document.documentElement.className='no-js'"` : "";
+        return `<script src="assets/js/${name}.js"${fallback}></script>`;
+      })
       .join("\n");
 
     const html = fill(shell, {

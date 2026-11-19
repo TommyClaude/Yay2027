@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- "no-js" stays only where script does not run; the styles then lay the nav out instead of hiding it in a drawer. -->
+<script>document.documentElement.className = "js";</script>
 <title>Checkout — YayCommerce</title>
 <meta name="description" content="Secure checkout for your YayCommerce licence.">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -306,7 +308,7 @@
   <span class="checkout-footer__built"><img src="assets/img/wordpress-logomark-mono.svg" alt="">Built for WordPress &amp; WooCommerce</span>
 </footer>
 
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js" onerror="document.documentElement.className='no-js'"></script>
 <script src="assets/js/checkout.js"></script>
 </body>
 </html>

@@ -148,6 +148,18 @@ svg { display: block; }
   text-decoration: none;
 }
 
+/* It appears over the dark promo bar, where a dark pill with a blue ring
+   would barely show: a white edge inside the ring separates it from both. */
+.skip-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+/* The skip link hands focus to the content so the next Tab starts there.
+   The content itself is not something to draw a ring around. */
+main:focus { outline: none; }
+
 h1, h2, h3, h4, h5, h6, p, figure, blockquote { margin: 0; }
 
 ul, ol { margin: 0; padding: 0; list-style: none; }

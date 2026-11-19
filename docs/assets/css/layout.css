@@ -9,12 +9,16 @@
    Promo bar
    ====================================================================== */
 
+/* 38px tall with its one line of text. The height is a minimum, not a fixed
+   size, so text that has to wrap (wider letter spacing, a longer offer)
+   makes the bar taller instead of spilling out of it. */
 .promo {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  height: 38px;
+  min-height: 38px;
+  padding-block: 6px;
   background: var(--dark);
   color: var(--ink-4);
   font-size: 13px;
@@ -53,6 +57,9 @@
   color: var(--brand-ink);
   text-decoration: none;
 }
+
+/* The blue focus ring is too faint on the dark bar; white is not. */
+.promo__link:focus-visible { outline-color: #fff; }
 
 /* =========================================================================
    Header
@@ -154,6 +161,20 @@
 .is-drawer-open .nav-toggle__bars { background: transparent; }
 .is-drawer-open .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
 .is-drawer-open .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+/* A forced-colours mode (Windows High Contrast) replaces backgrounds, and
+   the bars are nothing but backgrounds: without this the menu button is an
+   empty square. */
+@media (forced-colors: active) {
+  .nav-toggle__bars,
+  .nav-toggle__bars::before,
+  .nav-toggle__bars::after {
+    forced-color-adjust: none;
+    background: ButtonText;
+  }
+
+  .is-drawer-open .nav-toggle__bars { background: transparent; }
+}
 
 .site-header__search { position: relative; width: 230px; }
 .site-header__search .input { height: 36px; }
@@ -428,6 +449,17 @@
 }
 
 .has-account:not(.is-open) .account-menu { display: none; }
+
+/* Without script (it is off, or site.js did not arrive) nothing can give a
+   menu .is-open, so in the bar both open the plain way: on hover and on
+   keyboard focus. Below 1025px the responsive sheet lays the nav out
+   instead of hiding it in a drawer nobody can open. */
+@media (min-width: 1025px) {
+  .no-js .has-mega:hover .mega,
+  .no-js .has-mega:focus-within .mega,
+  .no-js .has-account:hover .account-menu,
+  .no-js .has-account:focus-within .account-menu { display: block; }
+}
 
 .account-menu__head {
   padding: 10px 10px 12px;

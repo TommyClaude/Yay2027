@@ -38,11 +38,15 @@
 
 /* The proof badge stays on one line. The full sentence is 392px wide, so
    "Trusted by" goes while the column still has a little room to spare, and
-   both numbers stay. */
+   both numbers stay. The short form is 304px and is not forced onto its
+   line: where it cannot fit (a reader's wider letter spacing, a much wider
+   font) it wraps inside the badge instead of running off the screen. The
+   radius is half the height of one line, so one line is still a full pill
+   and two lines are a soft box. */
 @container hero-copy (max-width: 430px) {
   .hero__badge {
     padding: 5px 12px 5px 8px;
-    white-space: nowrap;
+    border-radius: 17px;
   }
 
   .hero__badge-text { font-size: 12.5px; }
@@ -57,13 +61,12 @@
 }
 
 /* On the few 320px screens left it is set a size smaller to stay on its
-   line; if a wider font wraps it anyway, it wraps as a soft box, not a pill. */
+   line. */
 @container hero-copy (max-width: 310px) {
   .hero__badge {
     gap: 6px;
     padding: 5px 10px 5px 7px;
     border-radius: 16px;
-    white-space: normal;
   }
 
   .hero__badge-text { font-size: 11.5px; }
@@ -745,6 +748,62 @@
     }
   }
 
+  /* A forced-colours mode (Windows High Contrast) paints the sheet and the
+     page behind it the same colour and drops the shadow between them. */
+  @media (forced-colors: active) {
+    .site-header__panel { border-left: 1px solid CanvasText; }
+  }
+
+  /* Without script ---------------------------------------------------------
+     Nothing can open a drawer (script is off, or site.js did not arrive), so
+     there is no drawer: the pages and the account links are two rows of
+     plain links under the bar. The menu button, the plugin list and the
+     button that duplicates "All Access" are left out. */
+  .no-js .site-header {
+    flex-wrap: wrap;
+    row-gap: 0;
+    height: auto;
+  }
+
+  .no-js .site-header__logo { height: 72px; }
+
+  .no-js .site-header__panel {
+    position: static;
+    order: 3;
+    display: block;
+    width: 100%;
+    padding: 0 0 12px;
+    overflow: visible;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .no-js .nav-toggle,
+  .no-js .drawer-close,
+  .no-js .nav-link__chevron,
+  .no-js .account-chip,
+  .no-js .account-menu .menu-item svg,
+  .no-js .account-menu .menu-sep,
+  .no-js .site-header__actions > .btn { display: none; }
+
+  /* (The account selector names its wrapper to outrank the drawer's own
+     rule for that menu.) */
+  .no-js .site-nav,
+  .no-js .has-account .account-menu {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0;
+    margin-inline: -12px;
+  }
+
+  .no-js .has-account {
+    margin: 4px 0 0;
+    padding-top: 4px;
+  }
+
+  .no-js .account-menu .menu-item { color: var(--ink-2); }
+
   /* Slim headers have no drawer; their actions stay a row in the bar. */
   .site-header--slim .site-header__actions {
     display: flex;
@@ -785,13 +844,25 @@
 }
 
 /* Thumb-sized hit areas follow the pointer, not a width: a tablet is a thumb
-   too. (The 620 step sets the same for every phone.) Nothing moves; the
-   links' boxes grow into the space around them. */
+   too. (The 620 step sets the same for every phone.) Nothing moves. A text
+   link's hit area is a pseudo-element laid over the space around it, so the
+   link's own box, and with it the focus ring, stays the size of its words. */
 @media (pointer: coarse) and (min-width: 621px) {
   .section-head__link,
-  .case-card__foot a {
-    padding-block: 13px;
-    margin-block: -13px;
+  .case-card__foot a,
+  .promo__link { position: relative; }
+
+  .section-head__link::after,
+  .case-card__foot a::after {
+    content: "";
+    position: absolute;
+    inset: -13px 0;
+  }
+
+  .promo__link::after {
+    content: "";
+    position: absolute;
+    inset: -6px 0;
   }
 
   .aa-card__alt { padding: 0; }
@@ -818,11 +889,6 @@
     gap: 0;
     margin-block: -5px;
     margin-right: -11px;
-  }
-
-  .promo__link {
-    padding-block: 9px;
-    margin-block: -9px;
   }
 }
 
@@ -1170,12 +1236,7 @@
 
   /* Promo bar: one line that is the offer, the clock and, as a whole, the
      link. It may wrap in a wide font rather than run off the screen. */
-  .promo {
-    position: relative;
-    height: auto;
-    min-height: 38px;
-    padding-block: 6px;
-  }
+  .promo { position: relative; }
 
   .promo__inner {
     flex-wrap: wrap;
@@ -1209,8 +1270,19 @@
     inset: 0;
   }
 
+  /* The whole bar is the link, so the whole bar shows the focus: a ring
+     round the arrow alone would mark a fraction of what a tap activates. */
+  .promo__link:focus-visible { outline: none; }
+
+  .promo__link:focus-visible::after {
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+    border-radius: 4px;
+  }
+
   .site-header { height: 62px; }
   .site-header__logo img { height: 28px; }
+  .no-js .site-header__logo { height: 62px; }
 
   /* Slim headers: the support offer is the line that has to give. */
   .site-header--slim .site-header__actions > .muted,
@@ -1371,11 +1443,17 @@
   .band-categories { padding-block: 48px 4px; }
   .band-featured { padding-block: 40px 48px; }
 
-  /* Text links that stand alone get a thumb-sized hit area without moving. */
+  /* Text links that stand alone get a thumb-sized hit area without moving:
+     a pseudo-element over the space around the words, so the link's own
+     box and its focus ring stay the size of the words. */
   .section-head__link,
-  .case-card__foot a {
-    padding-block: 13px;
-    margin-block: -13px;
+  .case-card__foot a { position: relative; }
+
+  .section-head__link::after,
+  .case-card__foot a::after {
+    content: "";
+    position: absolute;
+    inset: -13px 0;
   }
 
   .aa-card__alt { padding: 0; }

@@ -30,9 +30,19 @@
   transition: background .1s, box-shadow .1s, color .1s;
 }
 
+/* The ring is a shadow so it can be two-tone. The outline is invisible
+   until a forced-colours mode (Windows High Contrast) drops shadows and
+   paints outlines in a system colour: there it is the ring. */
 .btn:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px var(--accent);
+}
+
+/* The same mode removes fills and shadows, which is all that makes a
+   button look like one. */
+@media (forced-colors: active) {
+  .btn { border: 1px solid; }
 }
 
 .btn svg { fill: currentColor; }
