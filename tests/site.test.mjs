@@ -6,7 +6,9 @@
 // Everything here drives docs/ in headless Chromium. Nothing reaches the
 // network. Exit code is the number of failed checks.
 
-import { launch, open, overflowOffenders, PAGES, group, check, expect, report } from './lib.mjs';
+import { pathToFileURL } from 'node:url';
+import path from 'node:path';
+import { launch, open, overflowOffenders, PAGES, SITE, group, check, expect, report } from './lib.mjs';
 
 const browser = await launch();
 const close = async (h) => h.context.close();
@@ -138,8 +140,11 @@ await check('a menu closes when focus moves on, stays open for a click on an emp
   expect(await mega.isVisible(), 'focus did not open the Plugins menu');
   await h.page.keyboard.press('Shift+Tab'); await h.page.waitForTimeout(100);
   expect(!(await mega.isVisible()), 'the Plugins menu stayed open after focus left it');
-  // a click on something in the menu that is not a link
+  // a click on something in the menu that is not a link, after a click on the
+  // button has given it focus (that click is what makes focus drop afterwards)
   await h.page.hover('.account-chip'); await h.page.waitForTimeout(150);
+  await h.page.click('.account-chip'); await h.page.waitForTimeout(100);
+  expect(await h.page.locator('.account-menu').isVisible(), 'a click on the account button shut the menu that hover had opened');
   await h.page.click('.account-menu__head'); await h.page.waitForTimeout(350);
   expect(await h.page.locator('.account-menu').isVisible(), 'a click on the name at the top of the account menu closed it under the pointer');
   await h.page.mouse.move(600, 700); await h.page.waitForTimeout(350);
@@ -226,12 +231,12 @@ await check('phone: opens from the button as a dialog that takes focus, makes th
   const state = await h.page.evaluate(() => {
     const panel = document.getElementById('site-drawer');
     const chip = panel.querySelector('.account-chip');
-    return { role: panel.getAttribute('role'), modal: panel.getAttribute('aria-modal'), focusInside: panel.contains(document.activeElement), chipRole: chip.getAttribute('role'), chipTab: chip.getAttribute('tabindex'), behind: document.querySelector('main').inert === true && document.querySelector('.site-footer').inert === true };
+    return { role: panel.getAttribute('role'), modal: panel.getAttribute('aria-modal'), focusInside: panel.contains(document.activeElement), chipRole: chip.getAttribute('role'), chipTab: chip.getAttribute('tabindex'), behind: ['.skip-link', '.promo', 'main', '.site-footer', '.site-header__logo', '.site-header__tools'].filter((sel) => document.querySelector(sel).inert !== true) };
   });
   expect(state.role === 'dialog' && state.modal === 'true', `the open drawer has role ${state.role}, aria-modal ${state.modal}`);
   expect(state.focusInside, 'focus did not move into the drawer');
   expect(state.chipRole === null && state.chipTab === null, 'the account name still poses as a button inside the drawer');
-  expect(state.behind, 'the page behind the open drawer is not inert');
+  expect(state.behind.length === 0, `not inert behind the open drawer: ${state.behind.join(', ')}`);
   expect(await h.page.locator('.drawer-scrim').isVisible(), 'no scrim behind the drawer');
   for (const t of ['All Access', 'Docs', 'Blog', 'Support']) {
     expect(await h.page.locator('.site-nav > .nav-link', { hasText: t }).first().isVisible(), `nav link "${t}" missing`);
@@ -343,11 +348,17 @@ await check('phone: scrolled to its end, a long plugin list leaves its last row 
       const rule = getComputedStyle(btn, '::before');
       if (rule.content !== 'none') stripTop = Math.min(stripTop, b.bottom - parseFloat(rule.bottom) - parseFloat(rule.height));
       const last = [...panel.querySelectorAll('.account-menu .menu-item')].pop();
-      return { pinned: getComputedStyle(btn).position === 'sticky', stripTop, lastBottom: last.getBoundingClientRect().bottom, label: last.textContent.trim(), spill: panel.scrollWidth - panel.clientWidth };
+      // The strip above the button is solid from one edge of the sheet to the
+      // other: a row scrolling behind it must not show at its corners.
+      const p = panel.getBoundingClientRect();
+      const holes = [p.left + 4, p.left + 24, (p.left + p.right) / 2, p.right - 24, p.right - 4]
+        .filter((x) => { const hit = document.elementFromPoint(x, b.top - 10); return !hit || hit !== btn; }).length;
+      return { pinned: getComputedStyle(btn).position === 'sticky', stripTop, holes, lastBottom: last.getBoundingClientRect().bottom, label: last.textContent.trim(), spill: panel.scrollWidth - panel.clientWidth };
     });
     await close(h);
     expect(r.pinned, `${width}x${height}: the button is not pinned with the plugin list open`);
     expect(r.lastBottom <= r.stripTop + 0.5, `${width}x${height}: "${r.label}" ends at ${Math.round(r.lastBottom)}, under the strip that starts at ${Math.round(r.stripTop)}`);
+    expect(r.holes === 0, `${width}x${height}: the strip above the button lets the list show through at ${r.holes} of 5 points across the sheet`);
     expect(r.spill <= 0, `${width}x${height}: the drawer scrolls sideways by ${r.spill}px`);
   }
 });
@@ -466,11 +477,21 @@ await check('with JavaScript off, Home shows its content, every nav link but Blo
   }));
   await h.page.focus('.account-chip');
   const accountOpens = await h.page.locator('.account-menu').isVisible();
+  await h.page.hover('.has-mega > .nav-link'); await h.page.waitForTimeout(100);
+  const megaOpens = await h.page.locator('.mega').isVisible();
   await close(h);
+  expect(megaOpens, 'desktop: the Plugins menu cannot be opened without JavaScript');
   expect(info.h1 > 0 && info.cards === 6, 'content missing without JavaScript');
   const dead = info.navLinks.filter((href) => !href || href === '#');
   expect(info.navLinks.length === 5 && dead.length <= 1, `${dead.length} of ${info.navLinks.length} nav links go nowhere`);   // Blog has no page yet
   expect(accountOpens, 'desktop: the account menu cannot be opened without JavaScript');
+  // The slim headers of checkout and thank-you have no drawer: without script they are as with it.
+  for (const name of ['checkout', 'thank-you']) {
+    const slim = await open(browser, name, { js: false, width: 393, height: 852 });
+    const r = await slim.page.evaluate(() => ({ header: document.querySelector('.site-header').getBoundingClientRect().height, account: getComputedStyle(document.querySelector('.account-chip')).display }));
+    await close(slim);
+    expect(r.header === 62 && r.account !== 'none', `${name}, 393px, no script: header ${r.header}px, account link ${r.account}`);
+  }
   for (const width of [393, 768]) {
     const p = await open(browser, 'index', { js: false, width, height: 852 });
     const r = await p.page.evaluate(() => {
@@ -482,6 +503,25 @@ await check('with JavaScript off, Home shows its content, every nav link but Blo
     expect(r.shown === r.total && r.total === 11, `${width}px: ${r.shown} of ${r.total} nav and account links can be seen`);
     expect(!r.button, `${width}px: the menu button shows although nothing can open a menu`);
     expect(r.spill <= 0, `${width}px: the page scrolls sideways by ${r.spill}px`);
+  }
+});
+
+await check('a page whose site.js fails to load falls back to the no-script header; one whose site.js is empty is not mistaken for it', async () => {
+  const url = pathToFileURL(path.join(SITE, 'index.html')).href;
+  for (const [what, handler, expected] of [
+    ['site.js fails to load', (route) => route.abort(), 'no-js'],
+    ['site.js loads but does nothing', (route) => route.fulfill({ status: 200, contentType: 'text/javascript', body: '' }), 'js'],
+  ]) {
+    const context = await browser.newContext({ viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true });
+    await context.route(/site\.js$/, handler);
+    await context.route(/^https?:\/\//, (route) => route.abort());
+    const page = await context.newPage();
+    await page.goto(url, { waitUntil: 'load' });
+    await page.waitForTimeout(150);
+    const r = await page.evaluate(() => ({ cls: document.documentElement.className, link: getComputedStyle(document.querySelector('.site-nav > .nav-link')).visibility }));
+    await context.close();
+    expect(r.cls === expected, `${what}: the page is "${r.cls}", expected "${expected}" (the line in the head lifts no-js, the script tag's onerror restores it)`);
+    if (expected === 'no-js') expect(r.link === 'visible', `${what}: the nav links are not shown`);
   }
 });
 
@@ -538,6 +578,14 @@ await check('the promo link carries its coupon; All Access passes it on, a detou
     await close(bad);
     expect(dropped, `a malformed code (${code.slice(0, 16)}) was passed on to checkout`);
   }
+  // After an order the code is forgotten.
+  const order = await open(browser, 'all-access', { hash: '?coupon=SUNNY30' });
+  await order.page.goto(order.page.url().replace(/all-access\.html.*$/, 'thank-you.html'));
+  await order.page.goto(order.page.url().replace(/thank-you\.html.*$/, 'all-access.html'));
+  await order.page.waitForTimeout(150);
+  const afterOrder = await order.page.evaluate(() => [...document.querySelectorAll('a[href*="checkout.html"]')].filter((a) => /coupon=/.test(a.getAttribute('href'))).length);
+  await close(order);
+  expect(afterOrder === 0, `after an order, ${afterOrder} checkout links still carry the code`);
 });
 
 await check('phone: at every width from 320 to 620px the promo bar is one line with the countdown, and all of it is the link', async () => {
@@ -573,6 +621,54 @@ await check('touch tablet: tapping the account chip opens its menu, tapping else
   await h.page.tap('.account-chip'); await h.page.waitForTimeout(150);
   expect(!(await h.page.locator('.mega').isVisible()) && (await menu.isVisible()), 'opening one menu left the other open');
   await close(h);
+});
+
+await check('forced colours: the menu button is drawn, buttons have an edge, and a button shows keyboard focus', async () => {
+  const phone = await open(browser, 'index', { width: 393, height: 852 });
+  await phone.page.emulateMedia({ forcedColors: 'active' });
+  const bars = await phone.page.evaluate(() => getComputedStyle(document.querySelector('.nav-toggle__bars')).backgroundColor);
+  await close(phone);
+  expect(!/rgba\(0, 0, 0, 0\)|transparent/.test(bars), `the menu button's bars are ${bars}`);
+  const h = await open(browser, 'index');
+  await h.page.emulateMedia({ forcedColors: 'active' });
+  const edge = await h.page.evaluate(() => getComputedStyle(document.querySelector('.hero__actions .btn')).borderTopStyle);
+  let ring = null;
+  for (let i = 0; i < 60 && !ring; i++) {
+    await h.page.keyboard.press('Tab');
+    ring = await h.page.evaluate(() => { const el = document.activeElement; return el.matches('.btn') ? getComputedStyle(el).outlineStyle : null; });
+  }
+  await close(h);
+  expect(edge === 'solid', `a hero button's edge is "${edge}"`);
+  expect(ring === 'solid', `a focused button's outline is "${ring}"; forced colours drop the shadow ring, so the outline is the only one left`);
+});
+
+await check('Home tells screen readers what the ratings, stars, icon row and "Read story" links mean', async () => {
+  const h = await open(browser, 'index');
+  const r = await h.page.evaluate(() => {
+    const out = [];
+    for (const meta of document.querySelectorAll('.plugin-grid .plugin-card__meta')) {
+      const said = (meta.querySelector('.visually-hidden') || {}).textContent || '';
+      if (!/^Rated \d\.\d out of 5 from [\d,]+ reviews\.$/.test(said)) out.push(`a plugin card says "${said}"`);
+      for (const el of meta.querySelectorAll('strong, .plugin-card__count')) if (el.getAttribute('aria-hidden') !== 'true') out.push(`"${el.textContent}" is read as well as the sentence`);
+    }
+    for (const stars of document.querySelectorAll('.tstm-card .stars')) if (stars.getAttribute('role') !== 'img' || !/out of 5 stars/.test(stars.getAttribute('aria-label') || '')) out.push('a row of stars has no label');
+    for (const card of document.querySelectorAll('.case-card')) {
+      const store = card.querySelector('.case-card__store').textContent.trim();
+      const name = card.querySelector('.case-card__foot a').getAttribute('aria-label') || '';
+      if (!name.startsWith('Read story') || !name.includes(store)) out.push(`"Read story" is named "${name}", not after ${store}`);
+    }
+    const row = document.querySelector('.aa-card__icons');
+    const names = [...row.querySelectorAll('[data-name]')].map((t) => t.dataset.name);
+    if (row.getAttribute('role') !== 'img' || !names.every((n) => (row.getAttribute('aria-label') || '').includes(n))) out.push('the price card icon row is not one labelled image');
+    for (const a of document.querySelectorAll('a[aria-label]')) {
+      const seen = a.textContent.replace(/[→↗]/g, '').replace(/\s+/g, ' ').trim();
+      if (seen && !a.getAttribute('aria-label').includes(seen)) out.push(`"${seen}" is named "${a.getAttribute('aria-label')}", which does not contain what it shows`);
+    }
+    if (document.querySelector('.promo__arrow').getAttribute('aria-hidden') !== 'true') out.push('the promo arrow is read out');
+    return out;
+  });
+  await close(h);
+  expect(r.length === 0, r.slice(0, 4).join(' ; '));
 });
 
 await check('the footer signup field shows the same focus colour as every other field', async () => {

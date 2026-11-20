@@ -52,6 +52,7 @@ npx http-server docs -p 8080
 npm install                        # once: Playwright, the only dev dependency
 npx playwright install chromium    # once: the browser it drives
 npm test                           # rebuilds, then runs tests/site.test.mjs in headless Chromium
+CHECKS='drawer' node tests/site.test.mjs   # only the checks whose title matches
 ```
 
 For a change to shared CSS, capture every page before and after and compare:

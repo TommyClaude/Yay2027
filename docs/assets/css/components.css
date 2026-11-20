@@ -675,3 +675,6 @@ a.panel:hover {
 }
 
 .faq__item:not(.is-open) .faq__a { display: none; }
+
+/* Without script nothing can open an answer, so all of them are open. */
+.no-js .faq__item:not(.is-open) .faq__a { display: block; }

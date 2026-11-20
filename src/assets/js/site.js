@@ -63,6 +63,17 @@
       set: function (open) {
         el.classList.toggle("is-open", open);
         if (trigger.hasAttribute("aria-expanded")) trigger.setAttribute("aria-expanded", String(open));
+      },
+      /* Close from outside (the pointer has left, the page came back from
+         history). Keyboard focus on a link inside the panel would be left
+         in something hidden: it goes back to the trigger first, without
+         that focus opening the menu again. */
+      dismiss: function () {
+        if (el.contains(document.activeElement) && document.activeElement !== trigger) {
+          dismissed = true;
+          trigger.focus();
+        }
+        menu.set(false);
       }
     };
 
@@ -82,16 +93,7 @@
       dismissed = false;
       if (!hovers()) return;
       clearTimeout(leaving);
-      leaving = setTimeout(function () {
-        /* Keyboard focus on a link inside the panel would be left in
-           something hidden: it goes back to the trigger, without that
-           focus opening the menu again. */
-        if (el.contains(document.activeElement) && document.activeElement !== trigger) {
-          dismissed = true;
-          trigger.focus();
-        }
-        menu.set(false);
-      }, 200);
+      leaving = setTimeout(menu.dismiss, 200);
     });
 
     el.addEventListener("focusin", function () {
@@ -132,9 +134,11 @@
 
     trigger.addEventListener("click", function (e) {
       /* With a mouse, hover has already opened the menu by the time a click
-         arrives. A click that no pointer made (a screen reader or switch
-         activating the button) has nothing else to open it. */
-      if (hovers() && !(isChip && e.detail === 0)) return;
+         arrives, so the click has nothing to do. Two clicks on the account
+         button do: one that no pointer made (a screen reader or a switch
+         activating it), and one that finds the menu shut although the
+         pointer is on it (Escape closed it a moment ago). */
+      if (hovers() && !(isChip && (e.detail === 0 || !menu.isOpen()))) return;
       /* In the drawer the account links are already on show. */
       if (isChip && narrow.matches) return;
       e.preventDefault();
@@ -296,7 +300,7 @@
   window.addEventListener("pageshow", function (e) {
     if (!e.persisted) return;
     setDrawer(false, false);
-    closeMenus();
+    menus.forEach(function (menu) { menu.dismiss(); });
   });
 
   /* -----------------------------------------------------------------------
@@ -370,21 +374,24 @@
      forgotten once an order is placed.
      -------------------------------------------------------------------- */
 
-  var coupon = new URLSearchParams(window.location.search).get("coupon");
   var isCode = function (code) { return !!code && /^[A-Za-z0-9_-]{1,32}$/.test(code); };
 
-  try {
-    if (/thank-you\.html$/.test(window.location.pathname)) {
-      sessionStorage.removeItem("yay-coupon");
-      coupon = null;
-    } else if (isCode(coupon)) {
-      sessionStorage.setItem("yay-coupon", coupon);
-    } else {
-      coupon = sessionStorage.getItem("yay-coupon");
-    }
-  } catch (error) { /* storage is blocked: the code still rides the links of the page it arrived on */ }
+  function carryCoupon() {
+    var coupon = new URLSearchParams(window.location.search).get("coupon");
 
-  if (isCode(coupon)) {
+    try {
+      if (/thank-you\.html$/.test(window.location.pathname)) {
+        sessionStorage.removeItem("yay-coupon");
+        coupon = null;
+      } else if (isCode(coupon)) {
+        sessionStorage.setItem("yay-coupon", coupon);
+      } else {
+        coupon = sessionStorage.getItem("yay-coupon");
+      }
+    } catch (error) { /* storage is blocked: the code still rides the links of the page it arrived on */ }
+
+    if (!isCode(coupon)) return;
+
     document.querySelectorAll('a[href^="checkout.html"]').forEach(function (link) {
       var url = new URL(link.href);
       if (!url.searchParams.has("coupon")) {
@@ -393,4 +400,10 @@
       }
     });
   }
+
+  carryCoupon();
+
+  /* Back to a page that was opened before the code arrived brings it out of
+     history without running this file again. */
+  window.addEventListener("pageshow", function (e) { if (e.persisted) carryCoupon(); });
 })();

@@ -131,7 +131,10 @@ export function overflowOffenders(page) {
 const results = [];
 let currentGroup = '';
 export function group(name) { currentGroup = name; }
+// CHECKS=<regular expression> runs only the checks whose title matches.
+const only = process.env.CHECKS ? new RegExp(process.env.CHECKS, 'i') : null;
 export async function check(name, fn) {
+  if (only && !only.test(name)) return;
   try {
     await fn();
     results.push({ group: currentGroup, name, ok: true });

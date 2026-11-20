@@ -105,10 +105,15 @@
 }
 
 /* Below the widths the design was drawn at there is no drawing to match, so
-   the last label always sits clear of the toast's text, and the toast keeps
-   its first half only where the result card leaves it comfortable room. */
-@media (max-width: 1180px) {
+   the last label always sits clear of the toast's text (from 1279px down; a
+   1280px window with a scrollbar still counts as 1280 and keeps the design),
+   and the toast keeps its first half only where the result card leaves it
+   comfortable room. */
+@media (max-width: 1279px) {
   .mock__tag--boost { bottom: 20px; }
+}
+
+@media (max-width: 1180px) {
 
   @container hero-visual (max-width: 560px) {
     .mock__toast-lead { display: none; }
@@ -211,6 +216,12 @@
 /* The swatch name is the first thing its label would cover. */
 @container hero-visual (max-width: 344px) {
   .mock__swatch-label { display: none; }
+}
+
+/* The narrowest address bar holds the domain and nothing after it, rather
+   than a cut-off page name. */
+@container hero-visual (max-width: 327px) {
+  .mock__url-page { display: none; }
 }
 
 /* 320px screens: no room for the result card beside the nudge, or for the
@@ -376,6 +387,12 @@
   .site-footer__cols { grid-template-columns: repeat(4, 1fr) minmax(250px, 1.4fr); }
 }
 
+/* Below the design width the signup blurb wraps at other places than drawn;
+   it should not end on a word of its own. */
+@media (max-width: 1279px) {
+  .site-footer__blurb { text-wrap: pretty; }
+}
+
 /* =========================================================================
    1180 - tighten the frame
    ====================================================================== */
@@ -474,6 +491,10 @@
 /* Home, 861-980: the bento's cards are at their narrowest beside the photo. */
 @media (min-width: 861px) and (max-width: 980px) {
   .why-card { padding: 22px; }
+
+  /* A stat label that takes two lines in one card of a row would drop that
+     card's title below its neighbour's: every label reserves two lines. */
+  .why-card__stat span { min-height: 2.8em; }
 }
 
 /* Home, 861-960: the All Access band still has two columns, but its copy
@@ -734,14 +755,14 @@
   .has-account { margin-bottom: 10px; }
 
   /* With the plugin list open the sheet is several screens long, so the
-     action is pinned to its foot and the list scrolls behind it. The flat
-     shadows are its backing, in the sheet's own colour above and below; the
-     rule across the sheet shows where the list goes under. (The rule is a
-     line of its own: drawn as a third shadow it would follow the button's
-     rounded corners.) The last row keeps clear of that strip, so the end of
-     the list is not left half under it, and so does a row the keyboard
-     brings into view. Not on a phone held sideways, where the pinned strip
-     would take a third of the screen. */
+     action is pinned to its foot and the list scrolls behind it, on a strip
+     of the sheet's own colour: a solid block above the button with a rule
+     along its top edge, edge to edge (shadows would follow the button's
+     rounded corners and let rows show at the strip's corners), and flat
+     shadows below and beside it. The last row keeps clear of that strip, so
+     the end of the list is not left half under it, and so does a row the
+     keyboard brings into view. Not on a phone held sideways, where the
+     pinned strip would take a third of the screen. */
   @media (min-height: 501px) {
     .site-header__panel:has(.has-mega.is-open) { scroll-padding-bottom: 96px; }
     .site-header__panel:has(.has-mega.is-open) .has-account { margin-bottom: 30px; }
@@ -756,10 +777,11 @@
       content: "";
       position: absolute;
       right: -20px;
-      bottom: calc(100% + 20px);
+      bottom: 100%;
       left: -20px;
-      height: 1px;
-      background: var(--line);
+      height: 21px;
+      border-top: 1px solid var(--line);
+      background: var(--surface);
     }
 
     .site-header__panel:has(.has-mega.is-open) .site-header__actions > .btn:focus-visible {

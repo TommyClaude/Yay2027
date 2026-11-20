@@ -264,7 +264,7 @@ node tests/visual.mjs diff before after
 Both need Playwright and its browser (`npm install`, then
 `npx playwright install chromium`; Node 20 or later, where the build alone
 runs on 18). They drive the built `docs/` and never touch the network.
-`site.test.mjs` (67 checks) covers every page for sideways scroll on either
+`site.test.mjs` (70 checks) covers every page for sideways scroll on either
 side of every breakpoint (and Home every 10px), the header menus by mouse,
 keyboard, touch and a click from assistive technology, the drawer (dialog,
 focus, inert page, nothing focused out of sight), the skip link, the
